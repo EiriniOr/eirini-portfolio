@@ -30,7 +30,8 @@ const PROFILE = {
     "Actionable Insights",
     "Design Innovation",
     "Fairness & Explainability (Fairlearn, SHAP)",
-    "SQL",
+    "SQL", 
+    "RAG",
     "Data Modeling",
     "Power BI · Looker",
     "R",
@@ -92,6 +93,22 @@ const PROJECTS = [
     ],
   },
 
+    {
+    kind: "LLM / RAG",
+    title: "Document Q&A (RAG Bot)",
+    year: "2025",
+    impact: "Answers grounded in uploaded PDFs using retrieval + generation.",
+    stack: ["FAISS", "Sentence-Transformers", "Flan-T5", "Streamlit"],
+    links: [
+      { label: "Live Demo", href: "https://rag-bot-jf9dca7h9sntosgie8waw4.streamlit.app/" },
+      { label: "GitHub", href: "https://github.com/EiriniOr/rag-bot" }
+    ],
+    highlights: [
+      "Local, free models — no paid APIs",
+      "Top-k passage citations for transparency"
+    ],
+  },
+
   {
   kind: "NLP",
   title: "AI Resume ↔ Job description Analyzer",
@@ -122,21 +139,7 @@ const PROJECTS = [
     "Compare per-capita vs absolute emissions"
   ],
 },
-{
-  kind: "LLM / RAG",
-  title: "Document Q&A (RAG Bot)",
-  year: "2025",
-  impact: "Answers grounded in uploaded PDFs using retrieval + generation.",
-  stack: ["FAISS", "Sentence-Transformers", "Flan-T5", "Streamlit"],
-  links: [
-    { label: "Live Demo", href: "https://rag-bot-jf9dca7h9sntosgie8waw4.streamlit.app/" },
-    { label: "GitHub", href: "https://github.com/EiriniOr/rag-bot" }
-  ],
-  highlights: [
-    "Local, free models — no paid APIs",
-    "Top-k passage citations for transparency"
-  ],
-},
+
 
 
   {
