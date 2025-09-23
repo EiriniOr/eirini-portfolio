@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+
+/* Animated gradient blobs */
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(48px);
+  opacity: 0.3;
+  mix-blend-mode: multiply;
+  animation: float 22s ease-in-out infinite;
+}
+
+.blob-a {
+  top: -12rem; left: -10rem; width: 28rem; height: 28rem;
+  background:
+    radial-gradient(circle at 30% 30%, #C4B5FD 0%, transparent 60%),
+    radial-gradient(circle at 70% 70%, #8B5CF6 0%, transparent 60%);
+}
+
+.blob-b {
+  bottom: -14rem; right: -10rem; width: 32rem; height: 32rem; animation-delay: -7s;
+  background:
+    radial-gradient(circle at 30% 70%, #A7F3D0 0%, transparent 60%),
+    radial-gradient(circle at 70% 30%, #86EFAC 0%, transparent 60%);
+}
+
+.blob-c {
+  top: 30%; left: 50%; transform: translateX(-50%); width: 24rem; height: 24rem; animation-delay: -12s;
+  background:
+    radial-gradient(circle at 50% 50%, #E9D5FF 0%, transparent 60%);
+}
+
+@keyframes float {
+  0%   { transform: translateY(0) translateX(0) scale(1); }
+  33%  { transform: translateY(-20px) translateX(10px) scale(1.05); }
+  66%  { transform: translateY(10px) translateX(-10px) scale(0.98); }
+  100% { transform: translateY(0) translateX(0) scale(1); }
+}
