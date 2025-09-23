@@ -15,7 +15,7 @@ const PROFILE = {
   phone: "+46730802820",
   links: {
     dashboards_pdf: "/reports/Churn practice.pdf",
-    github: "https://github.com/EiriniOr",
+    github: "https://github.com/EiriniOr/",
     linkedin: "https://www.linkedin.com/in/eiriniornithopoulou/",
     thesis: "https://hh.diva-portal.org/smash/record.jsf?pid=diva2%3A1987943&dswid=5697",
     dashboards1:
@@ -270,7 +270,7 @@ export default function Portfolio() {
                           whileTap={{ scale: 0.985 }}
                           transition={{ type: "tween", duration: 0.12, ease: "easeOut" }}
                           className={btn}  // or btnSm
-                          href="{PROFILE.links.github}"
+                          href={PROFILE.links.github}
                           target="_blank"
                           rel="noreferrer"
                                         >
