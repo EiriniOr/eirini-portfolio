@@ -270,7 +270,7 @@ export default function Portfolio() {
                           whileTap={{ scale: 0.985 }}
                           transition={{ type: "tween", duration: 0.12, ease: "easeOut" }}
                           className={btn}  // or btnSm
-                          href="..."
+                          href="{PROFILE.links.github}"
                           target="_blank"
                           rel="noreferrer"
                                         >
@@ -282,7 +282,7 @@ export default function Portfolio() {
                           whileTap={{ scale: 0.985 }}
                           transition={{ type: "tween", duration: 0.12, ease: "easeOut" }}
                           className={btn}  // or btnSm
-                          href="..."
+                          href={PROFILE.links.linkedin}
                           target="_blank"
                           rel="noreferrer"
                           >
