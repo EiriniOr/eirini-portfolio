@@ -6,14 +6,25 @@
     <title>Eirini's Portfolio</title>
 
     <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMF6SB4P1X"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMF6SB4P1X"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag('js', new Date());
 
-    gtag('config', 'G-TMF6SB4P1X');
-  </script>
+      // Enable debug so you can see hits in Realtime DebugView
+      gtag('config', 'G-TMF6SB4P1X', { debug_mode: true, send_page_view: false });
+
+      // Explicit page_view for SPAs
+      window.addEventListener('load', function () {
+        gtag('event', 'page_view', {
+          page_title: document.title,
+          page_location: location.href,
+          page_path: location.pathname
+        });
+      });
+    </script>
+
   </head>
   <body>
     <div id="root"></div>
