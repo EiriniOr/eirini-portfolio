@@ -37,7 +37,7 @@ const PROFILE = {
     "R",
     "Git",
     "Academic Research",
-    "Cloud: Azure, GCP, MS Fabric",
+    "Azure, GCP, MS Fabric",
     "Deep Learning: Computer Vision, LLMs, GAT/GCN, etc",
     "Predictive Maintenance/Fraud Detection",
     "Smart Healthcare",
@@ -45,7 +45,7 @@ const PROFILE = {
     "MLOps",
     "Service Design",
     "Causal Inference/Discovery", "React",
-    "LaTeX",
+    "LaTeX", "Vertex AI"
   ],
   languages: ["English (C2)", "Swedish (Intermediate)", "Greek (Native)"],
 };
