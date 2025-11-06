@@ -257,7 +257,7 @@ export default function Portfolio() {
       {/* HERO */}
       <section id="top" className="max-w-6xl mx-auto px-5 md:px-8 pt-12 pb-6">
         <div className={`${card} grid md:grid-cols-3 gap-6 items-center`}>
-          <div className="md:col-span-2">
+          <div className="md:col-span-2 flex flex-col gap-4">
             <motion.h1
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -265,35 +265,45 @@ export default function Portfolio() {
             >
               {PROFILE.name}
             </motion.h1>
-            <p className="mt-2 text-lg md:text-xl text-slate-700">{PROFILE.title}</p>
-            <p className="mt-4 leading-relaxed text-slate-700">{PROFILE.blurb}</p>
+            <p className="text-lg md:text-xl text-slate-700">{PROFILE.title}</p>
+
+            {/* Personal introduction */}
+            <p className="leading-relaxed text-slate-700">
+              I’m driven by curiosity and a desire to make meaningful change through technology.
+              I love understanding how systems work, uncovering insights in data, and building
+              solutions that help people and organizations make fair, informed decisions —
+              and sometimes fun applications too.
+            </p>
+
+            <p className="mt-1 text-slate-700">{PROFILE.blurb}</p>
+
             <div className="mt-4 flex flex-wrap gap-3">
-                            <motion.a
-                            whileHover={{ y: -1, scale: 1.015 }}
-                          whileTap={{ scale: 0.985 }}
-                          transition={{ type: "tween", duration: 0.12, ease: "easeOut" }}
-                          className={btn}  // or btnSm
-                          href={PROFILE.links.github}
-                          target="_blank"
-                          rel="noreferrer"
-                                        >
-                            GitHub
-                          </motion.a>
+              <motion.a
+                whileHover={{ y: -1, scale: 1.015 }}
+                whileTap={{ scale: 0.985 }}
+                transition={{ type: "tween", duration: 0.12, ease: "easeOut" }}
+                className={btn}
+                href={PROFILE.links.github}
+                target="_blank"
+                rel="noreferrer"
+              >
+                GitHub
+              </motion.a>
 
-                          <motion.a
-                           whileHover={{ y: -1, scale: 1.015 }}
-                          whileTap={{ scale: 0.985 }}
-                          transition={{ type: "tween", duration: 0.12, ease: "easeOut" }}
-                          className={btn}  // or btnSm
-                          href={PROFILE.links.linkedin}
-                          target="_blank"
-                          rel="noreferrer"
-                          >
-                            LinkedIn
-                          </motion.a>
-
-
+              <motion.a
+                whileHover={{ y: -1, scale: 1.015 }}
+                whileTap={{ scale: 0.985 }}
+                transition={{ type: "tween", duration: 0.12, ease: "easeOut" }}
+                className={btn}
+                href={PROFILE.links.linkedin}
+                target="_blank"
+                rel="noreferrer"
+              >
+                LinkedIn
+              </motion.a>
             </div>
+
+
           </div>
           <div>
             <div className="rounded-2xl bg-slate-900 text-white p-5">
