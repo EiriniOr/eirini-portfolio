@@ -45,9 +45,9 @@ const PROFILE = {
     "MLOps",
     "Service Design",
     "Causal Inference/Discovery", "React",
-    "LaTeX", "Vertex AI"
+    "LaTeX", "Vertex AI", "HTML/CSS", "Airflow"
   ],
-  languages: ["English (C2)", "Swedish (Intermediate)", "Greek (Native)"],
+  languages: ["English (C2)", "Swedish (SVA 2)", "Greek (Native)"],
 };
 
 const PROJECTS = [
@@ -111,7 +111,7 @@ const PROJECTS = [
 
   {
   kind: "NLP",
-  title: "AI Resume ↔ Job description Analyzer",
+  title: "Resume and Job Ad Analyzer",
   year: "2025",
   impact: "Scores fit and highlights missing keywords vs job descriptions.",
   stack: ["Python", "NLP", "TF-IDF", "Streamlit"],
