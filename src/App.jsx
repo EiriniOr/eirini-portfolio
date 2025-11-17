@@ -27,27 +27,45 @@ const PROFILE = {
     heart_api_repo: "https://github.com/EiriniOr/heart-risk-api",
   },
   skills: [
-    "Python (PyTorch, scikit-learn, pandas, matplotlib, and many more)",
-    "Data Analytics and Visualization (Power BI · Looker)", "Machine Learning/Deep Learning",
-    "UX/UI",
-    "Fairness & Explainability (Fairlearn, SHAP, etc)",
-    "SQL", 
-    "RAG",
-    "Data Modeling",
-    "FastAPI",
-    "R",
-    "Git",
-    "Academic Research",
-    "Azure, GCP, MS Fabric",
-    "Deep Learning: Computer Vision, LLMs, GAT/GCN, etc",
-    "Predictive Maintenance/Fraud Detection",
-    "Smart Healthcare",
-    "Weights&Biases",
-    "MLOps",
-    "Service Design",
-    "Causal Inference/Discovery", "React",
-    "LaTeX", "Vertex AI", "HTML/CSS", "Documentation",
-  ],
+  // Programming & Core Tools
+  "Python (PyTorch, scikit-learn, pandas, matplotlib, etc.)",
+  "SQL",
+  "R",
+  "Git",
+  "React",
+  "HTML/CSS",
+  "LaTeX",
+
+  // Machine Learning & AI
+  "Machine Learning",
+  "Deep Learning (Vision, LLMs, GAT/GCN, Transformers)",
+  "Fairness & Explainability (Fairlearn, SHAP)",
+  "NLP / RAG",
+  "Predictive Modeling (Churn, Fraud Detection, Healthcare)",
+  "Smart Healthcare AI",
+  "Causal Inference / Causal Discovery",
+
+  // MLOps & Deployment
+  "FastAPI",
+  "Docker & Containerization",
+  "MLOps (Experiment Tracking, Reproducibility)",
+  "Weights & Biases",
+  "Documentation",
+
+  // Cloud Platforms
+  "Azure",
+  "Google Cloud Platform (Cloud Run, Vertex AI)",
+  "Microsoft Fabric",
+
+  // Data Analytics & Visualization
+  "Data Analytics",
+  "Visualization (Power BI · Looker)",
+
+  // Design & Communication
+  "UX/UI",
+  "Service Design",
+  "Academic Research"
+],
   languages: ["English (C2)", "Swedish (SVA 2)", "Greek (Native)"],
 };
 
