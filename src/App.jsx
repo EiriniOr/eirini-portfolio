@@ -23,17 +23,18 @@ const PROFILE = {
     dashboards2:
       "https://app.powerbi.com/reportEmbed?reportId=c7d74911-13be-44aa-b11e-76a0312d3702&autoAuth=true&ctid=1ccb8299-3a8e-4aa1-b044-87491366f150",
     publications: "https://www.researchgate.net/profile/Eirini-Ornithopoulou/research",
+    heart_api_demo: "https://heart-risk-api-602311160874.europe-north1.run.app/",
+    heart_api_repo: "https://github.com/EiriniOr/heart-risk-api",
   },
   skills: [
     "Python (PyTorch, scikit-learn, pandas, matplotlib, and many more)",
-    "Data Analytics and Visualization",
-    "Actionable Insights",
-    "Design Innovation",
-    "Fairness & Explainability (Fairlearn, SHAP)",
+    "Data Analytics and Visualization (Power BI · Looker)", "Machine Learning/Deep Learning",
+    "UX/UI",
+    "Fairness & Explainability (Fairlearn, SHAP, etc)",
     "SQL", 
     "RAG",
     "Data Modeling",
-    "Power BI · Looker",
+    "FastAPI",
     "R",
     "Git",
     "Academic Research",
@@ -45,7 +46,7 @@ const PROFILE = {
     "MLOps",
     "Service Design",
     "Causal Inference/Discovery", "React",
-    "LaTeX", "Vertex AI", "HTML/CSS", "Airflow"
+    "LaTeX", "Vertex AI", "HTML/CSS", "Documentation",
   ],
   languages: ["English (C2)", "Swedish (SVA 2)", "Greek (Native)"],
 };
@@ -75,6 +76,31 @@ const PROJECTS = [
       "Domain adaptation before embedding creation",
     ],
   },
+  {
+      kind: "Cloud Deployment · Smart Healthcare",
+      title: "Heart Disease Risk Prediction API",
+      year: "2025",
+      impact:
+        "End-to-end ML service that estimates heart disease risk from basic clinical features, with an interactive browser demo and documented REST API.",
+      stack: [
+        "Python",
+        "scikit-learn",
+        "FastAPI",
+        "Docker",
+        "Google Cloud Run",
+      ],
+      links: [
+        { label: "Live Demo", href: PROFILE.links.heart_api_demo },
+        { label: "GitHub", href: PROFILE.links.heart_api_repo },
+      ],
+      highlights: [
+        "Trained a RandomForest classifier on the UCI Heart Disease dataset",
+        "Deployed a containerized FastAPI service to Google Cloud Run (serverless)",
+        "Simple web UI for non-technical users",
+      ],
+  },
+
+
   {
     kind: "Data Analysis/Data Engineering",
     title: "Customer Churn Dashboard",
@@ -184,6 +210,7 @@ const EDUCATION = [
 ];
 
 const CERTS = [
+  "Product Owner Certifications (IBM/Skillsbild,2025)",
   "Power BI Track (Datacamp, 2024)",
   "Data Engineering Associate in SQL (Datacamp, 2024)",
   "MS Fabric — The Complete Guide (Udemy, 2024)",
