@@ -371,13 +371,13 @@ export default function Portfolio() {
                 </a>
               </div>
 
-              {PROFILE.phone && (
+              {/* {PROFILE.phone && (
                 <div className="mt-1">
                   <a className="underline" href={`tel:${PROFILE.phone}`}>
                     {PROFILE.phone}
                   </a>
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         </div>
@@ -530,7 +530,7 @@ export default function Portfolio() {
       <Section id="contact" title="Contact">
         <div className={card}>
           <p className="text-slate-700">
-            I’m open to roles in Data Science / ML Engineering.
+            I’m open to roles in Data Science / Product Ownership.
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
             <a className="px-4 py-2 rounded-xl bg-slate-900 text-white text-sm" href={PROFILE.links.linkedin} target="_blank">Connect on LinkedIn</a>
