@@ -7,7 +7,7 @@ import EmbedModal from "./EmbedModal";
 
 const PROFILE = {
   name: "Eirini Ornithopoulou",
-  title: "Data Scientist · ML/AI Enthusiast",
+  title: "Data Scientist · Product Owner · ML/AI Enthusiast",
   blurb:
     "ML & Data Science MSc with a PhD in bionanotechnology (prior). I have experience in fair, explainable models, graph and attention-focused deep learning. Full Stack loading...",
   location: "Stockholm, Sweden",
@@ -94,6 +94,24 @@ const PROJECTS = [
       "Domain adaptation before embedding creation",
     ],
   },
+
+{
+  kind: "NLP",
+  title: "CV and Job Ad Analyzer (Improve your ATS-score)",
+  year: "2025",
+  impact:
+    "ATS-style tool that compares any resume to any job ad, scores the match, and surfaces missing keywords and soft skills with concrete improvement tips.",
+  stack: ["Python", "NLP", "TF-IDF", "scikit-learn", "Streamlit"],
+  links: [
+    { label: "Live Demo", href: "https://resume-analyzer-vzenm7bxsehqjeqecla8hy.streamlit.app/" },
+    { label: "GitHub", href: "https://github.com/EiriniOr/resume-analyzer" }
+  ],
+  highlights: [
+    "TF-IDF cosine similarity to score resume–job ad fit",
+    "Automatic keyword gap detection from job descriptions",
+    "Actionable suggestions and draft bullets to improve the match score"
+  ]
+},
   {
       kind: "Cloud Deployment · Smart Healthcare",
       title: "Heart Disease Risk Prediction API",
@@ -153,21 +171,6 @@ const PROJECTS = [
     ],
   },
 
-  {
-  kind: "NLP",
-  title: "Resume and Job Ad Analyzer",
-  year: "2025",
-  impact: "Scores fit and highlights missing keywords vs job descriptions.",
-  stack: ["Python", "NLP", "TF-IDF", "Streamlit"],
-  links: [
-    { label: "Live Demo", href: "https://resume-analyzer-vzenm7bxsehqjeqecla8hy.streamlit.app/" },
-    { label: "GitHub", href: "https://github.com/EiriniOr/resume-analyzer" }
-  ],
-  highlights: [
-    "Cosine similarity with n-grams",
-    "Keyword gap detection and actionable suggestions"
-  ],
-},
 {
   kind: "Data Visualization",
   title: "Carbon Emissions Explorer",
