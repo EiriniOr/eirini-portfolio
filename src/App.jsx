@@ -319,8 +319,9 @@ export default function Portfolio() {
             <p className="leading-relaxed text-slate-700">
               I’m driven by curiosity and a desire to make meaningful change through technology.
               I love understanding how systems work, uncovering insights in data, and building
-              solutions that help people and organizations make fair, informed decisions —
-              and sometimes fun applications too.
+              solutions that actually help people and organizations.
+
+              I enjoy going from messy data and vague ideas to prototypes, and services. I naturally take on a product mindset: aligning stakeholders, prioritising and translating so that solutions are both usable and valuable in the real world.
             </p>
 
             <p className="mt-1 text-slate-700">{PROFILE.blurb}</p>
