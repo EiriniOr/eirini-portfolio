@@ -6,10 +6,8 @@ import EmbedModal from "./EmbedModal";
 // ——— QUICK EDIT PANEL ———
 
 const PROFILE = {
-  name: "Eirini Ornithopoulou",
+  name: "Eirini Ornithopoulou, Ph.D.",
   title: "Data Scientist · Product Owner · ML/AI Enthusiast",
-  blurb:
-    "ML & Data Science MSc with a PhD in bionanotechnology (prior). I have experience in fair, explainable models, graph and attention-focused deep learning. Full Stack loading...",
   location: "Stockholm, Sweden",
   email: "renaorn@gmail.com",
   phone: "+46730802820",
@@ -355,37 +353,34 @@ export default function Portfolio() {
 
           </div>
           <div>
-            <div className="flex flex-col items-center">
-              <img
-                src="/photo/rena.jpg"
-                alt="Eirini Ornithopoulou portrait"
-                className="w-40 h-40 rounded-full object-cover border-4 border-violet-100 shadow-md mb-4"
-                loading="lazy"
-              />
-              <div className="rounded-2xl bg-slate-900 text-white p-5 w-full">
-                <div className="text-sm text-slate-300">Based in</div>
-                <div className="font-semibold">{PROFILE.location}</div>
-                <div className="mt-4 text-sm text-slate-300">Contact</div>
-                <div className="mt-1">
-                  {showEmail ? (
-                    <a className="underline" href={`mailto:${PROFILE.email}`}>{PROFILE.email}</a>
-                  ) : (
-                    <button className="underline" onClick={() => setShowEmail(true)}>Reveal email</button>
-                  )}
-                </div>
-                {PROFILE.phone && (
-                  <div className="mt-1">
-                    {showPhone ? (
-                      <a className="underline" href={`tel:${PROFILE.phone}`}>{PROFILE.phone}</a>
-                    ) : (
-                      <button className="underline" onClick={() => setShowPhone(true)}>Reveal phone</button>
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
+          <div className="flex flex-col items-center">
+            <img
+              src="/photo/rena.jpg"
+              alt="Eirini Ornithopoulou portrait"
+              className="w-40 h-40 rounded-full object-cover border-4 border-violet-100 shadow-md mb-4"
+              loading="lazy"
+            />
+            <div className="rounded-2xl bg-slate-900 text-white p-5 w-full">
+              <div className="text-sm text-slate-300">Based in</div>
+              <div className="font-semibold">{PROFILE.location}</div>
 
+              <div className="mt-4 text-sm text-slate-300">Contact</div>
+              <div className="mt-1">
+                <a className="underline" href={`mailto:${PROFILE.email}`}>
+                  {PROFILE.email}
+                </a>
+              </div>
+
+              {PROFILE.phone && (
+                <div className="mt-1">
+                  <a className="underline" href={`tel:${PROFILE.phone}`}>
+                    {PROFILE.phone}
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
+        </div>
         </div>
       </section>
 
