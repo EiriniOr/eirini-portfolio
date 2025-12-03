@@ -92,12 +92,33 @@ const PROJECTS = [
       "Domain adaptation before embedding creation",
     ],
   },
+
+  {
+  kind: "Winner of the AI Health Hackathon",
+  title: "NutrioFast",
+  year: "2025",
+  impact:
+    "My team and I won the 2025 AI Health Hackathon, organized by STING, Square One and KI Innovations, by developing an app that targets the problem of tracking patient food intake, and makes it easier to organize and visualize data, as well as relieves nurses' and assistant nurses' administrative burden by producing a summary text that they can then copy into the patient's health record. The tracking itself uses voice notes and image recognition through an OpenAI API.",
+  stack: [
+    "Service Design",
+    "LLM",
+    "OpenAI API",
+    "Streamlit",
+    "Typescript"
+  ],
+  links: [
+    {
+      label: "Live Demo",
+      href: "https://nutri-patient-watch.lovable.app"
+    }
+  ],
+},
 {
   kind: "NLP/LLM",
   title: "ATS-style Job Match Scorer",
   year: "2025",
   impact:
-    "Tired of sending applications into a black hole? This tool scores how well your CV matches a specific job ad, shows you the missing keywords and soft skills, and can even generate an ATS-friendly rewritten CV with an LLM – so you can tailor each application with data instead of guesswork.",
+    "Tired of sending applications into a black hole? This tool estimates how well your CV would score on a specific job ad, shows you suggestions, and can even generate an ATS-friendly rewritten CV with an LLM (COMPLETELY FREE)– so you can maximize your chances with each application. Let's level the playing field!",
   stack: [
     "Python",
     "NLP",
@@ -123,7 +144,6 @@ const PROJECTS = [
     "Implements an ATS-inspired scoring model that combines TF-IDF similarity, keyword coverage (with light stemming), soft-skill detection, impact signals (%, revenue, latency, etc.), and a scorecard for must-have vs nice-to-have skills.",
     "Supports both English and Swedish CVs/job ads with custom stopword lists, section-aware weighting (summary vs experience), and simple job-title matching to simulate real ATS behaviour more closely.",
     "Built an LLM-assisted rewrite flow using the Groq API (Llama 3.1 8B) via an OpenAI-compatible chat endpoint, including prompt engineering to preserve truthfulness, avoid hallucinated skills, and keep an ATS-friendly structure.",
-    "Packaged everything into a Streamlit app with clear UX: CV upload or paste, job-ad input, detailed score breakdown, actionable suggestions, and an optional one-click LLM rewrite mode."
   ]
 },
 
