@@ -112,6 +112,9 @@ const PROJECTS = [
       href: "https://nutri-patient-watch.lovable.app"
     }
   ],
+  highlights: [
+  
+  ]
 },
 {
   kind: "NLP/LLM",
