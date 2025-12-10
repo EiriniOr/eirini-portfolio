@@ -134,6 +134,10 @@ const PROJECTS = [
   ],
   links: [
     {
+      label: "Live Demo",
+      href: "/life_in_sweden_demo.pptx"
+    },
+    {
       label: "GitHub",
       href: "https://github.com/EiriniOr/mcp-powerpoint-server"
     }
