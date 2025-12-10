@@ -117,6 +117,35 @@ const PROJECTS = [
   ]
 },
 {
+  kind: "MCP Server / AI Tooling",
+  title: "PowerPoint MCP Server",
+  year: "2025",
+  impact:
+    "A comprehensive Model Context Protocol server that enables AI assistants (Claude, ChatGPT) to programmatically create PowerPoint presentations. Features 36 automation tools including charts, shapes, flowcharts, QR codes, data analysis from CSV/Excel/JSON, and advanced formatting - turning natural language requests into complete presentations.",
+  stack: [
+    "Python",
+    "Model Context Protocol (MCP)",
+    "python-pptx",
+    "pandas",
+    "FastAPI architecture",
+    "Data visualization",
+    "QR code generation",
+    "Claude Code integration"
+  ],
+  links: [
+    {
+      label: "GitHub",
+      href: "https://github.com/EiriniOr/mcp-powerpoint-server"
+    }
+  ],
+  highlights: [
+    "36 specialized tools: slides, charts (bar/line/pie/scatter/bubble), shapes, flowcharts, tables, image grids, QR codes, themes, and data analysis",
+    "Native integration with Claude Code via MCP protocol - use natural language to generate presentations",
+    "Python wrapper for ChatGPT and other LLMs to programmatically generate presentations",
+    "Automatic data analysis: reads CSV/Excel/JSON files and creates visualizations with insights"
+  ]
+},
+{
   kind: "NLP/LLM",
   title: "ATS-style Job Match Scorer",
   year: "2025",
