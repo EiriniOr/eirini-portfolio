@@ -134,8 +134,8 @@ const PROJECTS = [
   ],
   links: [
     {
-      label: "Live Demo",
-      href: "/life_in_sweden_demo.pptx"
+      label: "View Example",
+      href: "/life_in_sweden_demo.pdf"
     },
     {
       label: "GitHub",
