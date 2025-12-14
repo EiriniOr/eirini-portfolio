@@ -118,35 +118,44 @@ const PROJECTS = [
 },
 {
   kind: "MCP Server / AI Tooling",
-  title: "PowerPoint MCP Server",
+  title: "PowerPoint MCP Server + AI Weekly Digest Automation",
   year: "2025",
   impact:
-    "A comprehensive Model Context Protocol server that enables AI assistants (Claude, ChatGPT) to programmatically create PowerPoint presentations. Features 36 automation tools including charts, shapes, flowcharts, QR codes, data analysis from CSV/Excel/JSON, and advanced formatting - turning natural language requests into complete presentations.",
+    "A comprehensive Model Context Protocol server that enables AI assistants (Claude, ChatGPT) to programmatically create PowerPoint presentations. Built a fully automated system that generates weekly AI digest presentations every Sunday - collecting from arXiv, Hacker News, and Reddit, curating with Claude AI, and auto-deploying to GitHub Pages with email notifications.",
   stack: [
     "Python",
     "Model Context Protocol (MCP)",
     "python-pptx",
-    "pandas",
-    "FastAPI architecture",
-    "Data visualization",
-    "QR code generation",
-    "Claude Code integration"
+    "Claude API (Sonnet 4.5)",
+    "RSS/API aggregation",
+    "Email automation (SMTP)",
+    "GitHub Pages deployment",
+    "macOS launchd scheduling"
   ],
   links: [
     {
-      label: "View Example",
+      label: "View Latest Digest",
+      href: "https://EiriniOr.github.io/ai-weekly-digest/"
+    },
+    {
+      label: "Example Presentation",
       href: "/life_in_sweden_demo.pdf"
     },
     {
-      label: "GitHub",
+      label: "MCP Server GitHub",
       href: "https://github.com/EiriniOr/mcp-powerpoint-server"
+    },
+    {
+      label: "Digest Automation GitHub",
+      href: "https://github.com/EiriniOr/ai-weekly-digest"
     }
   ],
   highlights: [
-    "36 specialized tools: slides, charts (bar/line/pie/scatter/bubble), shapes, flowcharts, tables, image grids, QR codes, themes, and data analysis",
-    "Native integration with Claude Code via MCP protocol - use natural language to generate presentations",
-    "Python wrapper for ChatGPT and other LLMs to programmatically generate presentations",
-    "Automatic data analysis: reads CSV/Excel/JSON files and creates visualizations with insights"
+    "36 PowerPoint automation tools: charts, shapes, flowcharts, tables, QR codes, data analysis from CSV/Excel/JSON",
+    "Automated AI news aggregation system: collects from arXiv papers, Hacker News, Reddit communities",
+    "Claude AI curation: intelligently filters and categorizes content by relevance, generates insights",
+    "End-to-end automation: generates presentation, sends email, deploys to GitHub Pages - every Sunday at 6 PM",
+    "GitHub Pages integration: automatically updates live site with latest digest presentation"
   ]
 },
 {
