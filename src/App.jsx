@@ -117,19 +117,21 @@ const PROJECTS = [
   ]
 },
 {
-  kind: "Web App / Automation",
+  kind: "Web App / Automation / YouTube Channel",
   title: "AI Weekly Digest - Agentic AI News",
   year: "2025",
   impact:
-    "A beautiful, futuristic webpage that automatically curates and publishes weekly AI updates focused on agentic AI. Every Sunday at 6 PM, the system collects news from arXiv, Hacker News, and Reddit, uses Claude AI to intelligently filter and categorize content, then generates and deploys a stunning webpage with animated backgrounds and clean design. Maintains an archive of the last 5 weeks.",
+    "A fully automated content creation system that curates weekly AI updates and publishes them as both a beautiful futuristic webpage and YouTube videos with AI-generated narration. Every Sunday at 6 PM, the system collects news from arXiv, Hacker News, and Reddit, uses Claude AI to filter and categorize content, generates video scripts, creates 2-minute videos with female AI voice narration (OpenAI TTS), and deploys everything automatically. Archive of previous weeks included.",
   stack: [
     "Python",
     "Claude API (Sonnet 4.5)",
+    "OpenAI TTS",
+    "moviepy (video generation)",
     "HTML/CSS",
     "GitHub Pages",
-    "RSS/API aggregation",
-    "macOS launchd scheduling",
-    "Automated deployment"
+    "YouTube",
+    "GitHub Actions",
+    "RSS/API aggregation"
   ],
   links: [
     {
@@ -137,16 +139,21 @@ const PROJECTS = [
       href: "https://EiriniOr.github.io/ai-weekly-digest/"
     },
     {
+      label: "Watch on YouTube",
+      href: "https://www.youtube.com/channel/UCUPSLoXvaMVbOIaXsOorHng"
+    },
+    {
       label: "GitHub",
       href: "https://github.com/EiriniOr/ai-weekly-digest"
     }
   ],
   highlights: [
+    "AI-narrated YouTube videos: Claude generates scripts, OpenAI TTS creates female voice narration",
+    "Automated video production: moviepy creates 2-minute videos with animations and transitions",
     "Futuristic animated UI with gradient backgrounds and smooth scrolling",
-    "Automated weekly updates: collects 50+ items, curates to ~14 top stories",
-    "Claude AI curation: filters for relevance, generates insights, categorizes content",
-    "Archive system: maintains last 5 weeks of digests with summaries",
-    "Auto-deployment: generates and publishes webpage every Sunday at 6 PM"
+    "Claude AI curation: filters 50+ items to ~14 top stories with insights",
+    "Archive system: maintains last 5 weeks with clickable previous editions",
+    "Fully automated: runs in GitHub Actions cloud every Sunday at 6 PM"
   ]
 },
 {
