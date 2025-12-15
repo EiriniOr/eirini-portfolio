@@ -117,20 +117,19 @@ const PROJECTS = [
   ]
 },
 {
-  kind: "MCP Server / AI Tooling",
-  title: "PowerPoint MCP Server + AI Weekly Digest Automation",
+  kind: "Web App / Automation",
+  title: "AI Weekly Digest - Agentic AI News",
   year: "2025",
   impact:
-    "A comprehensive Model Context Protocol server that enables AI assistants (Claude, ChatGPT) to programmatically create PowerPoint presentations. Built a fully automated system that generates weekly AI digest presentations every Sunday - collecting from arXiv, Hacker News, and Reddit, curating with Claude AI, and auto-deploying to GitHub Pages with email notifications.",
+    "A beautiful, futuristic webpage that automatically curates and publishes weekly AI updates focused on agentic AI. Every Sunday at 6 PM, the system collects news from arXiv, Hacker News, and Reddit, uses Claude AI to intelligently filter and categorize content, then generates and deploys a stunning webpage with animated backgrounds and clean design. Maintains an archive of the last 5 weeks.",
   stack: [
     "Python",
-    "Model Context Protocol (MCP)",
-    "python-pptx",
     "Claude API (Sonnet 4.5)",
+    "HTML/CSS",
+    "GitHub Pages",
     "RSS/API aggregation",
-    "Email automation (SMTP)",
-    "GitHub Pages deployment",
-    "macOS launchd scheduling"
+    "macOS launchd scheduling",
+    "Automated deployment"
   ],
   links: [
     {
@@ -138,24 +137,48 @@ const PROJECTS = [
       href: "https://EiriniOr.github.io/ai-weekly-digest/"
     },
     {
-      label: "Example Presentation",
-      href: "/life_in_sweden_demo.pdf"
-    },
-    {
-      label: "MCP Server GitHub",
-      href: "https://github.com/EiriniOr/mcp-powerpoint-server"
-    },
-    {
-      label: "Digest Automation GitHub",
+      label: "GitHub",
       href: "https://github.com/EiriniOr/ai-weekly-digest"
     }
   ],
   highlights: [
-    "36 PowerPoint automation tools: charts, shapes, flowcharts, tables, QR codes, data analysis from CSV/Excel/JSON",
-    "Automated AI news aggregation system: collects from arXiv papers, Hacker News, Reddit communities",
-    "Claude AI curation: intelligently filters and categorizes content by relevance, generates insights",
-    "End-to-end automation: generates presentation, sends email, deploys to GitHub Pages - every Sunday at 6 PM",
-    "GitHub Pages integration: automatically updates live site with latest digest presentation"
+    "Futuristic animated UI with gradient backgrounds and smooth scrolling",
+    "Automated weekly updates: collects 50+ items, curates to ~14 top stories",
+    "Claude AI curation: filters for relevance, generates insights, categorizes content",
+    "Archive system: maintains last 5 weeks of digests with summaries",
+    "Auto-deployment: generates and publishes webpage every Sunday at 6 PM"
+  ]
+},
+{
+  kind: "MCP Server / AI Tooling",
+  title: "PowerPoint MCP Server",
+  year: "2025",
+  impact:
+    "A comprehensive Model Context Protocol server that enables AI assistants (Claude, ChatGPT) to programmatically create PowerPoint presentations. Features 36 tools for creating charts, shapes, flowcharts, tables, QR codes, and analyzing data from CSV/Excel/JSON files. Designed to work seamlessly with Claude and other AI assistants.",
+  stack: [
+    "Python",
+    "Model Context Protocol (MCP)",
+    "python-pptx",
+    "Data visualization",
+    "Chart generation",
+    "Shape manipulation"
+  ],
+  links: [
+    {
+      label: "Example Presentation",
+      href: "/life_in_sweden_demo.pdf"
+    },
+    {
+      label: "GitHub",
+      href: "https://github.com/EiriniOr/mcp-powerpoint-server"
+    }
+  ],
+  highlights: [
+    "36 PowerPoint automation tools for comprehensive presentation creation",
+    "Charts: bar, column, line, pie, scatter, bubble with customization",
+    "Shapes and connectors: rectangles, circles, arrows, flowcharts",
+    "Data analysis: automatic chart generation from CSV/Excel/JSON files",
+    "Advanced features: QR codes, image grids, timelines, comparison slides"
   ]
 },
 {
