@@ -117,19 +117,17 @@ const PROJECTS = [
   ]
 },
 {
-  kind: "Web App / Automation / YouTube Channel",
+  kind: "Web App / Automation / AI Audio Narration",
   title: "AI Weekly Digest - Agentic AI News",
   year: "2025",
   impact:
-    "A fully automated content creation system that curates weekly AI updates and publishes them as both a beautiful futuristic webpage and YouTube videos with AI-generated narration. Every Sunday at 6 PM, the system collects news from arXiv, Hacker News, and Reddit, uses Claude AI to filter and categorize content, generates video scripts, creates 2-minute videos with female AI voice narration (OpenAI TTS), and deploys everything automatically. Archive of previous weeks included.",
+    "A fully automated content creation system that curates weekly AI updates and publishes them as a beautiful futuristic webpage with AI-narrated audio summaries. Every Sunday at 6 PM, the system collects news from arXiv, Hacker News, and Reddit, uses Claude AI to filter and categorize content, generates narration scripts, creates audio summaries with female AI voice (OpenAI TTS), and deploys everything automatically. Archive of previous weeks included.",
   stack: [
     "Python",
     "Claude API (Sonnet 4.5)",
-    "OpenAI TTS",
-    "moviepy (video generation)",
+    "OpenAI TTS (audio narration)",
     "HTML/CSS",
     "GitHub Pages",
-    "YouTube",
     "GitHub Actions",
     "RSS/API aggregation"
   ],
@@ -139,17 +137,13 @@ const PROJECTS = [
       href: "https://EiriniOr.github.io/ai-weekly-digest/"
     },
     {
-      label: "Watch on YouTube",
-      href: "https://www.youtube.com/channel/UCUPSLoXvaMVbOIaXsOorHng"
-    },
-    {
       label: "GitHub",
       href: "https://github.com/EiriniOr/ai-weekly-digest"
     }
   ],
   highlights: [
-    "AI-narrated YouTube videos: Claude generates scripts, OpenAI TTS creates female voice narration",
-    "Automated video production: moviepy creates 2-minute videos with animations and transitions",
+    "AI-narrated audio: Claude generates scripts, OpenAI TTS creates 2-minute female voice narration",
+    "Embedded audio player: listen to the weekly summary directly on the webpage",
     "Futuristic animated UI with gradient backgrounds and smooth scrolling",
     "Claude AI curation: filters 50+ items to ~14 top stories with insights",
     "Archive system: maintains last 5 weeks with clickable previous editions",
