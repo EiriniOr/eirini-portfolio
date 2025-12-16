@@ -151,6 +151,40 @@ const PROJECTS = [
   ]
 },
 {
+  kind: "Web App / Automation / AI Audio Narration",
+  title: "Weekly International Politics Digest",
+  year: "2025",
+  impact:
+    "A fully automated news aggregation system that curates weekly updates on international politics, war conflicts, and Swedish news from trusted sources (Guardian, BBC, Al Jazeera, Reuters, Swedish media). Every Monday at 6 AM, the system collects news via RSS feeds, uses Claude AI to filter and categorize content into International Politics, War & Conflict, Swedish News, and Diplomacy sections, generates professional audio narration with OpenAI TTS, and deploys a multi-column news website to GitHub Pages automatically.",
+  stack: [
+    "Python",
+    "Claude API (Sonnet 4.5)",
+    "OpenAI TTS (audio narration)",
+    "HTML/CSS",
+    "GitHub Pages",
+    "GitHub Actions",
+    "RSS/Feedparser"
+  ],
+  links: [
+    {
+      label: "View Latest Digest",
+      href: "https://EiriniOr.github.io/news-aggregation/"
+    },
+    {
+      label: "GitHub",
+      href: "https://github.com/EiriniOr/news-aggregation"
+    }
+  ],
+  highlights: [
+    "Professional broadcaster narration: Claude generates scripts, OpenAI TTS creates 2-3 minute news summary",
+    "Multi-column news layout: professional design with category color coding and responsive grid",
+    "Trusted sources: Guardian, BBC, Al Jazeera, Reuters, Svenska Dagbladet, Dagens Nyheter, Aftonbladet",
+    "Claude AI categorization: filters and organizes news into Politics, War, Swedish News, Diplomacy",
+    "Archive system: maintains previous weeks' digests with navigation",
+    "Fully automated: runs in GitHub Actions every Monday at 6 AM"
+  ]
+},
+{
   kind: "MCP Server / AI Tooling",
   title: "PowerPoint MCP Server",
   year: "2025",
