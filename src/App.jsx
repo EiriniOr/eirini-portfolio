@@ -72,6 +72,7 @@ const PROJECTS = [
     kind: "AI Research Project",
     title: "Fairness‑Aware, Domain‑Adaptive GAT for ICU Mortality Prediction",
     year: "2025",
+    badge: "pinned",
     impact:
       "Developed end-to-end ML pipeline: SQL querying on GCP, designed computational graph construction, hyperparameter search and experiment tracking (using MLOps tools), implemented dynamic fairness constraints to reduce bias, domain adaptation in before embedding creation, explainable graph visualizations and risk prediction, some post processing tests.",
     stack: [
@@ -97,6 +98,7 @@ const PROJECTS = [
   kind: "Winner of the AI Health Hackathon",
   title: "NutrioFast",
   year: "2025",
+  badge: "pinned",
   impact:
     "My team and I won the 2025 AI Health Hackathon, organized by STING, Square One and KI Innovations, by developing an app that targets the problem of tracking patient food intake, and makes it easier to organize and visualize data, as well as relieves nurses' and assistant nurses' administrative burden by producing a summary text that they can then copy into the patient's health record. The tracking itself uses voice notes and image recognition through an OpenAI API.",
   stack: [
@@ -118,10 +120,11 @@ const PROJECTS = [
 },
 {
   kind: "Web App / Automation / AI Audio Narration",
-  title: "AI Weekly Digest - Agentic AI News",
+  title: "Automated Weekly Digest Systems",
   year: "2025",
+  badge: "new",
   impact:
-    "A fully automated content creation system that curates weekly AI updates and publishes them as a beautiful futuristic webpage with AI-narrated audio summaries. Every Sunday at 6 PM, the system collects news from arXiv, Hacker News, and Reddit, uses Claude AI to filter and categorize content, generates narration scripts, creates audio summaries with female AI voice (OpenAI TTS), and deploys everything automatically. Archive of previous weeks included.",
+    "Two fully automated content creation systems that curate weekly news and publish them as beautiful webpages with AI-narrated audio summaries. (1) AI Weekly Digest: curates agentic AI news from arXiv, Hacker News, Reddit every Sunday at 6 PM with futuristic UI. (2) International Politics Digest: aggregates global politics, war updates, and Swedish news from trusted sources (Guardian, BBC, Al Jazeera, Reuters) every Monday at 6 AM with professional multi-column design. Both use Claude AI for curation, OpenAI TTS for narration, and deploy automatically to GitHub Pages.",
   stack: [
     "Python",
     "Claude API (Sonnet 4.5)",
@@ -133,61 +136,36 @@ const PROJECTS = [
   ],
   links: [
     {
-      label: "View Latest Digest",
+      label: "AI Digest",
       href: "https://EiriniOr.github.io/ai-weekly-digest/"
     },
     {
-      label: "GitHub",
-      href: "https://github.com/EiriniOr/ai-weekly-digest"
-    }
-  ],
-  highlights: [
-    "AI-narrated audio: Claude generates scripts, OpenAI TTS creates 2-minute female voice narration",
-    "Embedded audio player: listen to the weekly summary directly on the webpage",
-    "Futuristic animated UI with gradient backgrounds and smooth scrolling",
-    "Claude AI curation: filters 50+ items to ~14 top stories with insights",
-    "Archive system: maintains last 5 weeks with clickable previous editions",
-    "Fully automated: runs in GitHub Actions cloud every Sunday at 6 PM"
-  ]
-},
-{
-  kind: "Web App / Automation / AI Audio Narration",
-  title: "Weekly International Politics Digest",
-  year: "2025",
-  impact:
-    "A fully automated news aggregation system that curates weekly updates on international politics, war conflicts, and Swedish news from trusted sources (Guardian, BBC, Al Jazeera, Reuters, Swedish media). Every Monday at 6 AM, the system collects news via RSS feeds, uses Claude AI to filter and categorize content into International Politics, War & Conflict, Swedish News, and Diplomacy sections, generates professional audio narration with OpenAI TTS, and deploys a multi-column news website to GitHub Pages automatically.",
-  stack: [
-    "Python",
-    "Claude API (Sonnet 4.5)",
-    "OpenAI TTS (audio narration)",
-    "HTML/CSS",
-    "GitHub Pages",
-    "GitHub Actions",
-    "RSS/Feedparser"
-  ],
-  links: [
-    {
-      label: "View Latest Digest",
+      label: "Politics Digest",
       href: "https://EiriniOr.github.io/news-aggregation/"
     },
     {
-      label: "GitHub",
+      label: "AI Digest GitHub",
+      href: "https://github.com/EiriniOr/ai-weekly-digest"
+    },
+    {
+      label: "Politics Digest GitHub",
       href: "https://github.com/EiriniOr/news-aggregation"
     }
   ],
   highlights: [
-    "Professional broadcaster narration: Claude generates scripts, OpenAI TTS creates 2-3 minute news summary",
-    "Multi-column news layout: professional design with category color coding and responsive grid",
-    "Trusted sources: Guardian, BBC, Al Jazeera, Reuters, Svenska Dagbladet, Dagens Nyheter, Aftonbladet",
-    "Claude AI categorization: filters and organizes news into Politics, War, Swedish News, Diplomacy",
-    "Archive system: maintains previous weeks' digests with navigation",
-    "Fully automated: runs in GitHub Actions every Monday at 6 AM"
+    "AI-narrated audio: Claude generates scripts, OpenAI TTS creates 2-3 minute voice narration for each digest",
+    "Dual automation: AI digest (Sundays 6 PM) focuses on agentic AI, Politics digest (Mondays 6 AM) covers world news",
+    "Smart curation: Claude filters 50+ items to ~15 top stories with insights and categorization",
+    "Professional designs: futuristic animated UI for AI digest, multi-column news layout for politics digest",
+    "Archive systems: both maintain previous weeks' digests with navigation",
+    "Fully automated: both run in GitHub Actions cloud with email notifications on completion"
   ]
 },
 {
   kind: "MCP Server / AI Tooling",
   title: "PowerPoint MCP Server",
   year: "2025",
+  badge: "new",
   impact:
     "A comprehensive Model Context Protocol server that enables AI assistants (Claude, ChatGPT) to programmatically create PowerPoint presentations. Features 36 tools for creating charts, shapes, flowcharts, tables, QR codes, and analyzing data from CSV/Excel/JSON files. Designed to work seamlessly with Claude and other AI assistants.",
   stack: [
@@ -539,7 +517,19 @@ export default function Portfolio() {
               >
 
               <div className="text-xs uppercase tracking-wider text-slate-500">{p.kind} · {p.year}</div>
-              <h3 className="text-xl font-semibold mt-1">{p.title}</h3>
+              <div className="flex items-center gap-2 mt-1">
+                <h3 className="text-xl font-semibold">{p.title}</h3>
+                {p.badge === "pinned" && (
+                  <span className="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full bg-amber-100 text-amber-800 border border-amber-300">
+                    📌 Pinned
+                  </span>
+                )}
+                {p.badge === "new" && (
+                  <span className="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300">
+                    ✨ New
+                  </span>
+                )}
+              </div>
               <p className="mt-2 text-slate-700">{p.impact}</p>
               <div className="mt-2">
                 {p.stack.map((s, j) => (
