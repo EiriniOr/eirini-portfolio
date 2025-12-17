@@ -7,7 +7,7 @@ import EmbedModal from "./EmbedModal";
 
 const PROFILE = {
   name: "Eirini Ornithopoulou, Ph.D.",
-  title: "Data Scientist · Product Owner · ML/AI Enthusiast",
+  title: "Data Scientist · Product Owner · ML/Agentic AI Enthusiast",
   location: "Stockholm, Sweden",
   email: "renaorn@gmail.com",
   phone: "+46730802820",
@@ -48,7 +48,7 @@ const PROFILE = {
   "Docker & Containerization",
   "MLOps (Experiment Tracking, Reproducibility)",
   "Weights & Biases",
-  "Documentation",
+  "Documentation", "AgentOps",
 
   // Cloud Platforms
   "Azure",
@@ -100,13 +100,13 @@ const PROJECTS = [
   year: "2025",
   badge: "pinned",
   impact:
-    "My team and I won the 2025 AI Health Hackathon, organized by STING, Square One and KI Innovations, by developing an app that targets the problem of tracking patient food intake, and makes it easier to organize and visualize data, as well as relieves nurses' and assistant nurses' administrative burden by producing a summary text that they can then copy into the patient's health record. The tracking itself uses voice notes and image recognition through an OpenAI API.",
+    "My team won the 2025 AI Health Hackathon, organized by STING, Square One and KI Innovations, by developing an app that targets the problem of tracking patient food intake, and makes it easier to organize and visualize data, as well as relieves nurses' and assistant nurses' administrative burden by producing a summary text that they can then copy into the patient's health record. The tracking itself uses voice notes and image recognition through an OpenAI API.",
   stack: [
     "Service Design",
     "LLM",
     "OpenAI API",
     "Streamlit",
-    "Typescript"
+    "Typescript", "Prototyping"
   ],
   links: [
     {
@@ -119,12 +119,12 @@ const PROJECTS = [
   ]
 },
 {
-  kind: "Web App / Automation / AI Audio Narration",
+  kind: "Multi-agent App / Automation / Audio Narration",
   title: "Automated Weekly Digest Systems",
   year: "2025",
   badge: "new",
   impact:
-    "Two fully automated content creation systems that curate weekly news and publish them as beautiful webpages with AI-narrated audio summaries. (1) AI Weekly Digest: curates agentic AI news from arXiv, Hacker News, Reddit every Sunday at 6 PM with futuristic UI. (2) International Politics Digest: aggregates global politics, war updates, and Swedish news from trusted sources (Guardian, BBC, Al Jazeera, Reuters) every Monday at 6 AM with professional multi-column design. Both use Claude AI for curation, OpenAI TTS for narration, and deploy automatically to GitHub Pages.",
+    "Two fully automated content creation systems that curate weekly news and publish them as curated webpages with AI-narrated audio summaries. (1) AI Weekly Digest: curates agentic AI news from arXiv, Hacker News, Reddit every Sunday at 6 PM with futuristic UI. (2) International Politics Digest: aggregates global politics, war updates, and diplomatic news from trusted sources (Guardian, BBC, Reuters, and several others) every Monday at 6 AM with professional multi-column design. Both use Claude AI for curation, OpenAI TTS for narration, and deploy automatically to GitHub Pages, via GitHub Actions.",
   stack: [
     "Python",
     "Claude API (Sonnet 4.5)",
@@ -153,12 +153,11 @@ const PROJECTS = [
     }
   ],
   highlights: [
-    "AI-narrated audio: Claude generates scripts, OpenAI TTS creates 2-3 minute voice narration for each digest",
-    "Dual automation: AI digest (Sundays 6 PM) focuses on agentic AI, Politics digest (Mondays 6 AM) covers world news",
-    "Smart curation: Claude filters 50+ items to ~15 top stories with insights and categorization",
-    "Professional designs: futuristic animated UI for AI digest, multi-column news layout for politics digest",
-    "Archive systems: both maintain previous weeks' digests with navigation",
-    "Fully automated: both run in GitHub Actions cloud with email notifications on completion"
+    "Claude generates scripts, OpenAI TTS creates 2-3 minute voice narration for each digest",
+    "Claude filters 50+ items to ~15 top stories with insights and categorization",
+    "Futuristic animated UI for AI digest, multi-column news layout for politics digest",
+    "Both maintain previous weeks' digests with navigation",
+    "Both run in GitHub Actions cloud with email notifications on completion"
   ]
 },
 {
