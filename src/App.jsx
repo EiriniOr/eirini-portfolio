@@ -166,13 +166,13 @@ const PROJECTS = [
   year: "2025",
   badge: "new",
   impact:
-    "Autonomous research agent that takes a question and produces a structured report with citations. Uses Claude AI to decompose questions into sub-queries, searches the web via DuckDuckGo, extracts facts from sources, and synthesizes findings into comprehensive markdown reports. Built with clean, modular architecture demonstrating agentic workflow design.",
+    "Autonomous research agent that takes a question and produces a structured report with citations. Uses Claude AI to decompose questions into sub-queries, searches the web via Google search, extracts facts from sources, and synthesizes findings into reports. Identifies facts that are shared among sources and lists knowledge gaps, which is something we often look for in academia. Built to demonstrate agentic workflow design.",
   stack: [
     "Python",
     "Claude API (Sonnet 4.5)",
     "Agentic AI",
     "Web Scraping",
-    "DuckDuckGo Search",
+    "Google Search",
     "Trafilatura",
     "Streamlit",
     "Poetry"
@@ -196,8 +196,8 @@ const PROJECTS = [
     }
   ],
   highlights: [
-    "Autonomous query decomposition: breaks complex questions into 3-5 sub-queries automatically",
-    "Multi-source synthesis: compares sources, identifies agreements, contradictions, and knowledge gaps",
+    "Breaks complex questions into 3-5 sub-queries automatically",
+    "Compares sources, identifies agreements, contradictions, and knowledge gaps",
     "Smart fact extraction with confidence scoring and citation tracking",
     "Note: Live demo not provided as it consumes API tokens; demo link available upon request"
   ]
