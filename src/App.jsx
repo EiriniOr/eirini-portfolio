@@ -161,6 +161,48 @@ const PROJECTS = [
   ]
 },
 {
+  kind: "Agentic AI / LLM / Web Scraping",
+  title: "Research Assistant",
+  year: "2025",
+  badge: "new",
+  impact:
+    "Autonomous research agent that takes a question and produces a structured report with citations. Uses Claude AI to decompose questions into sub-queries, searches the web via DuckDuckGo, extracts facts from sources, and synthesizes findings into comprehensive markdown reports. Built with clean, modular architecture demonstrating agentic workflow design.",
+  stack: [
+    "Python",
+    "Claude API (Sonnet 4.5)",
+    "Agentic AI",
+    "Web Scraping",
+    "DuckDuckGo Search",
+    "Trafilatura",
+    "Streamlit",
+    "Poetry"
+  ],
+  links: [
+    {
+      label: "GitHub",
+      href: "https://github.com/EiriniOr/research-assistant"
+    },
+    {
+      label: "Screenshot 1",
+      href: "/screenshots/research-assistant/screenshot1.png"
+    },
+    {
+      label: "Screenshot 2",
+      href: "/screenshots/research-assistant/screenshot2.png"
+    },
+    {
+      label: "Screenshot 3",
+      href: "/screenshots/research-assistant/screenshot3.png"
+    }
+  ],
+  highlights: [
+    "Autonomous query decomposition: breaks complex questions into 3-5 sub-queries automatically",
+    "Multi-source synthesis: compares sources, identifies agreements, contradictions, and knowledge gaps",
+    "Smart fact extraction with confidence scoring and citation tracking",
+    "Note: Live demo not provided as it consumes API tokens; demo link available upon request"
+  ]
+},
+{
   kind: "MCP Server / AI Tooling",
   title: "PowerPoint MCP Server",
   year: "2025",
