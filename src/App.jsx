@@ -124,15 +124,15 @@ const PROJECTS = [
   year: "2025",
   badge: "new",
   impact:
-    "Two fully automated content creation systems that curate weekly news and publish them as curated webpages with AI-narrated audio summaries. (1) AI Weekly Digest: curates agentic AI news from arXiv, Hacker News, Reddit every Sunday at 6 PM with futuristic UI. (2) International Politics Digest: aggregates global politics, war updates, and diplomatic news from trusted sources (Guardian, BBC, Reuters, and several others) every Monday at 6 AM with professional multi-column design. Both use Claude AI for curation, OpenAI TTS for narration, and deploy automatically to GitHub Pages, via GitHub Actions.",
+    "Two fully automated content creation systems that curate weekly news and publish them as curated webpages with AI-narrated audio summaries. (1) AI Weekly Digest: curates agentic AI news from arXiv, Hacker News, Reddit every Sunday at 6 PM with futuristic UI. (2) International Politics Digest: collects news via RSS feeds from BBC, Deutsche Welle, NYT, Financial Times, Foreign Policy, and South China Morning Post every Monday at 6 AM. Both use Claude AI for curation, OpenAI TTS for narration, and deploy automatically to GitHub Pages via GitHub Actions.",
   stack: [
     "Python",
     "Claude API (Sonnet 4.5)",
     "OpenAI TTS (audio narration)",
+    "RSS feeds (feedparser)",
     "HTML/CSS",
     "GitHub Pages",
-    "GitHub Actions",
-    "RSS/API aggregation"
+    "GitHub Actions"
   ],
   links: [
     {
