@@ -344,7 +344,40 @@ const PROJECTS = [
   ],
 },
 
-
+{
+  kind: "Causal Inference / A/B Testing",
+  title: "Cookie Cats A/B Test Analysis",
+  year: "2025",
+  badge: "new",
+  impact:
+    "Comprehensive analysis of the Cookie Cats mobile game A/B test using causal inference methods. Goes beyond simple t-tests to implement propensity score weighting, CUPED variance reduction, doubly robust estimation, and heterogeneous treatment effect analysis with causal forests.",
+  stack: [
+    "Python",
+    "Causal Inference",
+    "A/B Testing",
+    "Propensity Scores",
+    "CUPED",
+    "EconML",
+    "Streamlit",
+    "Statistical Modeling"
+  ],
+  links: [
+    {
+      label: "Live Demo",
+      href: "https://cookie-cats-causal-inference.streamlit.app/"
+    },
+    {
+      label: "GitHub",
+      href: "https://github.com/EiriniOr/cookie-cats-causal-inference"
+    }
+  ],
+  highlights: [
+    "Classical A/B: difference-in-means, z-tests, power analysis, SRM detection",
+    "Causal methods: regression adjustment, IPW, CUPED, doubly robust estimation",
+    "HTE analysis: subgroup effects by engagement, causal forests, meta-learners",
+    "Sensitivity: peeking simulation, multiple testing correction, robustness bounds"
+  ]
+},
 
   {
   kind: "University Projects",
