@@ -69,6 +69,31 @@ const PROFILE = {
 
 const PROJECTS = [
   {
+    kind: "Agentic AI / MCP Server / Multi-Agent",
+    title: "Job Application Assistant",
+    year: "2025",
+    badge: "new",
+    impact:
+      "Multi-agent system using LangGraph + MCP that searches jobs across Adzuna/RemoteOK, generates tailored cover letters with Claude, and tracks applications with a Kanban dashboard. Demonstrates MCP server implementation and multi-agent orchestration patterns.",
+    stack: [
+      "LangGraph",
+      "MCP (Model Context Protocol)",
+      "FastAPI",
+      "Next.js",
+      "Claude API",
+      "SQLite"
+    ],
+    links: [
+      { label: "GitHub", href: "https://github.com/EiriniOr/job-application-assistant" }
+    ],
+    highlights: [
+      "MCP server with 10+ tools for job search, resume parsing, cover letter generation",
+      "Supervisor + Matcher + Tailor + Tracker agents orchestrated via LangGraph StateGraph",
+      "Drag-and-drop Kanban board for tracking application pipeline",
+      "AI matching scores with skill gap analysis"
+    ],
+  },
+  {
     kind: "AI Research Project",
     title: "Fairness‑Aware, Domain‑Adaptive GAT for ICU Mortality Prediction",
     year: "2025",
