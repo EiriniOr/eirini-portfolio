@@ -134,6 +134,7 @@ const PROJECTS = [
       "SQLite"
     ],
     links: [
+      { label: "Live Demo", href: "https://job-application-assistant-five.vercel.app/" },
       { label: "GitHub", href: "https://github.com/EiriniOr/job-application-assistant" }
     ],
     highlights: [
