@@ -135,7 +135,10 @@ const PROJECTS = [
     ],
     links: [
       { label: "Live Demo", href: "https://job-application-assistant-five.vercel.app/" },
-      { label: "GitHub", href: "https://github.com/EiriniOr/job-application-assistant" }
+      { label: "GitHub", href: "https://github.com/EiriniOr/job-application-assistant" },
+      { label: "Screenshot 1", href: "/screenshots/job-assistant/dashboard.png" },
+      { label: "Screenshot 2", href: "/screenshots/job-assistant/jobs.png" },
+      { label: "Screenshot 3", href: "/screenshots/job-assistant/kanban.png" }
     ],
     highlights: [
       "MCP server with 10+ tools for job search, resume parsing, cover letter generation",
