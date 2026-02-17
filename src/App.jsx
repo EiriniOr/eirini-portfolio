@@ -120,7 +120,7 @@ const PROJECTS = [
 },
 {
     kind: "Full-Stack AI App / Job Search",
-    title: "Job Application Assistant",
+    title: "JobbaJobba",
     year: "2025",
     badge: "new",
     impact:
@@ -138,7 +138,7 @@ const PROJECTS = [
       { label: "GitHub", href: "https://github.com/EiriniOr/job-application-assistant" }
     ],
     highlights: [
-      "Search jobs from Arbetsförmedlingen + LinkedIn/Indeed with location filtering",
+      "Search jobs from Arbetsförmedlingen + LinkedIn/Indeed with location & language filters",
       "AI cover letter generation using Claude with resume context",
       "Add jobs manually via URL - AI extracts job details automatically",
       "Drag-and-drop Kanban board for tracking application pipeline",
