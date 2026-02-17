@@ -150,7 +150,6 @@ const PROJECTS = [
   kind: "Multi-agent App / Automation / Audio Narration",
   title: "Automated Weekly Digest Systems",
   year: "2025",
-  badge: "new",
   impact:
     "Two fully automated content creation systems that curate weekly news and publish them as curated webpages with AI-narrated audio summaries. (1) AI Weekly Digest: curates agentic AI news from arXiv, Hacker News, Reddit every Sunday at 6 PM with futuristic UI. (2) International Politics Digest: collects news via RSS feeds from BBC, Deutsche Welle, NYT, Financial Times, Foreign Policy, and South China Morning Post every Monday at 6 AM. Both use Claude AI for curation, OpenAI TTS for narration, and deploy automatically to GitHub Pages via GitHub Actions.",
   stack: [
@@ -234,7 +233,6 @@ const PROJECTS = [
   kind: "MCP Server / AI Tooling",
   title: "PowerPoint MCP Server",
   year: "2025",
-  badge: "new",
   impact:
     "A comprehensive Model Context Protocol server that enables AI assistants (Claude, ChatGPT) to programmatically create PowerPoint presentations. Features 36 tools for creating charts, shapes, flowcharts, tables, QR codes, and analyzing data from CSV/Excel/JSON files. Designed to work seamlessly with Claude and other AI assistants.",
   stack: [
@@ -376,7 +374,6 @@ const PROJECTS = [
   kind: "Causal Inference / A/B Testing",
   title: "Cookie Cats A/B Test Analysis",
   year: "2025",
-  badge: "new",
   impact:
     "Comprehensive analysis of the Cookie Cats mobile game A/B test using causal inference methods. Goes beyond simple t-tests to implement propensity score weighting, CUPED variance reduction, doubly robust estimation, and heterogeneous treatment effect analysis with causal forests.",
   stack: [
