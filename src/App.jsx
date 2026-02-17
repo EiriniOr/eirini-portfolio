@@ -135,7 +135,8 @@ const PROJECTS = [
       "Vercel"
     ],
     links: [
-      { label: "GitHub", href: "https://github.com/EiriniOr/job-application-assistant" }
+      { label: "GitHub", href: "https://github.com/EiriniOr/job-application-assistant" },
+      { label: "Live Demo", href: "https://job-application-assistant-gules.vercel.app" }
     ],
     highlights: [
       "Search jobs from Arbetsförmedlingen + LinkedIn/Indeed with location & language filters",
