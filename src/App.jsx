@@ -119,28 +119,31 @@ const PROJECTS = [
   ]
 },
 {
-    kind: "Agentic AI / MCP Server / Multi-Agent",
+    kind: "Full-Stack AI App / Job Search",
     title: "Job Application Assistant",
     year: "2025",
     badge: "new",
     impact:
-      "Multi-agent system using LangGraph + MCP that searches jobs across Adzuna/RemoteOK, generates tailored cover letters with Claude, and tracks applications with a Kanban dashboard. Demonstrates MCP server implementation and multi-agent orchestration patterns.",
+      "Full-stack job search and application tracking platform with AI-powered features. Searches jobs from Arbetsförmedlingen (Swedish Public Employment) and LinkedIn/Indeed via JSearch API. Generates personalized cover letters using Claude AI based on your resume. Includes user authentication, cloud database storage, and a drag-and-drop Kanban board for managing applications.",
     stack: [
-      "LangGraph",
-      "MCP (Model Context Protocol)",
-      "FastAPI",
-      "Next.js",
+      "Next.js 14",
+      "Supabase (Auth + PostgreSQL)",
       "Claude API",
-      "SQLite"
+      "JSearch API (RapidAPI)",
+      "Tailwind CSS",
+      "TypeScript",
+      "Vercel"
     ],
     links: [
-      { label: "GitHub", href: "https://github.com/EiriniOr/job-application-assistant" }
+      { label: "GitHub", href: "https://github.com/EiriniOr/job-application-assistant" },
+      { label: "Live Demo", href: "https://job-application-assistant-gules.vercel.app" }
     ],
     highlights: [
-      "MCP server with 10+ tools for job search, resume parsing, cover letter generation",
-      "Supervisor + Matcher + Tailor + Tracker agents orchestrated via LangGraph StateGraph",
+      "Search jobs from Arbetsförmedlingen + LinkedIn/Indeed with location filtering",
+      "AI cover letter generation using Claude with resume context",
+      "Add jobs manually via URL - AI extracts job details automatically",
       "Drag-and-drop Kanban board for tracking application pipeline",
-      "AI matching scores with skill gap analysis"
+      "User authentication with Supabase - data persists across devices"
     ],
   },
 {
