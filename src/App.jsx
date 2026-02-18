@@ -137,10 +137,10 @@ const PROJECTS = [
     links: [
       { label: "GitHub", href: "https://github.com/EiriniOr/job-application-assistant" },
       { label: "Live Demo", href: "https://job-application-assistant-five.vercel.app" },
-      { label: "Homepage", href: "/screenshots/jobbajobba/1-homepage.png" },
-      { label: "Search", href: "/screenshots/jobbajobba/2-search.png" },
-      { label: "Kanban", href: "/screenshots/jobbajobba/3-kanban.png" },
-      { label: "Cover Letter", href: "/screenshots/jobbajobba/4-cover-letter.png" }
+      { label: "Screenshot 1", href: "/screenshots/jobbajobba/1-homepage.png" },
+      { label: "Screenshot 2", href: "/screenshots/jobbajobba/2-search.png" },
+      { label: "Screenshot 3", href: "/screenshots/jobbajobba/3-kanban.png" },
+      { label: "Screenshot 4", href: "/screenshots/jobbajobba/4-cover-letter.png" }
     ],
     highlights: [
       "Search jobs from Arbetsförmedlingen + LinkedIn/Indeed with location & language filters",
