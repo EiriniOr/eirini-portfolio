@@ -124,12 +124,12 @@ const PROJECTS = [
     year: "2025",
     badge: "new",
     impact:
-      "Full-stack job search and application tracking platform with AI-powered features. Searches jobs from Arbetsförmedlingen (Swedish Public Employment) and LinkedIn/Indeed via JSearch API. Generates personalized cover letters using Claude AI based on your resume. Includes user authentication, cloud database storage, and a drag-and-drop Kanban board for managing applications.",
+      "End-to-end job search and application platform built to make the job hunt faster and smarter. Searches Arbetsförmedlingen and LinkedIn/Indeed, generates tailored cover letters and ATS-optimised CVs with Claude AI, and tracks every application in a Kanban board. Designed specifically for the Swedish job market with bilingual (EN/SV) support throughout.",
     stack: [
       "Next.js 14",
-      "Supabase (Auth + PostgreSQL)",
+      "Supabase (Auth + PostgreSQL + Storage)",
       "Claude API",
-      "JSearch API (RapidAPI)",
+      "JSearch API",
       "Tailwind CSS",
       "TypeScript",
       "Vercel"
@@ -143,11 +143,12 @@ const PROJECTS = [
       { label: "Screenshot 4", href: "/screenshots/jobbajobba/4-cover-letter.png" }
     ],
     highlights: [
-      "Search jobs from Arbetsförmedlingen + LinkedIn/Indeed with location & language filters",
-      "AI cover letter generation using Claude with resume context",
-      "Add jobs manually via URL - AI extracts job details automatically",
-      "Drag-and-drop Kanban board for tracking application pipeline",
-      "User authentication with Supabase - data persists across devices"
+      "ATS match scoring with bilingual keyword detection (EN/SV) — flags missing keywords and soft skills",
+      "One-click AI CV rewrite: tailors your resume to a specific job, truthfully, in EN or SV",
+      "Downloads a beautifully formatted Word CV with your photo and clickable hyperlinks preserved from the original upload",
+      "AI cover letter generation with custom tone/style instructions and ATS-aware mode",
+      "Kanban board (Saved → Applied → Assessment → Interview → Offer) with drag-and-drop",
+      "Manual job add via URL — Claude extracts title, company, and description automatically"
     ],
   },
 {
