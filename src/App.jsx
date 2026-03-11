@@ -130,7 +130,6 @@ const PROJECTS = [
     kind: "Agentic AI / LLM / Web Scraping",
     title: "Research Assistant",
     year: "2025",
-    badge: "new",
     impact:
       "Autonomous research agent that takes a question and produces a structured report with citations. Uses Claude AI to decompose questions into sub-queries, searches the web via Google search, extracts facts from sources, and synthesizes findings into reports. Identifies facts that are shared among sources and lists knowledge gaps, which is something we often look for in academia. Built to demonstrate agentic workflow design.",
     stack: [
