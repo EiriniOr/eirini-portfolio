@@ -577,7 +577,7 @@ export default function Portfolio() {
 
       {/* PROJECTS */}
       <Section id="projects" title="Selected Projects">
-        <div className="grid md:grid-cols-2 gap-3">
+        <div className="grid md:grid-cols-2 gap-3 items-start">
           {PROJECTS.map((p, i) => (
             <ProjectCard
               key={i}
