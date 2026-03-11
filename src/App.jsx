@@ -507,9 +507,9 @@ export default function Portfolio() {
           <a href="#top" className={`font-semibold text-sm ${gradientText}`}>
             Eirini's Portfolio
           </a>
-          <div className="hidden md:flex gap-6 text-sm text-slate-400">
+          <div className="hidden md:flex gap-6 text-sm">
             {["projects", "skills", "education", "publications", "contact"].map((s) => (
-              <a key={s} href={`#${s}`} className="hover:text-cyan-400 transition-colors capitalize">
+              <a key={s} href={`#${s}`} className={`${gradientText} capitalize opacity-80 hover:opacity-100 transition-opacity`}>
                 {s}
               </a>
             ))}
