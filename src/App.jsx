@@ -103,6 +103,30 @@ const PROJECTS = [
     ],
   },
   {
+    kind: "AI Data Science Suite / ML Pipeline",
+    title: "Miss Datrix",
+    year: "2025",
+    badge: "new",
+    impact:
+      "End-to-end AI-guided data science platform built on Streamlit. Upload any tabular dataset and an AI analyst (Claude) proposes a workflow, then walks through cleaning, EDA, feature engineering, model benchmarking, hyperparameter optimisation, SHAP explainability, and a downloadable HTML report. Also supports A/B testing and causal inference (propensity score matching, IPW). Access is invite-only as it runs on personal API infrastructure.",
+    stack: [
+      "Python", "Streamlit", "Claude API", "scikit-learn", "XGBoost", "LightGBM",
+      "Optuna", "SHAP", "Plotly", "statsmodels", "A/B Testing", "Causal Inference",
+    ],
+    links: [
+      { label: "Live Demo", href: "https://msdatrix.streamlit.app/" },
+      { label: "GitHub", href: "https://github.com/EiriniOr/data-suite" },
+    ],
+    highlights: [
+      "AI analyst proposes a minimal workflow based on uploaded data and stated goal — not a fixed template",
+      "Trains real models (RF, XGBoost, LightGBM, SVM, Logistic/Ridge) with cross-validated leaderboard",
+      "Optuna Bayesian hyperparameter search with trial progress and before/after comparison",
+      "SHAP feature importance + confusion matrix / ROC / residual plots + downloadable HTML report",
+      "A/B testing: auto-detects continuous vs binary outcome, Welch/Mann-Whitney/chi-square, Cohen's d, power analysis",
+      "Causal inference: propensity score matching or IPW, ATE with bootstrap SE, covariate balance (SMD)",
+    ],
+  },
+  {
     kind: "Multi-agent App / Automation / Audio Narration",
     title: "Automated Weekly Digest Systems",
     year: "2025",
