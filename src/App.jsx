@@ -80,7 +80,7 @@ const PROJECTS = [
   {
     kind: "Full-Stack AI App / Job Search",
     title: "JobbaJobba",
-    year: "2025",
+    year: "2026",
     badge: "new",
     impact:
       "End-to-end job search and application platform built to make the job hunt faster and smarter. Searches Arbetsförmedlingen and LinkedIn/Indeed, generates tailored cover letters and ATS-optimised CVs with Claude AI, and tracks every application in a Kanban board. Designed specifically for the Swedish job market with bilingual (EN/SV) support throughout. Access is invite-only as it runs on personal API infrastructure.",
@@ -105,7 +105,7 @@ const PROJECTS = [
   {
     kind: "AI Data Science Suite / ML Pipeline",
     title: "Miss Datrix",
-    year: "2025",
+    year: "2026",
     badge: "new",
     impact:
       "End-to-end AI-guided data science platform built on Streamlit. Upload any tabular dataset and an AI analyst (Claude) proposes a workflow, then walks through cleaning, EDA, feature engineering, model benchmarking, hyperparameter optimisation, SHAP explainability, and a downloadable HTML report. Also supports A/B testing and causal inference (propensity score matching, IPW). Access is invite-only as it runs on personal API infrastructure.",
