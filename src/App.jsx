@@ -132,10 +132,10 @@ const PROJECTS = [
     year: "2026",
     badge: "new",
     impact:
-      "Curated roadmap of free resources for aspiring AI Engineers, Data Scientists, and ML Engineers. Resources are organised across phases — from Python foundations to production AI systems — with track filtering, per-track progress bars, user accounts, and auto-generated PDF certificates on path completion. Fully static (no build step, no server), deployed on Vercel with Firebase Auth and Firestore.",
+      "Curated roadmap of free resources for aspiring AI Engineers, Data Scientists, and ML Engineers. Resources span 6 phases from Python foundations to production AI, with track filtering, per-track progress bars, Firebase Auth accounts, jsPDF certificates on path completion, a community suggestion form (EmailJS, server-free), and a Wall of Fame for accepted contributors.",
     stack: [
       "HTML", "Tailwind CSS CDN", "Vanilla JS",
-      "Firebase Auth", "Firestore", "jsPDF", "Vercel",
+      "Firebase Auth", "Firestore", "jsPDF", "EmailJS", "Vercel",
     ],
     links: [
       { label: "Live", href: "https://forgemee.vercel.app" },
@@ -143,10 +143,11 @@ const PROJECTS = [
     ],
     highlights: [
       "Curated free resources across 6 learning phases — foundations to production AI",
-      "Track filter (All / Data Scientist / ML Engineer / AI Engineer) with per-track progress bars",
-      "User accounts with progress and certificates persisted in Firestore",
-      "Confetti celebration + downloadable PDF certificate on completing a full learning track",
+      "Track filter (DS / ML / AI) with per-track progress bars and Firestore persistence",
+      "Confetti celebration + downloadable dark-themed PDF certificate on completing a full track",
       "Overlapping resources grouped as alternative paths — pick your learning style",
+      "Community suggestion form with profanity filter, spam heuristics, rate limiting, and honeypot",
+      "Wall of Fame section — accepted contributors credited by name and resource",
     ],
   },
   {
