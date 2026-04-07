@@ -127,6 +127,28 @@ const PROJECTS = [
     ],
   },
   {
+    kind: "Curated Resource Platform / Web",
+    title: "ForgeMee",
+    year: "2026",
+    badge: "new",
+    impact:
+      "Curated, structured roadmap of free resources for aspiring AI Engineers, Data Scientists, and ML Engineers. Resources are organised across 5 phases — from Python foundations to production AI systems — with track filtering, per-track progress bars, and user accounts for persistent progress tracking. Fully static (no build step, no server), deployed on Vercel with Firebase Auth and Firestore handling auth and progress storage.",
+    stack: [
+      "HTML", "Tailwind CSS CDN", "Vanilla JS",
+      "Firebase Auth", "Firestore", "Vercel", "Google Fonts",
+    ],
+    links: [
+      { label: "Live", href: "https://forgemee.vercel.app" },
+      { label: "GitHub", href: "https://github.com/EiriniOr/forgemee" },
+    ],
+    highlights: [
+      "24 curated free resources across 5 learning phases — foundations to production AI",
+      "Track filter (All / Data Scientist / ML Engineer / AI Engineer) with per-track progress bars",
+      "User accounts with progress persisted in Firestore — survives page refresh",
+      "Glassmorphism cards, animated cycling hero, sticky nav on scroll",
+    ],
+  },
+  {
     kind: "Multi-agent App / Automation / Audio Narration",
     title: "Automated Weekly Digest Systems",
     year: "2025",
