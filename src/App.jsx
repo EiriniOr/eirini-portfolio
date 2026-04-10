@@ -103,6 +103,29 @@ const PROJECTS = [
     ],
   },
   {
+    kind: "ML / Recommender Systems",
+    title: "Sequence-Based Movie Recommender",
+    year: "2026",
+    badge: "new",
+    impact:
+      "Transformer-based sequential recommendation system trained on MovieLens 25M (25 million ratings). Models the order of a user's watch history to predict the next movie — capturing dynamic taste shifts that static collaborative filtering misses. Benchmarked against a Matrix Factorization baseline using Hit@10 and NDCG@10. Includes a live Streamlit demo where anyone can pick movies from a curated list and get personalised top-10 recommendations.",
+    stack: [
+      "PyTorch", "Transformer Encoder", "Matrix Factorization",
+      "MovieLens 25M", "Streamlit", "Plotly", "Python",
+    ],
+    links: [
+      { label: "Live Demo", href: "https://movie-rec-transformer.streamlit.app/" },
+      { label: "GitHub", href: "https://github.com/EiriniOr/movie-rec-transformer" },
+    ],
+    highlights: [
+      "Causal self-attention over ordered watch history — position t attends only to movies watched before it",
+      "Sliding-window next-item prediction trained with cross-entropy loss on 4.5M sequence windows",
+      "Hit@10 and NDCG@10 evaluation on held-out last-3-movies per user across ~162k users",
+      "Live demo: pick from 20 curated movie pills, get top-10 predictions instantly",
+      "\"How It Works\" explainer page covering embeddings, attention, and why order matters — aimed at non-technical viewers",
+    ],
+  },
+  {
     kind: "AI Data Science Suite / ML Pipeline",
     title: "Miss Datrix",
     year: "2026",
