@@ -103,6 +103,31 @@ const PROJECTS = [
     ],
   },
   {
+    kind: "macOS App / Electron / Developer Tool",
+    title: "Petal",
+    year: "2026",
+    badge: "new",
+    impact:
+      "A beautiful local markdown notes app for macOS, built from scratch with Electron, React, and TypeScript. Notes are stored as plain .md files on disk — no cloud, no accounts, no sync fees. Features a CodeMirror 6 editor with split/preview/edit modes, ⌘K full-text search, folders and #hashtag support, and desktop sticky notes that float on the desktop and render markdown. A menu bar icon keeps the app alive without cluttering the Dock.",
+    stack: [
+      "Electron", "React 18", "TypeScript", "Tailwind CSS",
+      "Framer Motion", "CodeMirror 6", "Zustand", "react-markdown",
+    ],
+    links: [
+      { label: "GitHub", href: "https://github.com/EiriniOr/petal" },
+      { label: "Download v1.0", href: "https://github.com/EiriniOr/petal/releases/tag/v1.0.0" },
+    ],
+    highlights: [
+      "Markdown editor with split / edit / preview modes, syntax highlighting, and live preview",
+      "Desktop sticky notes — pin any note as a floating widget, click to edit, renders markdown with themed colors",
+      "Local-first: notes are plain .md files in ~/Documents/Petal Notes/, survive restarts and work in any editor",
+      "⌘K command palette for full-text search across all notes",
+      "Menu bar icon — closing the window never quits the app; New Note and Quit from the tray",
+      "Import .md files from anywhere via the sidebar file picker (supports multi-select)",
+      "Install: download the DMG from the release page, drag Petal to Applications, right-click → Open on first launch to bypass the unsigned-app warning",
+    ],
+  },
+  {
     kind: "ML / Recommender Systems",
     title: "Sequence-Based Movie Recommender",
     year: "2026",
