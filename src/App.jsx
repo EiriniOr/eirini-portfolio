@@ -173,6 +173,29 @@ const PROJECTS = [
     ],
   },
   {
+    kind: "Interactive Learning Tool / Web App",
+    title: "MrGraph — The Graph-Based Tutor",
+    year: "2026",
+    badge: "new",
+    impact:
+      "Interactive force-directed knowledge graph for navigating 105 AI/ML engineering concepts across 10 learning paths. Click any node to open a rich detail panel with definitions, multi-paragraph explanations, and code examples. Built as a fully static frontend — no build step, no server dependency. Includes fuzzy search with match highlighting, learning path filters with colour-coded node dimming, Prev/Next navigation within each path, and clickable prerequisite/related concept chips.",
+    stack: [
+      "D3.js v7", "Vanilla JS (ES Modules)", "Python", "FastAPI (dev server)",
+      "Force-directed graph", "Vercel",
+    ],
+    links: [
+      { label: "Live Demo", href: "https://ai-learning-graph.vercel.app" },
+      { label: "GitHub", href: "https://github.com/EiriniOr/ai-learning-graph" },
+    ],
+    highlights: [
+      "105 fully-written concepts with 3+ paragraph explanations and working code examples — no stubs",
+      "10 colour-coded learning paths: ML Foundations, Deep Learning, LLMs & Generative AI, RL, MLOps, and more",
+      "Fuzzy search ranks by id/title/tag/path/short match and highlights matched text in results",
+      "Force simulation: forceLink + forceManyBody + forceCollide — drag nodes, zoom, and fit-to-screen",
+      "Smooth pan/zoom transition when selecting a concept via search or chip navigation",
+    ],
+  },
+  {
     kind: "Curated Resource Platform / Web",
     title: "ForgeMee",
     year: "2026",
