@@ -184,7 +184,7 @@ const PROJECTS = [
       "Force-directed graph", "Vercel",
     ],
     links: [
-      { label: "Live Demo", href: "https://ai-learning-graph.vercel.app" },
+      { label: "Live Demo", href: "https://ai-learning-graph-ruddy.vercel.app/" },
       { label: "GitHub", href: "https://github.com/EiriniOr/ai-learning-graph" },
     ],
     highlights: [
