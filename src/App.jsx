@@ -78,6 +78,29 @@ const PROJECTS = [
     highlights: [],
   },
   {
+    kind: "AI Agent / Personal Tools",
+    title: "Cassandra",
+    year: "2026",
+    badge: "new",
+    impact:
+      "A personal AI agent built on Claude Opus 4.7 with 30 tools and a persistent memory wiki (Karpathy's LLM Wiki pattern). Browses the web, reads/writes files, inspects git repos, runs shell commands with two-step confirmation, tracks pomodoro sessions, captures brain-dumps and decisions, and ingests articles into a structured second brain at ~/cassandra-memory/. Streams responses in a Streamlit chat with username/password auth; Tools reference page is public.",
+    stack: [
+      "Python", "Anthropic Claude API", "Streamlit",
+      "Tool Use", "Adaptive Thinking", "Karpathy LLM Wiki Pattern",
+    ],
+    links: [
+      { label: "Live Demo", href: "https://cassandraagent.streamlit.app/" },
+      { label: "GitHub", href: "https://github.com/EiriniOr/Cassandra" },
+    ],
+    highlights: [
+      "30 tools — web search/fetch, memory wiki, file & shell I/O, git inspector, clipboard, pomodoro, arXiv/HN search, decision journal, brain-dump inbox, and more",
+      "Persistent second brain at ~/cassandra-memory/ following Karpathy's LLM Wiki pattern (raw/, wiki/{entities,concepts,sources,synthesis}, CLAUDE.md schema)",
+      "Two-step shell execution: dry-run, user confirmation, then execute — never runs commands without explicit approval",
+      "Auth-gated chat (username + password from .env or Streamlit secrets); public Tools reference page documents every capability with sample prompts",
+      "Streaming responses with adaptive thinking on Claude Opus 4.7; deployable to Streamlit Cloud or runnable locally with one-click launch.command script",
+    ],
+  },
+  {
     kind: "Full-Stack AI App / Job Search",
     title: "JobbaJobba",
     year: "2026",
