@@ -90,7 +90,6 @@ const PROJECTS = [
     ],
     links: [
       { label: "Live Demo", href: "https://cassandraagent.streamlit.app/" },
-      { label: "Run Locally", href: "http://localhost:8501" },
       { label: "GitHub", href: "https://github.com/EiriniOr/Cassandra" },
     ],
     highlights: [
