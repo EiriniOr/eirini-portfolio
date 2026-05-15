@@ -78,6 +78,29 @@ const PROJECTS = [
     highlights: [],
   },
   {
+    kind: "Multi-agent App / Automation / Audio Narration",
+    title: "Automated Weekly Digest Systems",
+    year: "2025",
+    impact:
+      "Two fully automated content creation systems that curate weekly news and publish them as curated webpages with AI-narrated audio summaries. (1) AI Weekly Digest: curates agentic AI news from arXiv, Hacker News, Reddit every Sunday at 6 PM with a galaxy-themed UI. (2) International Politics Digest: collects news via RSS feeds from BBC, Deutsche Welle, NYT, Financial Times, Foreign Policy, and South China Morning Post every Monday at 6 AM with a newsroom-aurora UI. Both use Claude AI for curation, OpenAI TTS for narration, and deploy automatically to GitHub Pages via GitHub Actions.",
+    stack: [
+      "Python", "Claude API (Sonnet 4.5)", "OpenAI TTS (audio narration)",
+      "RSS feeds (feedparser)", "HTML/CSS", "GitHub Pages", "GitHub Actions",
+    ],
+    links: [
+      { label: "AI Digest", href: "https://EiriniOr.github.io/ai-weekly-digest/" },
+      { label: "Politics Digest", href: "https://EiriniOr.github.io/news-aggregation/" },
+      { label: "AI Digest GitHub", href: "https://github.com/EiriniOr/ai-weekly-digest" },
+      { label: "Politics Digest GitHub", href: "https://github.com/EiriniOr/news-aggregation" },
+    ],
+    highlights: [
+      "Claude generates scripts, OpenAI TTS creates 2-3 minute voice narration for each digest",
+      "Claude filters 50+ items to ~15 top stories with insights and categorization",
+      "Distinct interactive UIs: galaxy palette for AI digest, newsroom-aurora for politics",
+      "Both run in GitHub Actions cloud with email notifications on completion",
+    ],
+  },
+  {
     kind: "AI Agent / Personal Tools",
     title: "Cassandra",
     year: "2026",
@@ -240,30 +263,6 @@ const PROJECTS = [
       "Overlapping resources grouped as alternative paths — pick your learning style",
       "Community suggestion form with profanity filter, spam heuristics, rate limiting, and honeypot",
       "Wall of Fame section — accepted contributors credited by name and resource",
-    ],
-  },
-  {
-    kind: "Multi-agent App / Automation / Audio Narration",
-    title: "Automated Weekly Digest Systems",
-    year: "2025",
-    impact:
-      "Two fully automated content creation systems that curate weekly news and publish them as curated webpages with AI-narrated audio summaries. (1) AI Weekly Digest: curates agentic AI news from arXiv, Hacker News, Reddit every Sunday at 6 PM with futuristic UI. (2) International Politics Digest: collects news via RSS feeds from BBC, Deutsche Welle, NYT, Financial Times, Foreign Policy, and South China Morning Post every Monday at 6 AM. Both use Claude AI for curation, OpenAI TTS for narration, and deploy automatically to GitHub Pages via GitHub Actions.",
-    stack: [
-      "Python", "Claude API (Sonnet 4.5)", "OpenAI TTS (audio narration)",
-      "RSS feeds (feedparser)", "HTML/CSS", "GitHub Pages", "GitHub Actions",
-    ],
-    links: [
-      { label: "AI Digest", href: "https://EiriniOr.github.io/ai-weekly-digest/" },
-      { label: "Politics Digest", href: "https://EiriniOr.github.io/news-aggregation/" },
-      { label: "AI Digest GitHub", href: "https://github.com/EiriniOr/ai-weekly-digest" },
-      { label: "Politics Digest GitHub", href: "https://github.com/EiriniOr/news-aggregation" },
-    ],
-    highlights: [
-      "Claude generates scripts, OpenAI TTS creates 2-3 minute voice narration for each digest",
-      "Claude filters 50+ items to ~15 top stories with insights and categorization",
-      "Futuristic animated UI for AI digest, multi-column news layout for politics digest",
-      "Both maintain previous weeks' digests with navigation",
-      "Both run in GitHub Actions cloud with email notifications on completion",
     ],
   },
   {
