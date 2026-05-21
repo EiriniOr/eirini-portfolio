@@ -105,7 +105,7 @@ const PROJECTS = [
     kind: "AI Agent / Personal Tools",
     title: "Cassandra",
     year: "2026",
-    badge: "new",
+    badge: "inprogress",
     impact:
       "A personal AI agent built on Claude Opus 4.7 with 30 tools and a persistent memory wiki (Karpathy's LLM Wiki pattern). Browses the web, reads/writes files, inspects git repos, runs shell commands with two-step confirmation, tracks pomodoro sessions, captures brain-dumps and decisions, and ingests articles into a structured second brain at ~/cassandra-memory/. Streams responses in a Streamlit chat with username/password auth; Tools reference page is public.",
     stack: [
@@ -198,7 +198,7 @@ const PROJECTS = [
     kind: "AI Data Science Suite / ML Pipeline",
     title: "Miss Datrix",
     year: "2026",
-    badge: "underconstruction",
+    badge: "inprogress",
     impact:
       "End-to-end AI-guided data science platform built on Streamlit. Upload any tabular dataset and an AI analyst (Claude) proposes a workflow, then walks through cleaning, EDA, feature engineering, model benchmarking, hyperparameter optimisation, SHAP explainability, and a downloadable HTML report. Also supports A/B testing and causal inference (propensity score matching, IPW). Access is invite-only as it runs on personal API infrastructure.",
     stack: [
@@ -534,12 +534,12 @@ function ProjectCard({ p, isOpen, onToggle, openEmbed }) {
             )}
             {p.badge === "updated" && (
               <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-700/50">
-                Updated!
+                Updated
               </span>
             )}
-            {p.badge === "underconstruction" && (
-              <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-amber-950/90 text-amber-400 border border-amber-700/60"> 
-                Under Construction
+            {p.badge === "inprogress" && (
+              <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-orange-950/90 text-amber-300 border border-orange-700/60">
+                🛠️In Progress
               </span>
             )}
           </div>
