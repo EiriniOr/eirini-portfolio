@@ -538,7 +538,7 @@ function ProjectCard({ p, isOpen, onToggle, openEmbed }) {
               </span>
             )}
             {p.badge === "inprogress" && (
-              <span className="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-[#423806] text-[#f5e8c7] border border-[#6b5c2e]">                
+              <span className="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-[#292304] text-[#ab9007] border border-[#d6b924]">                
                  🛠️ In Progress
               </span>
             )}
