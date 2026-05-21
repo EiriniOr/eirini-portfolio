@@ -34,6 +34,8 @@ const PROFILE = {
     "Causal Inference / Causal Discovery",
     "FastAPI", "Docker & Containerization",
     "MLOps (Experiment Tracking, Reproducibility)",
+    "ML Model Training & Fine-tuning",
+    "Agentic Engineering",
     "Weights & Biases", "Documentation", "AgentOps",
     "Azure",
     "Google Cloud Platform (Cloud Run, Vertex AI)",
@@ -434,7 +436,7 @@ const EDUCATION = [
   {
     degree: "MSc, Computer Science — Data Science & ML",
     org: "Halmstad University, Sweden",
-    years: "2024–2025",
+    years: "2024–2026 (Completed!)",
     logo: "/edu/halmstad.png",
   },
   {
