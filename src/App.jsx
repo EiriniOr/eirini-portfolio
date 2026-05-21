@@ -651,7 +651,7 @@ export default function Portfolio() {
       {/* NAV */}
       <header className="sticky top-0 z-20 bg-slate-950/80 backdrop-blur border-b border-cyan-900/30">
         <nav className="max-w-5xl mx-auto px-5 md:px-8 py-3 flex items-center justify-between">
-          <a href="#top" className={`font-semibold text-sm ${gradientText}`}>
+          <a href="#top" style={{ fontFamily: "'Dancing Script', cursive" }} className={`text-base font-semibold ${gradientText}`}>
             Eirini's Portfolio
           </a>
           <div className="hidden md:flex gap-6 text-sm">
@@ -671,7 +671,8 @@ export default function Portfolio() {
             <motion.h1
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              className={`text-3xl md:text-5xl font-bold tracking-tight ${gradientText}`}
+              style={{ fontFamily: "'Dancing Script', cursive" }}
+              className={`text-3xl md:text-5xl font-semibold tracking-normal ${gradientText}`}
             >
               {PROFILE.name}
             </motion.h1>
