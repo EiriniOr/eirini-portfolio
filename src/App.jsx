@@ -113,7 +113,6 @@ const PROJECTS = [
       "Tool Use", "Adaptive Thinking", "Karpathy LLM Wiki Pattern",
     ],
     links: [
-      { label: "Live Demo", href: "https://cassandraagent.streamlit.app/" },
       { label: "GitHub", href: "https://github.com/EiriniOr/Cassandra" },
     ],
     highlights: [
@@ -246,7 +245,6 @@ const PROJECTS = [
     kind: "Curated Resource Platform / Web",
     title: "ForgeMee",
     year: "2026",
-    badge: "new",
     impact:
       "Curated roadmap of free resources for aspiring AI Engineers, Data Scientists, and ML Engineers. Resources span 6 phases from Python foundations to production AI, with track filtering, per-track progress bars, Firebase Auth accounts, jsPDF certificates on path completion, a community suggestion form (EmailJS, server-free), and a Wall of Fame for accepted contributors.",
     stack: [
