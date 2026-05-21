@@ -198,7 +198,7 @@ const PROJECTS = [
     kind: "AI Data Science Suite / ML Pipeline",
     title: "Miss Datrix",
     year: "2026",
-    badge: "new",
+    badge: "underconstruction",
     impact:
       "End-to-end AI-guided data science platform built on Streamlit. Upload any tabular dataset and an AI analyst (Claude) proposes a workflow, then walks through cleaning, EDA, feature engineering, model benchmarking, hyperparameter optimisation, SHAP explainability, and a downloadable HTML report. Also supports A/B testing and causal inference (propensity score matching, IPW). Access is invite-only as it runs on personal API infrastructure.",
     stack: [
@@ -535,6 +535,11 @@ function ProjectCard({ p, isOpen, onToggle, openEmbed }) {
             {p.badge === "updated" && (
               <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-700/50">
                 Updated!
+              </span>
+            )}
+            {p.badge === "underconstruction" && (
+              <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-amber-950/90 text-amber-400 border border-amber-700/60"> 
+                Under Construction
               </span>
             )}
           </div>
