@@ -534,12 +534,12 @@ function ProjectCard({ p, isOpen, onToggle, openEmbed }) {
             )}
             {p.badge === "updated" && (
               <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-700/50">
-                Updated
+                🔔 Updated
               </span>
             )}
             {p.badge === "inprogress" && (
-              <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-orange-950/90 text-amber-300 border border-orange-700/60">
-                🛠️In Progress
+              <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-amber-950/95 text-amber-400 border border-amber-600/70">                
+                 🛠️ In Progress
               </span>
             )}
           </div>
