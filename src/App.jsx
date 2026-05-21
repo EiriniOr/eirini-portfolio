@@ -5,7 +5,7 @@ import EmbedModal from "./EmbedModal";
 // ── Profile ────────────────────────────────────────────────────────────────
 const PROFILE = {
   name: "Eirini Ornithopoulou, Ph.D.",
-  title: "Data Scientist · Product Owner · ML/Agentic AI Enthusiast",
+  title: "Data Scientist · ML/Agentic AI Enthusiast · Product Owner trainee",
   location: "Stockholm, Sweden",
   email: "renaorn@gmail.com",
   phone: "+46730802820",
@@ -81,7 +81,7 @@ const PROJECTS = [
     kind: "Multi-agent App / Automation / Audio Narration",
     title: "Automated Weekly Digest Systems",
     year: "2025",
-    badge: "new",
+    badge: "updated",
     impact:
       "Two fully automated content creation systems that curate weekly news and publish them as curated webpages with AI-narrated audio summaries. (1) AI Weekly Digest: curates agentic AI news from arXiv, Hacker News, Reddit every Sunday at 6 PM with a galaxy-themed UI. (2) International Politics Digest: collects news via RSS feeds from BBC, Deutsche Welle, NYT, Financial Times, Foreign Policy, and South China Morning Post every Monday at 6 AM with a newsroom-aurora UI. Both use Claude AI for curation, OpenAI TTS for narration, and deploy automatically to GitHub Pages via GitHub Actions.",
     stack: [
@@ -532,6 +532,11 @@ function ProjectCard({ p, isOpen, onToggle, openEmbed }) {
             {p.badge === "new" && (
               <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-700/50">
                 ✦ New
+              </span>
+            )}
+            {p.badge === "updated" && (
+              <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-700/50">
+                Updated!
               </span>
             )}
           </div>
