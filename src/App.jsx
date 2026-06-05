@@ -80,30 +80,6 @@ const PROJECTS = [
     highlights: [],
   },
   {
-    kind: "Multi-agent App / Automation / Audio Narration",
-    title: "Automated Weekly Digest Systems",
-    year: "2025",
-    badge: "updated",
-    impact:
-      "Two fully automated content creation systems that curate weekly news and publish them as curated webpages with AI-narrated audio summaries. (1) AI Weekly Digest: curates agentic AI news from arXiv, Hacker News, Reddit every Sunday at 6 PM with a galaxy-themed UI. (2) International Politics Digest: collects news via RSS feeds from BBC, Deutsche Welle, NYT, Financial Times, Foreign Policy, and South China Morning Post every Monday at 6 AM with a newsroom-aurora UI. Both use Claude AI for curation, OpenAI TTS for narration, and deploy automatically to GitHub Pages via GitHub Actions.",
-    stack: [
-      "Python", "Claude API (Sonnet 4.5)", "OpenAI TTS (audio narration)",
-      "RSS feeds (feedparser)", "HTML/CSS", "GitHub Pages", "GitHub Actions",
-    ],
-    links: [
-      { label: "AI Digest", href: "https://EiriniOr.github.io/ai-weekly-digest/" },
-      { label: "Politics Digest", href: "https://EiriniOr.github.io/news-aggregation/" },
-      { label: "AI Digest GitHub", href: "https://github.com/EiriniOr/ai-weekly-digest" },
-      { label: "Politics Digest GitHub", href: "https://github.com/EiriniOr/news-aggregation" },
-    ],
-    highlights: [
-      "Claude generates scripts, OpenAI TTS creates 2-3 minute voice narration for each digest",
-      "Claude filters 50+ items to ~15 top stories with insights and categorization",
-      "Distinct interactive UIs: galaxy palette for AI digest, newsroom-aurora for politics",
-      "Both run in GitHub Actions cloud with email notifications on completion",
-    ],
-  },
-  {
     kind: "AI Agent / Personal Tools",
     title: "Cassandra",
     year: "2026",
@@ -123,77 +99,6 @@ const PROJECTS = [
       "Two-step shell execution: dry-run, user confirmation, then execute — never runs commands without explicit approval",
       "Auth-gated chat (username + password from .env or Streamlit secrets); public Tools reference page documents every capability with sample prompts",
       "Streaming responses with adaptive thinking on Claude Opus 4.7; deployable to Streamlit Cloud or runnable locally with one-click launch.command script",
-    ],
-  },
-  {
-    kind: "Full-Stack AI App / Job Search",
-    title: "JobbaJobba",
-    year: "2026",
-    badge: "new",
-    impact:
-      "End-to-end job search and application platform built to make the job hunt faster and smarter. Searches Arbetsförmedlingen and LinkedIn/Indeed, generates tailored cover letters and ATS-optimised CVs with Claude AI, and tracks every application in a Kanban board. Designed specifically for the Swedish job market with bilingual (EN/SV) support throughout. Access is invite-only as it runs on personal API infrastructure.",
-    stack: [
-      "Next.js 14", "Supabase (Auth + PostgreSQL + Storage)",
-      "Claude API", "JSearch API", "Tailwind CSS", "TypeScript", "Vercel",
-    ],
-    links: [
-      { label: "GitHub", href: "https://github.com/EiriniOr/job-application-assistant" },
-      { label: "Live Demo", href: "https://job-application-assistant-five.vercel.app" },
-    ],
-    highlights: [
-      "ATS match scoring with bilingual keyword detection (EN/SV) — flags missing keywords and soft skills",
-      "One-click AI CV rewrite: tailors resume to a specific job in EN or SV, downloads as styled Word or PDF",
-      "Gmail OAuth integration — auto-syncs inbox and moves kanban cards on rejections, interview invites, or offers",
-      "AI cover letter generation with custom tone/style and ATS-aware mode",
-      "Kanban board (Saved → Applied → Assessment → Interview → Offer → Rejected) with drag-and-drop",
-      "Manual job add via URL — Claude extracts title, company, and description automatically",
-      "Profile photo preserved with correct aspect ratio; all hyperlinks clickable in generated CV",
-    ],
-  },
-  {
-    kind: "macOS App / Electron / Developer Tool",
-    title: "Petal",
-    year: "2026",
-    badge: "new",
-    impact:
-      "A local markdown notes app for macOS, built with Electron, React, and TypeScript. Notes are stored as plain .md files on disk and can be easily shared with others. Features a CodeMirror 6 editor with split/preview/edit modes, ⌘K full-text search, folders and #hashtag support, and desktop sticky notes that float on the desktop and render markdown.",
-    stack: [
-      "Electron", "React 18", "TypeScript", "Tailwind CSS",
-      "Framer Motion", "CodeMirror 6", "Zustand", "react-markdown",
-    ],
-    links: [
-      { label: "GitHub", href: "https://github.com/EiriniOr/petal" },
-      { label: "Download v1.0", href: "https://github.com/EiriniOr/petal/releases/tag/v1.0.0" },
-    ],
-    highlights: [
-      "Markdown editor with split / edit / preview modes, syntax highlighting, and live preview",
-      "Desktop sticky notes — pin any note as a floating widget, click to edit, renders markdown with themed colors",
-      "⌘K command for full-text search across all notes",
-      "Import .md files from anywhere via the sidebar file picker (supports multi-select)",
-      "Install: download the DMG from the release page, drag Petal to Applications, right-click → Open on first launch to bypass the unsigned-app warning",
-    ],
-  },
-  {
-    kind: "ML / Recommender Systems",
-    title: "Sequence-Based Movie Recommender",
-    year: "2026",
-    badge: "new",
-    impact:
-      "Transformer-based sequential recommendation system trained on MovieLens 25M (25 million ratings). Models the order of a user's watch history to predict the next movie — capturing dynamic taste shifts that static collaborative filtering misses. Benchmarked against a Matrix Factorization baseline using Hit@10 and NDCG@10. Includes a live Streamlit demo where anyone can pick movies from a curated list and get personalised top-10 recommendations.",
-    stack: [
-      "PyTorch", "Transformer Encoder", "Matrix Factorization",
-      "MovieLens 25M", "Streamlit", "Plotly", "Python",
-    ],
-    links: [
-      { label: "Live Demo", href: "https://movie-rec-transformer.streamlit.app/" },
-      { label: "GitHub", href: "https://github.com/EiriniOr/movie-rec-transformer" },
-    ],
-    highlights: [
-      "Causal self-attention over ordered watch history — position t attends only to movies watched before it",
-      "Sliding-window next-item prediction trained with cross-entropy loss on 4.5M sequence windows",
-      "Hit@10 and NDCG@10 evaluation on held-out last-3-movies per user across ~162k users",
-      "Live demo: pick from 20 curated movie pills, get top-10 predictions instantly",
-      "\"How It Works\" explainer page covering embeddings, attention, and why order matters — aimed at non-technical viewers",
     ],
   },
   {
@@ -221,10 +126,101 @@ const PROJECTS = [
     ],
   },
   {
+    kind: "Multi-agent App / Automation / Audio Narration",
+    title: "Automated Weekly Digest Systems",
+    year: "2025",
+    badge: "updated",
+    impact:
+      "Two fully automated content creation systems that curate weekly news and publish them as curated webpages with AI-narrated audio summaries. (1) AI Weekly Digest: curates agentic AI news from arXiv, Hacker News, Reddit every Sunday at 6 PM with a galaxy-themed UI. (2) International Politics Digest: collects news via RSS feeds from BBC, Deutsche Welle, NYT, Financial Times, Foreign Policy, and South China Morning Post every Monday at 6 AM with a newsroom-aurora UI. Both use Claude AI for curation, OpenAI TTS for narration, and deploy automatically to GitHub Pages via GitHub Actions.",
+    stack: [
+      "Python", "Claude API (Sonnet 4.5)", "OpenAI TTS (audio narration)",
+      "RSS feeds (feedparser)", "HTML/CSS", "GitHub Pages", "GitHub Actions",
+    ],
+    links: [
+      { label: "AI Digest", href: "https://EiriniOr.github.io/ai-weekly-digest/" },
+      { label: "Politics Digest", href: "https://EiriniOr.github.io/news-aggregation/" },
+      { label: "AI Digest GitHub", href: "https://github.com/EiriniOr/ai-weekly-digest" },
+      { label: "Politics Digest GitHub", href: "https://github.com/EiriniOr/news-aggregation" },
+    ],
+    highlights: [
+      "Claude generates scripts, OpenAI TTS creates 2-3 minute voice narration for each digest",
+      "Claude filters 50+ items to ~15 top stories with insights and categorization",
+      "Distinct interactive UIs: galaxy palette for AI digest, newsroom-aurora for politics",
+      "Both run in GitHub Actions cloud with email notifications on completion",
+    ],
+  },
+  {
+    kind: "Full-Stack AI App / Job Search",
+    title: "JobbaJobba",
+    year: "2026",
+    impact:
+      "End-to-end job search and application platform built to make the job hunt faster and smarter. Searches Arbetsförmedlingen and LinkedIn/Indeed, generates tailored cover letters and ATS-optimised CVs with Claude AI, and tracks every application in a Kanban board. Designed specifically for the Swedish job market with bilingual (EN/SV) support throughout. Access is invite-only as it runs on personal API infrastructure.",
+    stack: [
+      "Next.js 14", "Supabase (Auth + PostgreSQL + Storage)",
+      "Claude API", "JSearch API", "Tailwind CSS", "TypeScript", "Vercel",
+    ],
+    links: [
+      { label: "GitHub", href: "https://github.com/EiriniOr/job-application-assistant" },
+      { label: "Live Demo", href: "https://job-application-assistant-five.vercel.app" },
+    ],
+    highlights: [
+      "ATS match scoring with bilingual keyword detection (EN/SV) — flags missing keywords and soft skills",
+      "One-click AI CV rewrite: tailors resume to a specific job in EN or SV, downloads as styled Word or PDF",
+      "Gmail OAuth integration — auto-syncs inbox and moves kanban cards on rejections, interview invites, or offers",
+      "AI cover letter generation with custom tone/style and ATS-aware mode",
+      "Kanban board (Saved → Applied → Assessment → Interview → Offer → Rejected) with drag-and-drop",
+      "Manual job add via URL — Claude extracts title, company, and description automatically",
+      "Profile photo preserved with correct aspect ratio; all hyperlinks clickable in generated CV",
+    ],
+  },
+  {
+    kind: "macOS App / Electron / Developer Tool",
+    title: "Petal",
+    year: "2026",
+    impact:
+      "A local markdown notes app for macOS, built with Electron, React, and TypeScript. Notes are stored as plain .md files on disk and can be easily shared with others. Features a CodeMirror 6 editor with split/preview/edit modes, ⌘K full-text search, folders and #hashtag support, and desktop sticky notes that float on the desktop and render markdown.",
+    stack: [
+      "Electron", "React 18", "TypeScript", "Tailwind CSS",
+      "Framer Motion", "CodeMirror 6", "Zustand", "react-markdown",
+    ],
+    links: [
+      { label: "GitHub", href: "https://github.com/EiriniOr/petal" },
+      { label: "Download v1.0", href: "https://github.com/EiriniOr/petal/releases/tag/v1.0.0" },
+    ],
+    highlights: [
+      "Markdown editor with split / edit / preview modes, syntax highlighting, and live preview",
+      "Desktop sticky notes — pin any note as a floating widget, click to edit, renders markdown with themed colors",
+      "⌘K command for full-text search across all notes",
+      "Import .md files from anywhere via the sidebar file picker (supports multi-select)",
+      "Install: download the DMG from the release page, drag Petal to Applications, right-click → Open on first launch to bypass the unsigned-app warning",
+    ],
+  },
+  {
+    kind: "ML / Recommender Systems",
+    title: "Sequence-Based Movie Recommender",
+    year: "2026",
+    impact:
+      "Transformer-based sequential recommendation system trained on MovieLens 25M (25 million ratings). Models the order of a user's watch history to predict the next movie — capturing dynamic taste shifts that static collaborative filtering misses. Benchmarked against a Matrix Factorization baseline using Hit@10 and NDCG@10. Includes a live Streamlit demo where anyone can pick movies from a curated list and get personalised top-10 recommendations.",
+    stack: [
+      "PyTorch", "Transformer Encoder", "Matrix Factorization",
+      "MovieLens 25M", "Streamlit", "Plotly", "Python",
+    ],
+    links: [
+      { label: "Live Demo", href: "https://movie-rec-transformer.streamlit.app/" },
+      { label: "GitHub", href: "https://github.com/EiriniOr/movie-rec-transformer" },
+    ],
+    highlights: [
+      "Causal self-attention over ordered watch history — position t attends only to movies watched before it",
+      "Sliding-window next-item prediction trained with cross-entropy loss on 4.5M sequence windows",
+      "Hit@10 and NDCG@10 evaluation on held-out last-3-movies per user across ~162k users",
+      "Live demo: pick from 20 curated movie pills, get top-10 predictions instantly",
+      "\"How It Works\" explainer page covering embeddings, attention, and why order matters — aimed at non-technical viewers",
+    ],
+  },
+  {
     kind: "Interactive Learning Tool / Web App",
     title: "MrGraph — The Graph-Based Tutor",
     year: "2026",
-    badge: "new",
     impact:
       "Interactive force-directed knowledge graph for navigating 105 AI/ML engineering concepts across 10 learning paths. Click any node to open a rich detail panel with definitions, multi-paragraph explanations, and code examples. Built as a fully static frontend — no build step, no server dependency. Includes fuzzy search with match highlighting, learning path filters with colour-coded node dimming, Prev/Next navigation within each path, and clickable prerequisite/related concept chips.",
     stack: [
@@ -241,6 +237,23 @@ const PROJECTS = [
       "Fuzzy search ranks by id/title/tag/path/short match and highlights matched text in results",
       "Force simulation: forceLink + forceManyBody + forceCollide — drag nodes, zoom, and fit-to-screen",
       "Smooth pan/zoom transition when selecting a concept via search or chip navigation",
+    ],
+  },
+  {
+    kind: "EdTech Web App / School Project",
+    title: "Guru MD",
+    year: "2026",
+    impact:
+      "An EdTech learning platform built as a school project — a full-stack Next.js app with a PostgreSQL backend. Note: the hosted version is no longer functional, as the database backend behind it is no longer maintained, so the project is shared as source code only. A video demo may be added later.",
+    stack: [
+      "Next.js", "TypeScript", "PostgreSQL", "Tailwind CSS", "Vercel",
+    ],
+    links: [
+      { label: "GitHub", href: "https://github.com/EiriniOr/guru-md" },
+    ],
+    highlights: [
+      "School project exploring EdTech — built with Next.js and a PostgreSQL backend",
+      "Hosted demo retired (database no longer maintained); shared as source only — video demo may follow",
     ],
   },
   {
