@@ -126,6 +126,31 @@ const PROJECTS = [
     ],
   },
   {
+    kind: "EdTech Web App / AI Medical Tutor · School Project",
+    title: "Guru, MD",
+    year: "2026",
+    badge: "new",
+    video: "/videos/guru-md-demo.mp4",
+    impact:
+      "An AI medical-education platform for medical students, built as a school project and tuned for Swedish and EU clinical practice. At its core is \"Guru, MD\" — a Claude-powered tutor that answers questions with live, citation-backed evidence, runs structured learning paths with auto-generated quizzes, recommends what to study next, and even produces a spoken news podcast. Note: the hosted demo is retired (the Supabase database backend is no longer maintained), so the project is shared as source plus the video walkthrough below.",
+    stack: [
+      "Next.js (App Router)", "TypeScript", "Anthropic Claude (Sonnet 4.6)",
+      "Tavily Search (RAG)", "Supabase (Auth + PostgreSQL + RLS)",
+      "Web Speech API", "Tailwind CSS", "shadcn/ui", "Vercel",
+    ],
+    links: [
+      { label: "GitHub", href: "https://github.com/EiriniOr/guru-md" },
+    ],
+    highlights: [
+      "RAG-grounded tutor: streams Claude answers fused with live Tavily web search over EU/Swedish medical sources (ESC, ESICM, EULAR, FASS, Janusinfo, SBU), with inline numbered citations [1][2] back to each source",
+      "Prompt-engineered guardrails: a domain system prompt enforces SI units, European nomenclature, Socratic follow-ups, and an \"educational only — consult a clinician\" disclaimer when a question drifts toward personal medical advice",
+      "Auto-generated assessments: Claude turns any module's markdown into a strict-JSON 5-question MCQ quiz (2 easy / 2 medium / 1 hard) with per-answer explanations, then parses and scores it",
+      "AI study advisor: reads the student's activity log + module progress and returns JSON recommendations for the next path or module to tackle",
+      "Zero-cost audio: Claude writes a 2–3 minute spoken-word podcast script from fresh medical news, narrated in-browser via the Web Speech API — no paid TTS",
+      "Multi-tenant security by design: Supabase Postgres with Row-Level Security policies isolating every user's sessions, messages, quiz attempts, and progress, while learning paths stay publicly readable",
+    ],
+  },
+  {
     kind: "Multi-agent App / Automation / Audio Narration",
     title: "Automated Weekly Digest Systems",
     year: "2025",
@@ -237,23 +262,6 @@ const PROJECTS = [
       "Fuzzy search ranks by id/title/tag/path/short match and highlights matched text in results",
       "Force simulation: forceLink + forceManyBody + forceCollide — drag nodes, zoom, and fit-to-screen",
       "Smooth pan/zoom transition when selecting a concept via search or chip navigation",
-    ],
-  },
-  {
-    kind: "EdTech Web App / School Project",
-    title: "Guru MD",
-    year: "2026",
-    impact:
-      "An EdTech learning platform built as a school project — a full-stack Next.js app with a PostgreSQL backend. Note: the hosted version is no longer functional, as the database backend behind it is no longer maintained, so the project is shared as source code only. A video demo may be added later.",
-    stack: [
-      "Next.js", "TypeScript", "PostgreSQL", "Tailwind CSS", "Vercel",
-    ],
-    links: [
-      { label: "GitHub", href: "https://github.com/EiriniOr/guru-md" },
-    ],
-    highlights: [
-      "School project exploring EdTech — built with Next.js and a PostgreSQL backend",
-      "Hosted demo retired (database no longer maintained); shared as source only — video demo may follow",
     ],
   },
   {
@@ -593,6 +601,18 @@ function ProjectCard({ p, isOpen, onToggle, openEmbed }) {
                   <span key={j} className={tag}>{s}</span>
                 ))}
               </div>
+
+              {/* Video demo */}
+              {p.video && (
+                <video
+                  controls
+                  preload="metadata"
+                  playsInline
+                  className="mt-4 w-full rounded-lg border border-cyan-900/40 bg-black"
+                >
+                  <source src={p.video} type="video/mp4" />
+                </video>
+              )}
 
               {/* Highlights */}
               {p.highlights.length > 0 && (
