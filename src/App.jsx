@@ -80,6 +80,27 @@ const PROJECTS = [
     highlights: [],
   },
   {
+    kind: "Agentic AI · Geospatial",
+    title: "Agentic Assistant for Climate & Urban Planning",
+    year: "2026",
+    badge: "new",
+    impact:
+      "An applied R&D project: an end-to-end agentic assistant for climate and urban-planning decision support, pairing a chat agent with an interactive map. You ask in natural language and a guarded, tool-using agent reasons over public geospatial and statistical data, answers with inline citations, and renders the result on the map — small-area demographics, land cover (green space, water, built-up), a modelled air-quality layer, a planning-document knowledge store, and live scientific literature, all behind one conversation. Project specifics are confidential, so this is a capability summary — no live demo, source, or screenshots.",
+    stack: [
+      "Next.js", "React", "MapLibre GL", "CopilotKit",
+      "Python", "LangGraph", "FastAPI", "Claude API",
+      "Azure AI", "RAG · ChromaDB", "MCP",
+    ],
+    links: [],
+    highlights: [
+      "Guarded agent: input/output guardrails + deterministic citation & quote verification — it may only present sources the tools actually returned (no hallucinated references)",
+      "Model-agnostic: runs on a small fast model or a large reasoning model, with auto-routing by question complexity and a live cost estimate",
+      "Map intelligence: metric-appropriate choropleths, weighted multi-criteria (MCDA) priority colouring, and side-by-side / spyglass comparison of two indicators",
+      "Click or draw an area → instant current-state analysis (demographics, air quality vs limit values, land cover, heat) from public data",
+      "Portable by design: framework-free tools exposed as an MCP server + per-answer evaluation logging, so the analysis drops into a production agent without a rewrite",
+    ],
+  },
+  {
     kind: "AI Agent / Personal Tools",
     title: "Cassandra",
     year: "2026",
@@ -614,6 +635,22 @@ function ProjectCard({ p, isOpen, onToggle, openEmbed }) {
                 </video>
               )}
 
+              {/* Screenshots */}
+              {p.images?.length > 0 && (
+                <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {p.images.map((src, n) => (
+                    <a key={n} href={src} target="_blank" rel="noreferrer">
+                      <img
+                        src={src}
+                        alt={`${p.title} screenshot ${n + 1}`}
+                        loading="lazy"
+                        className="w-full rounded-lg border border-cyan-900/40 bg-black object-cover hover:opacity-90 transition-opacity"
+                      />
+                    </a>
+                  ))}
+                </div>
+              )}
+
               {/* Highlights */}
               {p.highlights.length > 0 && (
                 <ul className="mt-4 space-y-1.5">
@@ -761,7 +798,10 @@ export default function Portfolio() {
       {/* PROJECTS */}
       <Section id="projects" title="Selected Projects">
         <div className="grid md:grid-cols-2 gap-3 items-start">
-          {PROJECTS.map((p, i) => (
+          {[
+            ...PROJECTS.filter((p) => p.badge !== "inprogress"),
+            ...PROJECTS.filter((p) => p.badge === "inprogress"),
+          ].map((p, i) => (
             <ProjectCard
               key={i}
               p={p}
