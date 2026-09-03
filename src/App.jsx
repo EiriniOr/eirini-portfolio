@@ -80,6 +80,29 @@ const PROJECTS = [
     highlights: [],
   },
   {
+    kind: "AI Research Assistant / Full-Stack Web App",
+    title: "Cassandra",
+    year: "2026",
+    badge: "new",
+    impact:
+      "An open-domain research assistant that grounds every answer in real scientific literature. Ask a question and it searches OpenAlex + arXiv live, then renders the answer as an interactive hub-and-spoke canvas: the synthesized answer sits at the center, and its actual grounding sources fan out on demand — connected by animated, measured lines rather than a flat list — with each source itself expandable from a one-sentence fact to a full paragraph to the real open-access PDF, embedded inline only when genuinely verified. Password-gated and deployed on Vercel, built directly on the Anthropic API (no agent framework in the loop).",
+    stack: [
+      "Next.js (App Router)", "TypeScript", "Anthropic Claude API (Sonnet 5)",
+      "OpenAlex + arXiv APIs", "Upstash Redis", "Framer Motion", "Vercel Cron",
+    ],
+    links: [
+      { label: "GitHub", href: "https://github.com/EiriniOr/Cassandra" },
+    ],
+    highlights: [
+      "Hub-and-spoke answer canvas: sources fan out around the answer on expand, connected by SVG lines measured live off the DOM — not hardcoded positions — and wrap above and below the hub once there are too many for one row",
+      "Progressive disclosure per source: sentence → grounded paragraph → real embedded PDF — the PDF step is skipped entirely rather than shown fake; it verifies actual file bytes and rejects access-gated interstitials some publishers serve in place of the article",
+      "LLM relevance filter drops keyword-matched but off-topic search results before they ever reach the UI",
+      "Branch a follow-up question off any answer into a connected child node, with breadcrumb navigation back up the thread",
+      "Track a topic and a Vercel Cron job re-searches it every 2 days, surfacing new results into a saved library backed by Upstash Redis",
+      "Full conversation history stays out of the way behind the input bar — collapsed by default, reveals as a scrollable panel on hover",
+    ],
+  },
+  {
     kind: "Agentic AI · Geospatial",
     title: "Agentic Assistant for Climate & Urban Planning",
     year: "2026",
@@ -98,28 +121,6 @@ const PROJECTS = [
       "Map intelligence: metric-appropriate choropleths, weighted multi-criteria (MCDA) priority colouring, and side-by-side / spyglass comparison of two indicators",
       "Click or draw an area → instant current-state analysis (demographics, air quality vs limit values, land cover, heat) from public data",
       "Portable by design: framework-free tools exposed as an MCP server + per-answer evaluation logging, so the analysis drops into a production agent without a rewrite",
-    ],
-  },
-  {
-    kind: "AI Agent / Personal Tools",
-    title: "Cassandra",
-    year: "2026",
-    badge: "inprogress",
-    impact:
-      "A personal AI agent built on Claude Opus 4.7 with 30 tools and a persistent memory wiki (Karpathy's LLM Wiki pattern). Browses the web, reads/writes files, inspects git repos, runs shell commands with two-step confirmation, tracks pomodoro sessions, captures brain-dumps and decisions, and ingests articles into a structured second brain at ~/cassandra-memory/. Streams responses in a Streamlit chat with username/password auth; Tools reference page is public.",
-    stack: [
-      "Python", "Anthropic Claude API", "Streamlit",
-      "Tool Use", "Adaptive Thinking", "Karpathy LLM Wiki Pattern",
-    ],
-    links: [
-      { label: "GitHub", href: "https://github.com/EiriniOr/Cassandra" },
-    ],
-    highlights: [
-      "30 tools — web search/fetch, memory wiki, file & shell I/O, git inspector, clipboard, pomodoro, arXiv/HN search, decision journal, brain-dump inbox, and more",
-      "Persistent second brain at ~/cassandra-memory/ following Karpathy's LLM Wiki pattern (raw/, wiki/{entities,concepts,sources,synthesis}, CLAUDE.md schema)",
-      "Two-step shell execution: dry-run, user confirmation, then execute — never runs commands without explicit approval",
-      "Auth-gated chat (username + password from .env or Streamlit secrets); public Tools reference page documents every capability with sample prompts",
-      "Streaming responses with adaptive thinking on Claude Opus 4.7; deployable to Streamlit Cloud or runnable locally with one-click launch.command script",
     ],
   },
   {
