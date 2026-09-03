@@ -26,6 +26,16 @@ export default function NetworkGraph({ className = "" }) {
       className={className}
       aria-hidden="true"
     >
+      <defs>
+        <filter id="ng-glow" x="-200%" y="-200%" width="500%" height="500%">
+          <feGaussianBlur stdDeviation="3" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
       {EDGES.map(([a, b], i) => {
         const [x1, y1] = NODES[a];
         const [x2, y2] = NODES[b];
@@ -34,8 +44,8 @@ export default function NetworkGraph({ className = "" }) {
             key={i}
             x1={x1} y1={y1} x2={x2} y2={y2}
             stroke="#22d3ee"
-            strokeWidth="1"
-            strokeOpacity="0.16"
+            strokeWidth="1.4"
+            strokeOpacity="0.45"
           />
         );
       })}
@@ -47,10 +57,11 @@ export default function NetworkGraph({ className = "" }) {
         return (
           <motion.circle
             key={`pulse-${i}`}
-            r="2.5"
-            fill="#a78bfa"
+            r="4"
+            fill="#c4b5fd"
+            filter="url(#ng-glow)"
             initial={{ cx: x1, cy: y1, opacity: 0 }}
-            animate={{ cx: [x1, x2, x1], cy: [y1, y2, y1], opacity: [0, 0.9, 0] }}
+            animate={{ cx: [x1, x2, x1], cy: [y1, y2, y1], opacity: [0, 1, 0] }}
             transition={{
               duration: 5 + (i % 3),
               repeat: Infinity,
@@ -64,10 +75,11 @@ export default function NetworkGraph({ className = "" }) {
       {NODES.map(([x, y], i) => (
         <motion.circle
           key={i}
-          cx={x} cy={y} r="3.2"
-          fill="#22d3ee"
-          initial={{ opacity: 0.35 }}
-          animate={{ opacity: [0.35, 0.85, 0.35] }}
+          cx={x} cy={y} r="5"
+          fill="#67e8f9"
+          filter="url(#ng-glow)"
+          initial={{ opacity: 0.55 }}
+          animate={{ opacity: [0.55, 1, 0.55] }}
           transition={{
             duration: 3.5 + (i % 4),
             repeat: Infinity,
