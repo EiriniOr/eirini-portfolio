@@ -5,7 +5,7 @@ import EmbedModal from "./EmbedModal";
 // ── Profile ────────────────────────────────────────────────────────────────
 const PROFILE = {
   name: "Eirini Ornithopoulou, Ph.D.",
-  title: "Data Scientist · ML/Agentic AI Enthusiast · Product Owner trainee",
+  title: "Data Scientist · ML/Agentic AI Enthusiast · Product Owner/IT Project Manager in the making",
   location: "Stockholm, Sweden",
   email: "renaorn@gmail.com",
   phone: "+46730802820",
