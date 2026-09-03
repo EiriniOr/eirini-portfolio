@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 // project. Nodes pulse gently; a handful of edges carry a traveling "data
 // pulse" dot to suggest an active agentic pipeline rather than static decor.
 const NODES = [
-  [60, 60], [140, 140], [90, 220], [200, 80], [260, 200], [180, 300],
+  [100, 60], [140, 140], [90, 220], [200, 80], [260, 200], [180, 300],
   [340, 60], [400, 160], [370, 280], [500, 100], [560, 220], [620, 60],
   [680, 180], [750, 100], [820, 200], [700, 300], [450, 320], [120, 40],
 ];
