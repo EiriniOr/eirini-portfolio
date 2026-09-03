@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll } from "framer-motion";
 import EmbedModal from "./EmbedModal";
+import NetworkGraph from "./NetworkGraph";
 
 // ── Profile ────────────────────────────────────────────────────────────────
 const PROFILE = {
@@ -529,6 +530,7 @@ const SKILL_GROUPS = [
       "Predictive Modeling (Churn, Fraud Detection, Healthcare)",
       "Smart Healthcare AI",
       "Causal Inference / Causal Discovery",
+      "Prompt Engineering",
     ],
   },
   {
@@ -543,7 +545,11 @@ const SKILL_GROUPS = [
   },
   {
     label: "Data, Product & Research",
-    items: ["Documentation", "Data Analytics", "Visualization (Power BI · Looker)", "UX/UI", "Service Design", "Academic Research"],
+    items: [
+      "Documentation", "Data Analytics", "Visualization (Power BI · Looker)",
+      "UX/UI", "Service Design", "Customer-Facing Product Design & Conception",
+      "Academic Research",
+    ],
   },
 ];
 
@@ -587,7 +593,8 @@ function Section({ id, title, children }) {
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className={`text-2xl md:text-3xl font-semibold tracking-tight mb-6 ${gradientText}`}
+        style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+        className={`text-2xl md:text-3xl font-bold tracking-tight mb-6 ${gradientText}`}
       >
         {title}
       </motion.h2>
@@ -617,7 +624,10 @@ function ProjectCard({ p, isOpen, onToggle, openEmbed, compact = false }) {
             </div>
           )}
           <div className={`flex items-center gap-2 flex-wrap ${compact ? "" : "mt-1.5"}`}>
-            <h3 className={compact ? "text-sm font-medium text-slate-200 leading-snug" : "text-base md:text-lg font-semibold text-white leading-snug"}>
+            <h3
+              style={compact ? undefined : { fontFamily: "'Space Grotesk', sans-serif" }}
+              className={compact ? "text-sm font-medium text-slate-200 leading-snug" : "text-base md:text-lg font-bold text-white leading-snug"}
+            >
               {p.title}
             </h3>
             {compact && <span className="text-xs text-slate-500 font-mono">{p.year}</span>}
@@ -758,6 +768,7 @@ export default function Portfolio() {
   const [embedSrc, setEmbedSrc] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navLinks = ["projects", "skills", "education", "publications", "contact"];
+  const { scrollYProgress } = useScroll();
 
   function openEmbed(url) {
     setEmbedSrc(url);
@@ -776,6 +787,12 @@ export default function Portfolio() {
         <div className="blob blob-b" />
         <div className="blob blob-c" />
       </div>
+
+      {/* SCROLL PROGRESS */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-cyan-400 to-violet-400 origin-left z-30"
+        style={{ scaleX: scrollYProgress }}
+      />
 
       {/* NAV */}
       <header className="sticky top-0 z-20 bg-slate-950/80 backdrop-blur border-b border-cyan-900/30">
@@ -832,8 +849,9 @@ export default function Portfolio() {
       </header>
 
       {/* HERO */}
-      <section id="top" className="max-w-5xl mx-auto px-5 md:px-8 pt-12 pb-6">
-        <div className={`${card} grid md:grid-cols-3 gap-6 items-center p-6`}>
+      <section id="top" className="max-w-5xl mx-auto px-5 md:px-8 pt-12 pb-6 relative">
+        <NetworkGraph className="pointer-events-none absolute -inset-x-6 -top-10 -bottom-10 w-[calc(100%+3rem)] h-[calc(100%+5rem)] opacity-70" />
+        <div className={`${card} grid md:grid-cols-3 gap-6 items-center p-6 relative`}>
           <div className="md:col-span-2 flex flex-col gap-4">
             <motion.h1
               initial={{ opacity: 0, y: 12 }}
