@@ -492,6 +492,7 @@ const EDUCATION = [
     degree: "MSc, IT Project Management",
     org: "Stockholm University, Sweden",
     years: "2026–2028 (Ongoing, part-time)",
+    logo: "/edu/stockholm.png",
   },
   {
     degree: "MSc, Computer Science — Data Science & ML",
