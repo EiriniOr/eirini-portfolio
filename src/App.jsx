@@ -478,7 +478,7 @@ const PROJECTS = [
 // Featured (pinned/new) projects get full-size cards up top; everything else
 // groups into a compact, categorized list so 20+ projects don't read as one
 // undifferentiated wall — a skim-friendly hierarchy instead.
-const FEATURED_BADGES = new Set(["pinned", "new"]);
+const FEATURED_BADGES = new Set(["pinned"]);
 const CATEGORY_ORDER = ["Agentic AI & LLM Tools", "Data Science & ML", "Full-Stack Web Apps"];
 
 const ORDERED_PROJECTS = [
