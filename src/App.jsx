@@ -22,28 +22,6 @@ const PROFILE = {
     heart_api_demo: "https://heart-risk-api-602311160874.europe-north1.run.app/",
     heart_api_repo: "https://github.com/EiriniOr/heart-risk-api",
   },
-  skills: [
-    "Python (PyTorch, scikit-learn, pandas, matplotlib, etc.)",
-    "SQL", "R", "Git", "React", "HTML/CSS", "LaTeX",
-    "Machine Learning",
-    "Deep Learning (Vision, LLMs, GAT/GCN, Transformers)",
-    "Fairness & Explainability (Fairlearn, SHAP)",
-    "NLP / RAG",
-    "Predictive Modeling (Churn, Fraud Detection, Healthcare)",
-    "Smart Healthcare AI",
-    "Causal Inference / Causal Discovery",
-    "FastAPI", "Docker & Containerization",
-    "MLOps (Experiment Tracking, Reproducibility)",
-    "ML Model Training & Fine-tuning",
-    "Agentic Engineering",
-    "Weights & Biases", "Documentation", "AgentOps",
-    "Azure",
-    "Google Cloud Platform (Cloud Run, Vertex AI)",
-    "Microsoft Fabric",
-    "Data Analytics",
-    "Visualization (Power BI · Looker)",
-    "UX/UI", "Service Design", "Academic Research",
-  ],
   languages: ["English (C2)", "Swedish (SVA 2)", "Greek (Native)"],
 };
 
@@ -51,6 +29,7 @@ const PROFILE = {
 const PROJECTS = [
   {
     kind: "AI Research Project",
+    category: "Data Science & ML",
     title: "Fairness‑Aware, Domain‑Adaptive GAT for ICU Mortality Prediction",
     year: "2025",
     badge: "pinned",
@@ -70,6 +49,7 @@ const PROJECTS = [
   },
   {
     kind: "Winner of the AI Health Hackathon",
+    category: "Full-Stack Web Apps",
     title: "NutrioFast",
     year: "2025",
     badge: "pinned",
@@ -81,6 +61,7 @@ const PROJECTS = [
   },
   {
     kind: "AI Research Assistant / Full-Stack Web App",
+    category: "Agentic AI & LLM Tools",
     title: "Cassandra",
     year: "2026",
     badge: "new",
@@ -104,6 +85,7 @@ const PROJECTS = [
   },
   {
     kind: "Agentic AI · Geospatial",
+    category: "Agentic AI & LLM Tools",
     title: "Agentic Assistant for Climate & Urban Planning",
     year: "2026",
     badge: "new",
@@ -125,6 +107,7 @@ const PROJECTS = [
   },
   {
     kind: "AI Data Science Suite / ML Pipeline",
+    category: "Data Science & ML",
     title: "Miss Datrix",
     year: "2026",
     badge: "inprogress",
@@ -149,6 +132,7 @@ const PROJECTS = [
   },
   {
     kind: "EdTech Web App / AI Medical Tutor · School Project",
+    category: "Full-Stack Web Apps",
     title: "Guru, MD",
     year: "2026",
     badge: "new",
@@ -174,6 +158,7 @@ const PROJECTS = [
   },
   {
     kind: "Multi-agent App / Automation / Audio Narration",
+    category: "Full-Stack Web Apps",
     title: "Automated Weekly Digest Systems",
     year: "2025",
     badge: "updated",
@@ -198,6 +183,7 @@ const PROJECTS = [
   },
   {
     kind: "Full-Stack AI App / Job Search",
+    category: "Full-Stack Web Apps",
     title: "JobbaJobba",
     year: "2026",
     impact:
@@ -222,6 +208,7 @@ const PROJECTS = [
   },
   {
     kind: "macOS App / Electron / Developer Tool",
+    category: "Full-Stack Web Apps",
     title: "Petal",
     year: "2026",
     impact:
@@ -244,6 +231,7 @@ const PROJECTS = [
   },
   {
     kind: "ML / Recommender Systems",
+    category: "Data Science & ML",
     title: "Sequence-Based Movie Recommender",
     year: "2026",
     impact:
@@ -266,6 +254,7 @@ const PROJECTS = [
   },
   {
     kind: "Interactive Learning Tool / Web App",
+    category: "Full-Stack Web Apps",
     title: "MrGraph — The Graph-Based Tutor",
     year: "2026",
     impact:
@@ -288,6 +277,7 @@ const PROJECTS = [
   },
   {
     kind: "Curated Resource Platform / Web",
+    category: "Full-Stack Web Apps",
     title: "ForgeMee",
     year: "2026",
     impact:
@@ -311,6 +301,7 @@ const PROJECTS = [
   },
   {
     kind: "Agentic AI / LLM / Web Scraping",
+    category: "Agentic AI & LLM Tools",
     title: "Research Assistant",
     year: "2025",
     impact:
@@ -334,6 +325,7 @@ const PROJECTS = [
   },
   {
     kind: "MCP Server / AI Tooling",
+    category: "Agentic AI & LLM Tools",
     title: "PowerPoint MCP Server",
     year: "2025",
     impact:
@@ -356,6 +348,7 @@ const PROJECTS = [
   },
   {
     kind: "NLP/LLM",
+    category: "Agentic AI & LLM Tools",
     title: "ATS-style Job Match Scorer",
     year: "2025",
     impact:
@@ -376,6 +369,7 @@ const PROJECTS = [
   },
   {
     kind: "Cloud Deployment · Smart Healthcare",
+    category: "Data Science & ML",
     title: "Heart Disease Risk Prediction API",
     year: "2025",
     impact:
@@ -393,6 +387,7 @@ const PROJECTS = [
   },
   {
     kind: "Data Analysis/Data Engineering",
+    category: "Data Science & ML",
     title: "Customer Churn Dashboard",
     year: "2024",
     impact:
@@ -409,6 +404,7 @@ const PROJECTS = [
   },
   {
     kind: "LLM / RAG",
+    category: "Agentic AI & LLM Tools",
     title: "Document Q&A (RAG Bot)",
     year: "2025",
     impact: "Answers grounded in uploaded PDFs using retrieval + generation.",
@@ -424,6 +420,7 @@ const PROJECTS = [
   },
   {
     kind: "Data Visualization",
+    category: "Data Science & ML",
     title: "Carbon Emissions Explorer",
     year: "2025",
     impact: "Interactive map and trends for CO₂ metrics (public data).",
@@ -439,6 +436,7 @@ const PROJECTS = [
   },
   {
     kind: "Causal Inference / A/B Testing",
+    category: "Data Science & ML",
     title: "Cookie Cats A/B Test Analysis",
     year: "2025",
     impact:
@@ -460,6 +458,7 @@ const PROJECTS = [
   },
   {
     kind: "University Projects",
+    category: "Data Science & ML",
     title: "AI Implementation & Strategy",
     year: "2025",
     impact:
@@ -475,7 +474,25 @@ const PROJECTS = [
   },
 ];
 
+// Featured (pinned/new) projects get full-size cards up top; everything else
+// groups into a compact, categorized list so 20+ projects don't read as one
+// undifferentiated wall — a skim-friendly hierarchy instead.
+const FEATURED_BADGES = new Set(["pinned", "new"]);
+const CATEGORY_ORDER = ["Agentic AI & LLM Tools", "Data Science & ML", "Full-Stack Web Apps"];
+
+const ORDERED_PROJECTS = [
+  ...PROJECTS.filter((p) => FEATURED_BADGES.has(p.badge)),
+  ...PROJECTS.filter((p) => !FEATURED_BADGES.has(p.badge) && p.badge !== "inprogress"),
+  ...PROJECTS.filter((p) => p.badge === "inprogress"),
+];
+const FEATURED_COUNT = PROJECTS.filter((p) => FEATURED_BADGES.has(p.badge)).length;
+
 const EDUCATION = [
+  {
+    degree: "MSc, IT Project Management",
+    org: "Stockholm University, Sweden",
+    years: "2026–2028 (Ongoing, part-time)",
+  },
   {
     degree: "MSc, Computer Science — Data Science & ML",
     org: "Halmstad University, Sweden",
@@ -493,6 +510,39 @@ const EDUCATION = [
     org: "University of Crete, Greece",
     years: "2009–2016",
     logo: "/edu/uoc.png",
+  },
+];
+
+const SKILL_GROUPS = [
+  {
+    label: "Languages & Core",
+    items: ["Python (PyTorch, scikit-learn, pandas, matplotlib, etc.)", "SQL", "R", "Git", "React", "HTML/CSS", "LaTeX"],
+  },
+  {
+    label: "Machine Learning & AI",
+    items: [
+      "Machine Learning",
+      "Deep Learning (Vision, LLMs, GAT/GCN, Transformers)",
+      "Fairness & Explainability (Fairlearn, SHAP)",
+      "NLP / RAG",
+      "Predictive Modeling (Churn, Fraud Detection, Healthcare)",
+      "Smart Healthcare AI",
+      "Causal Inference / Causal Discovery",
+    ],
+  },
+  {
+    label: "MLOps, Agentic & Cloud",
+    items: [
+      "FastAPI", "Docker & Containerization",
+      "MLOps (Experiment Tracking, Reproducibility)",
+      "ML Model Training & Fine-tuning",
+      "Agentic Engineering", "AgentOps", "Weights & Biases",
+      "Azure", "Google Cloud Platform (Cloud Run, Vertex AI)", "Microsoft Fabric",
+    ],
+  },
+  {
+    label: "Data, Product & Research",
+    items: ["Documentation", "Data Analytics", "Visualization (Power BI · Looker)", "UX/UI", "Service Design", "Academic Research"],
   },
 ];
 
@@ -546,7 +596,7 @@ function Section({ id, title, children }) {
 }
 
 // ── Project card (accordion) ───────────────────────────────────────────────
-function ProjectCard({ p, isOpen, onToggle, openEmbed }) {
+function ProjectCard({ p, isOpen, onToggle, openEmbed, compact = false }) {
   return (
     <motion.article
       initial={{ opacity: 0, y: 12 }}
@@ -557,16 +607,19 @@ function ProjectCard({ p, isOpen, onToggle, openEmbed }) {
       {/* Header — always visible */}
       <button
         onClick={onToggle}
-        className="w-full text-left px-5 pt-5 pb-4 flex items-start gap-3 group"
+        className={`w-full text-left flex items-start gap-3 group ${compact ? "px-4 py-3" : "px-5 pt-5 pb-4"}`}
       >
         <div className="flex-1 min-w-0">
-          <div className="text-xs uppercase tracking-widest text-cyan-500/80 font-mono">
-            {p.kind} · {p.year}
-          </div>
-          <div className="flex items-center gap-2 mt-1.5 flex-wrap">
-            <h3 className="text-base md:text-lg font-semibold text-white leading-snug">
+          {!compact && (
+            <div className="text-xs uppercase tracking-widest text-cyan-500/80 font-mono">
+              {p.kind} · {p.year}
+            </div>
+          )}
+          <div className={`flex items-center gap-2 flex-wrap ${compact ? "" : "mt-1.5"}`}>
+            <h3 className={compact ? "text-sm font-medium text-slate-200 leading-snug" : "text-base md:text-lg font-semibold text-white leading-snug"}>
               {p.title}
             </h3>
+            {compact && <span className="text-xs text-slate-500 font-mono">{p.year}</span>}
             {p.badge === "pinned" && (
               <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-amber-950/80 text-amber-400 border border-amber-700/50">
                 📌 Pinned
@@ -583,12 +636,12 @@ function ProjectCard({ p, isOpen, onToggle, openEmbed }) {
               </span>
             )}
             {p.badge === "inprogress" && (
-              <span className="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-[#292304] text-[#ab9007] border border-[#d6b924]">                
+              <span className="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-[#292304] text-[#ab9007] border border-[#d6b924]">
                  🛠️ In Progress
               </span>
             )}
           </div>
-          {!isOpen && (
+          {!isOpen && !compact && (
             <p className="mt-1.5 text-sm text-slate-500 line-clamp-2">
               {p.impact.slice(0, 120)}{p.impact.length > 120 ? "…" : ""}
             </p>
@@ -702,6 +755,8 @@ export default function Portfolio() {
   const [openProject, setOpenProject] = useState(null);
   const [embedOpen, setEmbedOpen] = useState(false);
   const [embedSrc, setEmbedSrc] = useState("");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navLinks = ["projects", "skills", "education", "publications", "contact"];
 
   function openEmbed(url) {
     setEmbedSrc(url);
@@ -728,13 +783,51 @@ export default function Portfolio() {
             Eirini's Portfolio
           </a>
           <div className="hidden md:flex gap-6 text-sm">
-            {["projects", "skills", "education", "publications", "contact"].map((s) => (
+            {navLinks.map((s) => (
               <a key={s} href={`#${s}`} className={`${gradientText} capitalize opacity-80 hover:opacity-100 transition-opacity`}>
                 {s}
               </a>
             ))}
           </div>
+          <button
+            className="md:hidden text-cyan-300 p-1.5 -mr-1.5"
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileMenuOpen}
+            onClick={() => setMobileMenuOpen((v) => !v)}
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              {mobileMenuOpen ? (
+                <path d="M6 6l12 12M18 6L6 18" />
+              ) : (
+                <path d="M4 7h16M4 12h16M4 17h16" />
+              )}
+            </svg>
+          </button>
         </nav>
+        <AnimatePresence initial={false}>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
+              className="md:hidden overflow-hidden border-t border-cyan-900/30"
+            >
+              <div className="px-5 py-3 flex flex-col gap-3 text-sm">
+                {navLinks.map((s) => (
+                  <a
+                    key={s}
+                    href={`#${s}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`${gradientText} capitalize opacity-80 hover:opacity-100 transition-opacity`}
+                  >
+                    {s}
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       {/* HERO */}
@@ -798,11 +891,9 @@ export default function Portfolio() {
 
       {/* PROJECTS */}
       <Section id="projects" title="Selected Projects">
+        {/* Featured — pinned + newest flagship work, full-size cards */}
         <div className="grid md:grid-cols-2 gap-3 items-start">
-          {[
-            ...PROJECTS.filter((p) => p.badge !== "inprogress"),
-            ...PROJECTS.filter((p) => p.badge === "inprogress"),
-          ].map((p, i) => (
+          {ORDERED_PROJECTS.slice(0, FEATURED_COUNT).map((p, i) => (
             <ProjectCard
               key={i}
               p={p}
@@ -812,16 +903,73 @@ export default function Portfolio() {
             />
           ))}
         </div>
+
+        {/* Everything else — grouped by category, compact rows */}
+        {CATEGORY_ORDER.map((cat) => {
+          const items = ORDERED_PROJECTS
+            .map((p, i) => ({ p, i }))
+            .filter(({ p, i }) => i >= FEATURED_COUNT && p.badge !== "inprogress" && p.category === cat);
+          if (items.length === 0) return null;
+          return (
+            <div key={cat} className="mt-8">
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-cyan-500/70 mb-3">
+                {cat}
+              </h3>
+              <div className="grid md:grid-cols-2 gap-2 items-start">
+                {items.map(({ p, i }) => (
+                  <ProjectCard
+                    key={i}
+                    p={p}
+                    isOpen={openProject === i}
+                    onToggle={() => toggleProject(i)}
+                    openEmbed={openEmbed}
+                    compact
+                  />
+                ))}
+              </div>
+            </div>
+          );
+        })}
+
+        {/* Still in progress */}
+        {ORDERED_PROJECTS.some((p) => p.badge === "inprogress") && (
+          <div className="mt-8">
+            <h3 className="text-xs font-semibold uppercase tracking-widest text-cyan-500/70 mb-3">
+              In Progress
+            </h3>
+            <div className="grid md:grid-cols-2 gap-2 items-start">
+              {ORDERED_PROJECTS.map((p, i) =>
+                p.badge === "inprogress" ? (
+                  <ProjectCard
+                    key={i}
+                    p={p}
+                    isOpen={openProject === i}
+                    onToggle={() => toggleProject(i)}
+                    openEmbed={openEmbed}
+                    compact
+                  />
+                ) : null
+              )}
+            </div>
+          </div>
+        )}
       </Section>
 
       {/* SKILLS */}
       <Section id="skills" title="Skills">
-        <div className={`${card} p-6`}>
-          <div className="flex flex-wrap gap-2">
-            {PROFILE.skills.map((s, i) => (
-              <span key={i} className={tag}>{s}</span>
-            ))}
-          </div>
+        <div className={`${card} p-6 flex flex-col gap-5`}>
+          {SKILL_GROUPS.map((group) => (
+            <div key={group.label}>
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-cyan-500/70 mb-2">
+                {group.label}
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {group.items.map((s, i) => (
+                  <span key={i} className={tag}>{s}</span>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </Section>
 
