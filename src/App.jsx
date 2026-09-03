@@ -850,7 +850,7 @@ export default function Portfolio() {
 
       {/* HERO */}
       <section id="top" className="max-w-5xl mx-auto px-5 md:px-8 pt-12 pb-6 relative">
-        <NetworkGraph className="pointer-events-none absolute -inset-x-6 -top-10 -bottom-10 w-[calc(100%+3rem)] h-[calc(100%+5rem)] opacity-70" />
+        <NetworkGraph className="pointer-events-none absolute -inset-x-10 -top-16 -bottom-16 w-[calc(100%+5rem)] h-[calc(100%+8rem)]" />
         <div className={`${card} grid md:grid-cols-3 gap-6 items-center p-6 relative`}>
           <div className="md:col-span-2 flex flex-col gap-4">
             <motion.h1
