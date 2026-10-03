@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { MEDIA, PROFILE, STORIES, linkMedia } from "../data";
-import { play } from "../sound";
 import { Cover, Kicker, MediaTags, ease } from "./ui";
 
 const linkKind = (l) => {
@@ -106,7 +105,6 @@ export default function Article({ slug, origin, onClose, onOpen, openEmbed }) {
                           href={l.href}
                           target={internal && !/\.(pdf|pptx)$/i.test(l.href) ? "_self" : "_blank"}
                           rel="noreferrer"
-                          onClick={() => play("click")}
                           className={`btn-solid ${LINK_STYLE[k]}`}
                         >
                           <span className="font-mono text-xs">{icon}</span> {l.label}

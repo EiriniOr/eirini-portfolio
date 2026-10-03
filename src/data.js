@@ -558,21 +558,9 @@ export const CERTS = [
 
 // ── Front-page stories ─────────────────────────────────────────────────────
 export const NOW = {
-  kicker: "Now building",
-  headline: "Building on Jev — a model that decides instead of chats",
-  deck:
-    "Jev is TypeSafe AI's first System One model: unstructured state in, typed and calibrated decisions out, in 70–500 ms. I'm building an application on top of it and studying the ideas underneath — what it takes for software to trust a model's confidence.",
-  studying: [
-    "Calibrated confidence",
-    "RL for Calibrated Decisions (RLCD)",
-    "Schema-guaranteed outputs",
-    "Classification & routing",
-    "Guardrailing",
-    "Latency-aware system design",
-  ],
-  stages: ["Research", "Prototype", "Evaluate", "Ship"],
-  stage: 1,
-  link: { label: "Read: Introducing Jev", href: "https://typesafe.ai/blog/introducing-system-one-models-and-jev" },
+  kicker: "Now exploring",
+  text: "These days I'm looking into Jev, TypeSafe AI's System One model.",
+  link: { label: "Read about Jev", href: "https://typesafe.ai/blog/introducing-system-one-models-and-jev" },
 };
 
 export const UPCOMING = {

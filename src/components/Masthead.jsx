@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PROFILE, STORIES } from "../data";
-import { setAmbient, setSound, useSound, play } from "../sound";
+import { setAmbient, setSound, useSound } from "../sound";
 import { ease } from "./ui";
 
 export const NAV = [
@@ -44,7 +44,7 @@ function SoundToggle() {
             initial={{ opacity: 0, width: 0 }}
             animate={{ opacity: 1, width: "auto" }}
             exit={{ opacity: 0, width: 0 }}
-            onClick={() => { setAmbient(!ambient); play("click"); }}
+            onClick={() => setAmbient(!ambient)}
             aria-pressed={ambient}
             title={ambient ? "Mute ambient music" : "Play ambient music"}
             className={`overflow-hidden whitespace-nowrap rounded-full border px-2.5 py-1 font-mono text-[11px] uppercase tracking-wider ${

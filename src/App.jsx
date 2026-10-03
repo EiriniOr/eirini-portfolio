@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, MotionConfig } from "framer-motion";
 import EmbedModal from "./EmbedModal";
-import NeuralField from "./components/NeuralField";
 import { TopBar, Wordmark } from "./components/Masthead";
 import FrontPage, { NowSection } from "./components/FrontPage";
 import Stories from "./components/Stories";
@@ -87,7 +86,7 @@ export default function Portfolio() {
   return (
     <MotionConfig reducedMotion="user">
       <div className="relative min-h-screen overflow-x-clip bg-[#07070c] text-slate-100">
-        <NeuralField />
+        <div className="page-glow pointer-events-none fixed inset-0 z-0" aria-hidden />
         <div className="grain pointer-events-none fixed inset-0 z-[1]" aria-hidden />
 
         <div className="relative z-10">

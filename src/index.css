@@ -23,6 +23,14 @@ body {
   border-radius: 6px;
 }
 
+/* ── Static background glow ────────────────────────────────── */
+.page-glow {
+  background:
+    radial-gradient(60% 45% at 85% 0%, rgba(124, 58, 237, 0.14), transparent 70%),
+    radial-gradient(50% 40% at 0% 30%, rgba(34, 211, 238, 0.08), transparent 70%),
+    radial-gradient(60% 50% at 50% 110%, rgba(34, 211, 238, 0.06), transparent 70%);
+}
+
 /* ── Film grain ─────────────────────────────────────────────── */
 .grain {
   opacity: 0.07;

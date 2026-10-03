@@ -1,6 +1,5 @@
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { MEDIA, STORIES } from "../data";
-import { play } from "../sound";
 import { Cover, Kicker, MediaTags, SectionHead, ease } from "./ui";
 
 const BADGE = {
@@ -122,7 +121,7 @@ function Archive({ onOpen, filter, setFilter }) {
               key={k}
               role="tab"
               aria-selected={media === k}
-              onClick={() => { setFilter({ ...filter, media: k }); play("click"); }}
+              onClick={() => setFilter({ ...filter, media: k })}
               className={chip(media === k)}
             >
               {media === k && <motion.span layoutId="filter-pill" className="absolute inset-0 rounded-full bg-white" transition={{ type: "spring", bounce: 0.2, duration: 0.5 }} />}
@@ -136,7 +135,7 @@ function Archive({ onOpen, filter, setFilter }) {
           {CATEGORIES.map((c) => (
             <button
               key={c}
-              onClick={() => { setFilter({ ...filter, category: c }); play("click"); }}
+              onClick={() => setFilter({ ...filter, category: c })}
               className={`relative pb-1 font-mono text-[11px] uppercase tracking-wider transition-colors ${category === c ? "text-white" : "text-slate-500 hover:text-slate-300"}`}
             >
               {c}

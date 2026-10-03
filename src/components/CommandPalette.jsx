@@ -15,7 +15,7 @@ export default function CommandPalette({ onClose, onOpen, setFilter, replayIntro
 
   const items = useMemo(() => {
     const actions = [
-      { group: "Jump to", label: "Now — building on Jev", run: () => go("now") },
+      { group: "Jump to", label: "Now — exploring Jev", run: () => go("now") },
       { group: "Jump to", label: "Coming up — Karolinska", run: () => go("coming-up") },
       { group: "Jump to", label: "▶ Watch my story (90 s)", run: () => go("watch") },
       { group: "Jump to", label: "Featured projects", run: () => go("featured") },
@@ -62,7 +62,6 @@ export default function CommandPalette({ onClose, onOpen, setFilter, replayIntro
 
   function run(it) {
     if (!it) return;
-    play("click");
     onClose();
     setTimeout(it.run, 60);
   }

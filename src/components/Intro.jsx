@@ -9,7 +9,7 @@ const today = new Date().toLocaleDateString("en-GB", { day: "2-digit", month: "s
 const LINES = [
   `portfolio · ${today}`,
   `loading ${STORIES.length} projects`,
-  "wiring neural field",
+  "tuning the ambient sound",
   "eirini ornithopoulou · data scientist",
 ];
 

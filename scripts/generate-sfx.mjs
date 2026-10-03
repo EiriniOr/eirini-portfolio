@@ -16,9 +16,7 @@ const SOUNDS = {
   "flow-1": { text: "soft whoosh of energy flowing past, smooth airy sweep, gentle and warm, no crackle, no static", duration_seconds: 0.6 },
   "flow-2": { text: "short soft synth swish gliding left to right, smooth motion, warm, no static", duration_seconds: 0.6 },
   "flow-3": { text: "gentle rising energy swoosh, a soft pulse travelling past, smooth, no crackle", duration_seconds: 0.6 },
-  "laser-1": { text: "high-pitched clean sci-fi laser pew, bright and short, pure synth tone, not robotic, no voice", duration_seconds: 0.5 },
-  "laser-2": { text: "thocky rounded laser blip, punchy low pew with a soft thock attack, short, pure synth, not robotic, no voice", duration_seconds: 0.5 },
-  "laser-3": { text: "high crystal laser ping with a quick pitch drop, sparkly and clean, pure synth, not robotic, no voice", duration_seconds: 0.6 },
+  hover: { text: "very soft subtle UI hover tick, airy glassy blip, short and gentle, quiet", duration_seconds: 0.5 },
   palette: { text: "soft digital pop, UI menu opening, subtle bubbly click", duration_seconds: 0.5 },
   ambient: {
     text: "smooth slowly moving synth drone with gentle pulsing motion and soft shimmering sweeps, warm and flowing, no static, no crackle, no melody, seamless loop",

@@ -125,7 +125,6 @@ export function Briefs() {
           href={PROFILE.links.publications}
           target="_blank"
           rel="noreferrer"
-          onClick={() => play("click")}
           className="story group flex flex-col justify-between rounded-2xl border border-white/10 bg-gradient-to-br from-violet-500/15 to-transparent p-5"
         >
           <div>
@@ -149,7 +148,7 @@ export function Contact() {
           Hiring for data science or product? <em className="text-cyan-200">Let's talk.</em>
         </h2>
         <div className="mt-6 flex flex-wrap gap-3">
-          <a href={`mailto:${PROFILE.email}`} onClick={() => play("click")} className="btn-solid bg-white text-black hover:bg-slate-200">
+          <a href={`mailto:${PROFILE.email}`} className="btn-solid bg-white text-black hover:bg-slate-200">
             ✉ {PROFILE.email}
           </a>
           <button
@@ -163,10 +162,10 @@ export function Contact() {
           >
             {copied ? "Copied ✓" : "Copy"}
           </button>
-          <a href={PROFILE.links.linkedin} target="_blank" rel="noreferrer" onClick={() => play("click")} className="btn-ghost">
+          <a href={PROFILE.links.linkedin} target="_blank" rel="noreferrer" className="btn-ghost">
             LinkedIn ↗
           </a>
-          <a href={PROFILE.links.github} target="_blank" rel="noreferrer" onClick={() => play("click")} className="btn-ghost">
+          <a href={PROFILE.links.github} target="_blank" rel="noreferrer" className="btn-ghost">
             GitHub ↗
           </a>
         </div>

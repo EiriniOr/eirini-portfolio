@@ -7,20 +7,15 @@ const SFX = {
   open: 0.18,
   close: 0.18,
   boot: 0.3,
-  "laser-1": 0.35,
-  "laser-2": 0.2,
-  "laser-3": 0.14,
+  hover: 0.12,
   palette: 0.28,
 };
-// Background-network sounds get a darker filter and a slow fade-in so they sit under the page.
-const SOFT = new Set(["laser-1", "laser-2", "laser-3"]);
 const AMBIENT_GAIN = 0.09;
 const STORE_KEY = "eo-sound";
 
 let ctx = null;
 let master = null;
 let sfxBus = null;
-let softBus = null;
 let ambientGain = null;
 let ambientSrc = null;
 const buffers = {};
@@ -67,8 +62,6 @@ function ensureContext() {
     };
     sfxBus = lowpass(3200);
     sfxBus.connect(master);
-    softBus = lowpass(4000);
-    softBus.connect(master);
     ambientGain = ctx.createGain();
     ambientGain.gain.value = 0;
     const ambientFilter = lowpass(1400);
@@ -124,18 +117,17 @@ export function play(name, { rate = 1, gain = 1, pan = 0 } = {}) {
   const src = ctx.createBufferSource();
   src.buffer = buffers[name];
   src.playbackRate.value = rate;
-  const soft = SOFT.has(name);
   const g = ctx.createGain();
   const t = ctx.currentTime;
   g.gain.setValueAtTime(0, t);
-  g.gain.linearRampToValueAtTime((SFX[name] ?? 0.3) * gain, t + (soft ? 0.12 : 0.02));
+  g.gain.linearRampToValueAtTime((SFX[name] ?? 0.3) * gain, t + 0.02);
   let node = src.connect(g);
   if (pan && ctx.createStereoPanner) {
     const p = ctx.createStereoPanner();
     p.pan.value = Math.max(-1, Math.min(1, pan));
     node = node.connect(p);
   }
-  node.connect(soft ? softBus : sfxBus);
+  node.connect(sfxBus);
   src.start();
 }
 
@@ -189,6 +181,29 @@ if (typeof window !== "undefined") {
   for (const type of ["play", "playing", "pause", "ended", "emptied", "volumechange"]) {
     document.addEventListener(type, track, true);
   }
+
+  // Every option (link, button, tab) sounds on hover and click. Mouse only for hover,
+  // so touch taps don't double up; elements with data-nosfx opt out.
+  const OPTION = "a[href], button, [role=tab], [role=button]";
+  let hovered = null;
+  let lastHover = 0;
+  document.addEventListener("pointerover", (e) => {
+    if (e.pointerType !== "mouse") return;
+    const el = e.target.closest?.(OPTION);
+    if (!el || el === hovered || el.closest("[data-nosfx]")) {
+      if (!el) hovered = null;
+      return;
+    }
+    hovered = el;
+    const now = performance.now();
+    if (now - lastHover < 70) return;
+    lastHover = now;
+    play("hover");
+  });
+  document.addEventListener("click", (e) => {
+    const el = e.target.closest?.(OPTION);
+    if (el && !el.closest("[data-nosfx]")) play("click");
+  }, true);
   document.addEventListener("visibilitychange", () => {
     if (!ctx) return;
     if (document.hidden) ctx.suspend();

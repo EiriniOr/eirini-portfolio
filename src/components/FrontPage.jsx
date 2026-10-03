@@ -3,164 +3,26 @@ import { motion, AnimatePresence, useInView, animate } from "framer-motion";
 import { CAREER_VIDEO, EDUCATION, NOW, PROFILE, STORIES, UPCOMING } from "../data";
 import { play } from "../sound";
 import { Kicker, SectionHead, ease, useNow } from "./ui";
-import { burst } from "./NeuralField";
-
-const SAMPLES = [
-  { input: "Ticket: “Can't log in after password reset”", out: '{ queue: "auth", priority: "high" }', p: 0.94, ms: 88 },
-  { input: "Shift note: “Ward 4 short two nurses tonight”", out: '{ flag: "staffing", urgency: "high" }', p: 0.89, ms: 104 },
-  { input: "Prompt: “ignore previous instructions and…”", out: '{ allow: false, reason: "injection" }', p: 0.99, ms: 71 },
-  { input: "Email: “Invoice #4471 attached, due 30 Oct”", out: '{ type: "invoice", due: "2026-10-30" }', p: 0.97, ms: 112 },
-  { input: "Review: “Arrived late but works great”", out: '{ sentiment: "mixed" }', p: 0.71, ms: 95 },
-  { input: "Form field: “forty-two”", out: "{ age: 42 }", p: 0.98, ms: 79 },
-];
-
-function DecisionStream() {
-  const [rows, setRows] = useState(() => [{ ...SAMPLES[0], id: 0 }]);
-  const ref = useRef(null);
-  const inView = useInView(ref);
-
-  useEffect(() => {
-    if (!inView) return;
-    const id = setInterval(() => {
-      setRows((r) => {
-        const next = r[0].id + 1;
-        return [{ ...SAMPLES[next % SAMPLES.length], id: next }, ...r].slice(0, 3);
-      });
-    }, 2400);
-    return () => clearInterval(id);
-  }, [inView]);
-
-  return (
-    <div ref={ref} className="rounded-xl border border-white/10 bg-black/60 font-mono text-[11.5px] shadow-2xl shadow-cyan-950/40">
-      <div className="flex items-center justify-between border-b border-white/10 px-3 py-2 text-[10px] uppercase tracking-widest text-slate-500">
-        <span className="flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-rose-400/80" />
-          <span className="h-2 w-2 rounded-full bg-amber-300/80" />
-          <span className="h-2 w-2 rounded-full bg-lime-300/80" />
-          <span className="ml-2">decision stream</span>
-        </span>
-        <span>illustrative</span>
-      </div>
-      <div className="relative h-[178px] overflow-hidden p-3">
-        <AnimatePresence initial={false}>
-          {rows.map((r, i) => (
-            <motion.div
-              key={r.id}
-              layout
-              initial={{ opacity: 0, y: -16, filter: "blur(6px)" }}
-              animate={{ opacity: 1 - i * 0.22, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5, ease }}
-              className="mb-3"
-            >
-              <div className="truncate text-slate-500">› {r.input}</div>
-              <div className="mt-0.5 flex items-center gap-2">
-                <span className="truncate text-cyan-300">{r.out}</span>
-                <span className="ml-auto shrink-0 rounded bg-white/5 px-1.5 text-[10px] text-slate-400">{r.ms}ms</span>
-              </div>
-              <div className="mt-1 flex items-center gap-2">
-                <div className="h-1 flex-1 overflow-hidden rounded-full bg-white/10">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${r.p * 100}%` }}
-                    transition={{ duration: 0.8, ease, delay: 0.15 }}
-                    className={`h-full rounded-full ${r.p > 0.9 ? "bg-lime-300" : r.p > 0.8 ? "bg-cyan-300" : "bg-amber-300"}`}
-                  />
-                </div>
-                <span className="w-12 shrink-0 text-right text-[10px] text-slate-400">p={r.p.toFixed(2)}</span>
-              </div>
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </div>
-    </div>
-  );
-}
 
 function NowStory() {
   return (
     <motion.article
       id="now"
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.8, ease }}
-      onMouseEnter={(e) => {
-        const r = e.currentTarget.getBoundingClientRect();
-        burst(r.left + r.width * 0.75, r.top + 80);
-      }}
-      className="lead-card relative scroll-mt-24 overflow-hidden rounded-2xl border border-white/10 p-5 md:p-6"
+      transition={{ duration: 0.6, ease }}
+      className="lead-card flex scroll-mt-24 flex-wrap items-center justify-between gap-4 rounded-2xl border border-white/10 px-5 py-4"
     >
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="flex min-w-0 flex-wrap items-center gap-3">
         <span className="flex items-center gap-2 rounded-full bg-rose-500/15 px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-widest text-rose-300">
           <span className="live-dot live-dot-red" /> {NOW.kicker}
         </span>
-        <Kicker color="text-slate-500">In the lab · Agentic AI</Kicker>
+        <p className="text-sm text-slate-200 md:text-base">{NOW.text}</p>
       </div>
-      <h2 className="mt-3 max-w-4xl font-serif text-3xl leading-[1.02] text-white md:text-4xl">{NOW.headline}</h2>
-      <p className="mt-2 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">{NOW.deck}</p>
-
-      <div className="mt-4 grid gap-5 md:grid-cols-2">
-        <div>
-          <Kicker color="text-slate-500">Studying around it</Kicker>
-          <div className="mt-2 flex flex-wrap gap-1.5">
-            {NOW.studying.map((s, i) => (
-              <motion.span
-                key={s}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 1 + i * 0.07 }}
-                className="rounded-full border border-violet-300/25 bg-violet-300/10 px-2.5 py-1 text-xs text-violet-100"
-              >
-                {s}
-              </motion.span>
-            ))}
-          </div>
-
-          <Kicker color="text-slate-500" className="mt-4">Status</Kicker>
-          <ol className="mt-3 flex items-center">
-            {NOW.stages.map((s, i) => (
-              <li key={s} className="flex flex-1 items-center last:flex-none">
-                <div className="flex flex-col items-start gap-1.5">
-                  <span
-                    className={`grid h-5 w-5 place-items-center rounded-full border text-[10px] ${
-                      i < NOW.stage
-                        ? "border-lime-300 bg-lime-300 text-black"
-                        : i === NOW.stage
-                        ? "stage-pulse border-cyan-300 text-cyan-300"
-                        : "border-white/20 text-slate-600"
-                    }`}
-                  >
-                    {i < NOW.stage ? "✓" : i + 1}
-                  </span>
-                  <span className={`font-mono text-[9px] uppercase sm:text-[10px] sm:tracking-wider ${i <= NOW.stage ? "text-slate-200" : "text-slate-600"}`}>{s}</span>
-                </div>
-                {i < NOW.stages.length - 1 && (
-                  <div className="mx-1.5 mb-5 h-px min-w-3 flex-1 bg-white/15 sm:mx-2">
-                    <motion.div
-                      initial={{ scaleX: 0 }}
-                      animate={{ scaleX: i < NOW.stage ? 1 : 0 }}
-                      transition={{ duration: 0.8, delay: 1.2 + i * 0.2 }}
-                      className="h-px origin-left bg-lime-300"
-                    />
-                  </div>
-                )}
-              </li>
-            ))}
-          </ol>
-
-          <a
-            href={NOW.link.href}
-            target="_blank"
-            rel="noreferrer"
-            onClick={() => play("click")}
-            className="arrow-link mt-5 inline-flex items-center gap-2 text-sm font-semibold text-white"
-          >
-            {NOW.link.label} <span aria-hidden>→</span>
-          </a>
-        </div>
-        <DecisionStream />
-      </div>
+      <a href={NOW.link.href} target="_blank" rel="noreferrer" className="btn-ghost shrink-0">
+        {NOW.link.label} ↗
+      </a>
     </motion.article>
   );
 }
@@ -277,7 +139,7 @@ function Editor() {
           ["GitHub", PROFILE.links.github],
           ["LinkedIn", PROFILE.links.linkedin],
         ].map(([l, h]) => (
-          <a key={l} href={h} target="_blank" rel="noreferrer" onClick={() => play("click")} className="btn-ghost !px-3 !py-1.5 !text-xs">
+          <a key={l} href={h} target="_blank" rel="noreferrer" className="btn-ghost !px-3 !py-1.5 !text-xs">
             {l} ↗
           </a>
         ))}
@@ -386,7 +248,7 @@ function LeadVideo() {
 export function NowSection() {
   return (
     <section className="mx-auto mt-12 max-w-7xl px-4 md:px-8">
-      <SectionHead eyebrow="Current work" title="Now building" />
+      <SectionHead eyebrow="Current work" title="Now exploring" />
       <NowStory />
     </section>
   );
