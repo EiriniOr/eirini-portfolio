@@ -8,6 +8,7 @@ export default {
         display: ["'Space Grotesk'", "Inter", "sans-serif"],
         serif: ["'Instrument Serif'", "Georgia", "serif"],
         mono: ["'JetBrains Mono'", "ui-monospace", "monospace"],
+        script: ["'Dancing Script'", "cursive"],
       },
     },
   },

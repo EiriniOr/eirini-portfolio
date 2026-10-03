@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PROFILE, STORIES } from "../data";
 import { setAmbient, setSound, useSound, play } from "../sound";
-import { ease, useNow } from "./ui";
+import { ease } from "./ui";
 
 export const NAV = [
   ["now", "Now"],
@@ -60,7 +60,6 @@ function SoundToggle() {
 }
 
 export function TopBar({ onSearch }) {
-  const now = useNow(10000);
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const on = () => setScrolled(window.scrollY > 260);
@@ -68,8 +67,6 @@ export function TopBar({ onSearch }) {
     window.addEventListener("scroll", on, { passive: true });
     return () => window.removeEventListener("scroll", on);
   }, []);
-  const d = new Date(now);
-  const time = d.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Stockholm" });
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-[#07070c]/75 backdrop-blur-xl">
@@ -89,11 +86,6 @@ export function TopBar({ onSearch }) {
               </motion.a>
             )}
           </AnimatePresence>
-          <div className="hidden items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-slate-400 sm:flex">
-            <span>Stockholm</span>
-            <span className="text-slate-600">·</span>
-            <span className="tabular-nums text-slate-300">{time}</span>
-          </div>
         </div>
 
         <nav className={`hidden items-center gap-5 text-sm lg:flex transition-opacity duration-300 ${scrolled ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
@@ -129,13 +121,12 @@ export function Wordmark({ ready }) {
   const liveCount = STORIES.filter((s) => s.media.includes("live")).length;
   return (
     <section id="top" className="mx-auto max-w-7xl px-4 pt-6 md:px-8 md:pt-8">
-      <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-500">
-        <span className="rounded-full border border-cyan-300/40 bg-cyan-300/10 px-3 py-1 text-[12px] font-semibold tracking-[0.22em] text-cyan-200">Portfolio · Data Science &amp; AI</span>
+      <div className="flex flex-wrap items-end justify-end gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-500">
         <span>
           {STORIES.length} projects · {liveCount} live demos
         </span>
       </div>
-      <h1 aria-label={NAME} className="mt-2 font-serif text-[12vw] leading-[0.9] tracking-[-0.02em] text-white md:text-[6.6vw] xl:text-[92px]">
+      <h1 aria-label={`${NAME}, my portfolio`} className="mt-2 font-serif text-[12vw] leading-[0.9] tracking-[-0.02em] text-white md:text-[6.6vw] xl:text-[92px]">
         {NAME.split("").map((ch, i) => (
           <motion.span
             key={i}
@@ -155,6 +146,15 @@ export function Wordmark({ ready }) {
           transition={{ delay: 0.9 }}
         >
           PH.D.
+        </motion.span>
+        <motion.span
+          aria-hidden
+          className="ml-4 inline-block -rotate-6 whitespace-nowrap align-middle font-script text-[0.55em] leading-none md:text-[0.5em] text-cyan-200 md:ml-6"
+          initial={{ clipPath: "inset(0 100% 0 0)", opacity: 0 }}
+          animate={ready ? { clipPath: "inset(0 0% 0 0)", opacity: 1 } : {}}
+          transition={{ duration: 1.1, ease: "easeInOut", delay: 1 }}
+        >
+          My portfolio
         </motion.span>
       </h1>
       <motion.div
