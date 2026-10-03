@@ -6,7 +6,7 @@ import { Kicker, SectionHead, ease } from "./ui";
 
 export function Stack() {
   return (
-    <section className="mx-auto mt-20 max-w-7xl px-4 md:px-8">
+    <section className="mx-auto mt-12 max-w-7xl px-4 md:px-8">
       <SectionHead id="stack" eyebrow="Tools of the trade" title="The Stack" />
       <motion.div
         initial={{ opacity: 0, y: 24 }}
@@ -23,11 +23,11 @@ export function Stack() {
         </div>
         <div className="grid gap-px bg-white/10 md:grid-cols-2">
           {SKILL_GROUPS.map((g, gi) => (
-            <div key={g.label} className="bg-[#08090f] p-5">
+            <div key={g.label} className="bg-[#08090f] p-4">
               <div className="text-xs text-slate-500">
                 <span className="text-violet-300">"{g.label}"</span>: [
               </div>
-              <div className="mt-3 flex flex-wrap gap-1.5 pl-3">
+              <div className="mt-2 flex flex-wrap gap-1.5 pl-3">
                 {g.items.map((s, i) => (
                   <motion.span
                     key={s}
@@ -41,7 +41,7 @@ export function Stack() {
                   </motion.span>
                 ))}
               </div>
-              <div className="mt-3 text-xs text-slate-500">]</div>
+              <div className="mt-2 text-xs text-slate-500">]</div>
             </div>
           ))}
         </div>
@@ -64,9 +64,9 @@ export function Education() {
   for (let y = min; y <= max; y += 3) ticks.push(y);
 
   return (
-    <section className="mx-auto mt-20 max-w-7xl px-4 md:px-8">
+    <section className="mx-auto mt-12 max-w-7xl px-4 md:px-8">
       <SectionHead id="education" eyebrow="Timeline" title="Education" />
-      <div className="rounded-2xl border border-white/10 bg-black/30 p-5 backdrop-blur md:p-8">
+      <div className="rounded-2xl border border-white/10 bg-black/30 p-4 backdrop-blur md:p-6">
         <div className="relative ml-0 hidden h-5 md:ml-[38%] md:block">
           {ticks.map((y) => (
             <span key={y} className="absolute -translate-x-1/2 font-mono text-[10px] text-slate-600" style={{ left: `${pos(y)}%` }}>
@@ -74,7 +74,7 @@ export function Education() {
             </span>
           ))}
         </div>
-        <ol className="space-y-5">
+        <ol className="space-y-3">
           {rows.map((e, i) => (
             <li key={e.degree} className="grid items-center gap-3 md:grid-cols-[38%_1fr]">
               <div className="flex items-center gap-3">
@@ -104,12 +104,12 @@ export function Education() {
 
 export function Briefs() {
   return (
-    <section className="mx-auto mt-20 max-w-7xl px-4 md:px-8">
+    <section className="mx-auto mt-12 max-w-7xl px-4 md:px-8">
       <SectionHead eyebrow="In brief" title="Credentials" />
-      <div className="grid gap-5 md:grid-cols-3">
-        <div className="rounded-2xl border border-white/10 bg-black/30 p-6 backdrop-blur md:col-span-2">
+      <div className="grid gap-4 md:grid-cols-3">
+        <div className="rounded-2xl border border-white/10 bg-black/30 p-5 backdrop-blur md:col-span-2">
           <Kicker color="text-slate-500">Certifications</Kicker>
-          <ul className="mt-4 grid gap-x-6 gap-y-3 sm:grid-cols-2">
+          <ul className="mt-3 grid gap-x-6 gap-y-2 sm:grid-cols-2">
             {CERTS.map((c) => {
               const m = c.match(/^(.*)\((.*)\)$/);
               return (
@@ -126,11 +126,11 @@ export function Briefs() {
           target="_blank"
           rel="noreferrer"
           onClick={() => play("click")}
-          className="story group flex flex-col justify-between rounded-2xl border border-white/10 bg-gradient-to-br from-violet-500/15 to-transparent p-6"
+          className="story group flex flex-col justify-between rounded-2xl border border-white/10 bg-gradient-to-br from-violet-500/15 to-transparent p-5"
         >
           <div>
             <Kicker color="text-violet-300">Publications & writing</Kicker>
-            <p className="mt-4 font-serif text-3xl leading-tight text-white">Peer-reviewed research from six years of PhD work at KTH.</p>
+            <p className="mt-3 font-serif text-2xl leading-tight text-white">Peer-reviewed research from six years of PhD work at KTH.</p>
           </div>
           <span className="arrow-link mt-6 text-sm font-semibold text-white">Read on ResearchGate ↗</span>
         </a>
@@ -142,13 +142,13 @@ export function Briefs() {
 export function Contact() {
   const [copied, setCopied] = useState(false);
   return (
-    <section className="mx-auto mt-24 max-w-7xl px-4 md:px-8">
-      <div id="contact" className="scroll-mt-24 relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-cyan-400/10 via-[#0b0c14] to-violet-500/15 p-8 md:p-14">
+    <section className="mx-auto mt-14 max-w-7xl px-4 md:px-8">
+      <div id="contact" className="scroll-mt-24 relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-cyan-400/10 via-[#0b0c14] to-violet-500/15 p-6 md:p-10">
         <Kicker color="text-cyan-300">Get in touch</Kicker>
-        <h2 className="mt-4 max-w-3xl font-serif text-5xl leading-[0.95] text-white md:text-7xl">
+        <h2 className="mt-3 max-w-3xl font-serif text-4xl leading-[0.95] text-white md:text-5xl">
           Hiring for data science or product? <em className="text-cyan-200">Let's talk.</em>
         </h2>
-        <div className="mt-8 flex flex-wrap gap-3">
+        <div className="mt-6 flex flex-wrap gap-3">
           <a href={`mailto:${PROFILE.email}`} onClick={() => play("click")} className="btn-solid bg-white text-black hover:bg-slate-200">
             ✉ {PROFILE.email}
           </a>
@@ -177,7 +177,7 @@ export function Contact() {
 
 export function Footer() {
   return (
-    <footer className="mx-auto mt-16 max-w-7xl px-4 pb-10 md:px-8">
+    <footer className="mx-auto mt-10 max-w-7xl px-4 pb-8 md:px-8">
       <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-6 font-mono text-[11px] uppercase tracking-wider text-slate-600">
         <span>© {new Date().getFullYear()} {PROFILE.name}</span>
         <span>React · Framer Motion · Sound by ElevenLabs · Press ⌘K</span>

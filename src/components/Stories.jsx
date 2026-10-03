@@ -30,20 +30,20 @@ function reveal(i = 0) {
 function Latest({ onOpen }) {
   const items = STORIES.filter((s) => ["new", "updated", "inprogress"].includes(s.badge));
   return (
-    <section className="mx-auto mt-16 max-w-7xl px-4 md:px-8">
+    <section className="mx-auto mt-12 max-w-7xl px-4 md:px-8">
       <SectionHead eyebrow="Recently shipped" title="Latest projects" />
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
         {items.map((s, i) => (
           <motion.button key={s.slug} {...reveal(i)} onClick={() => onOpen(s.slug, "latest")} className="story group text-left">
             <motion.div layoutId={`cover-latest-${s.slug}`} className="overflow-hidden rounded-xl">
-              <Cover p={s} className="aspect-[16/10] rounded-xl" />
+              <Cover p={s} className="aspect-[16/8] rounded-xl" />
             </motion.div>
-            <div className="mt-3 flex items-center gap-2">
+            <div className="mt-2 flex items-center gap-2">
               <Badge b={s.badge} />
               <Kicker color="text-slate-500" className="truncate">{shortKind(s.kind)}</Kicker>
             </div>
-            <h3 className="story-title mt-2 font-display text-xl font-bold leading-tight text-white">{s.title}</h3>
-            <MediaTags media={s.media} size="xs" className="mt-3" />
+            <h3 className="story-title mt-1.5 font-display text-base font-bold leading-tight text-white">{s.title}</h3>
+            <MediaTags media={s.media} size="xs" className="mt-2" />
           </motion.button>
         ))}
       </div>
@@ -54,9 +54,9 @@ function Latest({ onOpen }) {
 function TopStories({ onOpen }) {
   const items = STORIES.filter((s) => s.badge === "pinned");
   return (
-    <section className="mx-auto mt-20 max-w-7xl px-4 md:px-8">
+    <section className="mx-auto mt-12 max-w-7xl px-4 md:px-8">
       <SectionHead id="featured" eyebrow="Highlights" title="Featured projects" />
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-4 lg:grid-cols-2">
         {items.map((s, i) => (
           <motion.button
             key={s.slug}
@@ -65,16 +65,16 @@ function TopStories({ onOpen }) {
             className="story feature group relative overflow-hidden rounded-2xl border border-white/10 text-left"
           >
             <motion.div layoutId={`cover-top-${s.slug}`} className="overflow-hidden">
-              <Cover p={s} className="aspect-[16/8]" />
+              <Cover p={s} className="aspect-[16/5]" />
             </motion.div>
-            <div className="relative p-6 md:p-8">
+            <div className="relative p-5"> 
               <div className="flex flex-wrap items-center gap-2">
                 <Badge b="pinned" />
                 <Kicker color="text-cyan-300">{s.kind} · {s.year}</Kicker>
               </div>
-              <h3 className="story-title mt-3 font-display text-3xl font-bold leading-[1.05] tracking-tight text-white md:text-4xl">{s.title}</h3>
-              <p className="mt-3 line-clamp-3 text-slate-400">{s.impact}</p>
-              <div className="mt-5 flex items-center justify-between gap-3">
+              <h3 className="story-title mt-2 font-display text-xl font-bold leading-[1.1] tracking-tight text-white md:text-2xl">{s.title}</h3>
+              <p className="mt-2 line-clamp-2 text-sm text-slate-400">{s.impact}</p>
+              <div className="mt-3 flex items-center justify-between gap-3">
                 <MediaTags media={s.media} />
                 <span className="arrow-link shrink-0 text-sm font-semibold text-white">View project →</span>
               </div>
@@ -107,7 +107,7 @@ function Archive({ onOpen, filter, setFilter }) {
     `relative rounded-full px-3.5 py-1.5 text-sm transition-colors ${active ? "text-black" : "text-slate-300 hover:text-white"}`;
 
   return (
-    <section className="mx-auto mt-20 max-w-7xl px-4 md:px-8">
+    <section className="mx-auto mt-12 max-w-7xl px-4 md:px-8">
       <SectionHead
         id="archive"
         eyebrow="Filter by what you can open"
@@ -146,7 +146,7 @@ function Archive({ onOpen, filter, setFilter }) {
         </div>
       </LayoutGroup>
 
-      <motion.ol layout className="mt-6 divide-y divide-white/10 border-y border-white/10">
+      <motion.ol layout className="mt-4 grid border-t border-white/10 lg:grid-cols-2 lg:gap-x-8">
         <AnimatePresence mode="popLayout" initial={false}>
           {items.map((s, i) => (
             <motion.li
@@ -156,24 +156,22 @@ function Archive({ onOpen, filter, setFilter }) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.98 }}
               transition={{ duration: 0.35, ease }}
+              className="border-b border-white/10"
             >
-              <button onClick={() => onOpen(s.slug, "archive")} className="story group grid w-full grid-cols-[auto_1fr] items-center gap-4 py-4 text-left md:grid-cols-[3rem_9rem_1fr_auto] md:gap-6">
-                <span className="hidden font-mono text-sm text-slate-600 md:block">{String(i + 1).padStart(2, "0")}</span>
-                <motion.div layoutId={`cover-archive-${s.slug}`} className="w-24 overflow-hidden rounded-lg md:w-36">
-                  <Cover p={s} className="aspect-[16/10] rounded-lg" hoverPlay={false} />
+              <button onClick={() => onOpen(s.slug, "archive")} className="story group grid w-full grid-cols-[auto_1fr_auto] items-center gap-3 py-2.5 text-left md:grid-cols-[1.75rem_5rem_1fr_auto] md:gap-4">
+                <span className="hidden font-mono text-xs text-slate-600 md:block">{String(i + 1).padStart(2, "0")}</span>
+                <motion.div layoutId={`cover-archive-${s.slug}`} className="w-16 overflow-hidden rounded-md md:w-20">
+                  <Cover p={s} className="aspect-[16/10] rounded-md" hoverPlay={false} />
                 </motion.div>
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-2">
                     {s.badge && s.badge !== "pinned" && <Badge b={s.badge} />}
                     <Kicker color="text-slate-500" className="truncate">{shortKind(s.kind)} · {s.year}</Kicker>
                   </div>
-                  <h3 className="story-title mt-1 font-display text-lg font-bold leading-snug text-white md:text-xl">{s.title}</h3>
-                  <MediaTags media={s.media} size="xs" className="mt-2 md:hidden" />
+                  <h3 className="story-title mt-0.5 font-display text-[15px] font-bold leading-snug text-white">{s.title}</h3>
+                  <MediaTags media={s.media} size="xs" className="mt-1.5" />
                 </div>
-                <div className="hidden items-center gap-4 md:flex">
-                  <MediaTags media={s.media} className="justify-end" />
-                  <span className="text-xl text-slate-600 transition-all duration-300 group-hover:translate-x-1 group-hover:text-white">→</span>
-                </div>
+                <span className="text-lg text-slate-600 transition-all duration-300 group-hover:translate-x-1 group-hover:text-white">→</span>
               </button>
             </motion.li>
           ))}

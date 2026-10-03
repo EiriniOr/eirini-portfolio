@@ -24,7 +24,7 @@ function DecisionStream() {
     const id = setInterval(() => {
       setRows((r) => {
         const next = r[0].id + 1;
-        return [{ ...SAMPLES[next % SAMPLES.length], id: next }, ...r].slice(0, 4);
+        return [{ ...SAMPLES[next % SAMPLES.length], id: next }, ...r].slice(0, 3);
       });
     }, 2400);
     return () => clearInterval(id);
@@ -41,7 +41,7 @@ function DecisionStream() {
         </span>
         <span>illustrative</span>
       </div>
-      <div className="relative h-[232px] overflow-hidden p-3">
+      <div className="relative h-[178px] overflow-hidden p-3">
         <AnimatePresence initial={false}>
           {rows.map((r, i) => (
             <motion.div
@@ -88,7 +88,7 @@ function NowStory() {
         const r = e.currentTarget.getBoundingClientRect();
         burst(r.left + r.width * 0.75, r.top + 80);
       }}
-      className="lead-card relative mt-5 scroll-mt-24 overflow-hidden rounded-2xl border border-white/10 p-6 md:p-8"
+      className="lead-card relative mt-4 scroll-mt-24 overflow-hidden rounded-2xl border border-white/10 p-5 md:p-6"
     >
       <div className="flex flex-wrap items-center gap-3">
         <span className="flex items-center gap-2 rounded-full bg-rose-500/15 px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-widest text-rose-300">
@@ -96,10 +96,10 @@ function NowStory() {
         </span>
         <Kicker color="text-slate-500">In the lab · Agentic AI</Kicker>
       </div>
-      <h2 className="mt-4 max-w-4xl font-serif text-4xl leading-[1.02] text-white md:text-5xl">{NOW.headline}</h2>
-      <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-300 md:text-lg">{NOW.deck}</p>
+      <h2 className="mt-3 max-w-4xl font-serif text-3xl leading-[1.02] text-white md:text-4xl">{NOW.headline}</h2>
+      <p className="mt-2 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">{NOW.deck}</p>
 
-      <div className="mt-6 grid gap-6 md:grid-cols-2">
+      <div className="mt-4 grid gap-5 md:grid-cols-2">
         <div>
           <Kicker color="text-slate-500">Studying around it</Kicker>
           <div className="mt-2 flex flex-wrap gap-1.5">
@@ -116,7 +116,7 @@ function NowStory() {
             ))}
           </div>
 
-          <Kicker color="text-slate-500" className="mt-6">Status</Kicker>
+          <Kicker color="text-slate-500" className="mt-4">Status</Kicker>
           <ol className="mt-3 flex items-center">
             {NOW.stages.map((s, i) => (
               <li key={s} className="flex flex-1 items-center last:flex-none">
@@ -153,7 +153,7 @@ function NowStory() {
             target="_blank"
             rel="noreferrer"
             onClick={() => play("click")}
-            className="arrow-link mt-7 inline-flex items-center gap-2 text-sm font-semibold text-white"
+            className="arrow-link mt-5 inline-flex items-center gap-2 text-sm font-semibold text-white"
           >
             {NOW.link.label} <span aria-hidden>→</span>
           </a>
@@ -169,7 +169,7 @@ const pad = (n) => String(n).padStart(2, "0");
 function Digit({ value, label }) {
   return (
     <div className="flex flex-col items-center">
-      <div className="relative h-12 w-14 overflow-hidden rounded-lg border border-white/10 bg-black/50 md:h-14 md:w-16">
+      <div className="relative h-11 w-12 overflow-hidden rounded-lg border border-white/10 bg-black/50 md:h-12 md:w-14">
         <AnimatePresence initial={false}>
           <motion.span
             key={value}
@@ -177,7 +177,7 @@ function Digit({ value, label }) {
             animate={{ y: 0 }}
             exit={{ y: "100%" }}
             transition={{ duration: 0.45, ease }}
-            className="absolute inset-0 grid place-items-center font-mono text-2xl font-bold tabular-nums text-white md:text-3xl"
+            className="absolute inset-0 grid place-items-center font-mono text-xl font-bold tabular-nums text-white md:text-2xl"
           >
             {value}
           </motion.span>
@@ -204,7 +204,7 @@ function Upcoming() {
       initial={{ opacity: 0, x: 24 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.9, ease, delay: 0.7 }}
-      className="relative scroll-mt-24 overflow-hidden rounded-2xl border border-lime-300/20 bg-gradient-to-br from-lime-300/[0.07] via-transparent to-transparent p-6"
+      className="relative scroll-mt-24 overflow-hidden rounded-2xl border border-lime-300/20 bg-gradient-to-br from-lime-300/[0.07] via-transparent to-transparent p-5"
     >
       <div className="flex flex-wrap items-center gap-2">
         <Kicker color="text-lime-300">
@@ -223,7 +223,7 @@ function Upcoming() {
       </p>
 
       {phase === "before" && (
-        <div className="mt-5 flex gap-2">
+        <div className="mt-4 flex gap-2">
           <Digit value={pad(Math.floor(left / 86400))} label="days" />
           <Digit value={pad(Math.floor((left % 86400) / 3600))} label="hrs" />
           <Digit value={pad(Math.floor((left % 3600) / 60))} label="min" />
@@ -242,7 +242,7 @@ function Upcoming() {
         </div>
       )}
 
-      <p className="mt-5 text-sm leading-relaxed text-slate-300">{UPCOMING.summary}</p>
+      <p className="mt-4 text-sm leading-relaxed text-slate-300">{UPCOMING.summary}</p>
       <p className="mt-2 text-xs text-slate-500">{UPCOMING.context}</p>
       <p className="mt-3 border-t border-white/10 pt-3 text-xs leading-relaxed text-slate-400">{UPCOMING.viaNote}</p>
     </motion.article>
@@ -256,14 +256,14 @@ function Editor() {
       initial={{ opacity: 0, x: 24 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.9, ease, delay: 0.85 }}
-      className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur"
+      className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur"
     >
       <Kicker color="text-slate-500">About Eirini</Kicker>
       <div className="mt-4 flex items-center gap-4">
         <img
           src="/photo/rena.jpg"
           alt="Eirini Ornithopoulou"
-          className="h-20 w-20 rounded-full object-cover ring-2 ring-white/15 transition duration-500 hover:ring-cyan-300/60"
+          className="h-16 w-16 rounded-full object-cover ring-2 ring-white/15 transition duration-500 hover:ring-cyan-300/60"
         />
         <div className="min-w-0">
           <div className="font-display text-lg font-bold text-white">{PROFILE.name}</div>
@@ -321,10 +321,10 @@ function Numbers() {
     [1, "hackathon won"],
   ];
   return (
-    <div className="mt-6 grid grid-cols-2 divide-white/10 rounded-2xl border border-white/10 bg-black/30 backdrop-blur sm:grid-cols-5 sm:divide-x">
+    <div className="mt-4 grid grid-cols-2 divide-white/10 rounded-2xl border border-white/10 bg-black/30 backdrop-blur sm:grid-cols-5 sm:divide-x">
       {stats.map(([n, l]) => (
-        <div key={l} className="px-5 py-4">
-          <div className="font-display text-3xl font-bold text-white md:text-4xl">
+        <div key={l} className="px-5 py-3">
+          <div className="font-display text-2xl font-bold text-white md:text-3xl">
             <Count to={n} />
           </div>
           <div className="mt-0.5 font-mono text-[10px] uppercase tracking-wider text-slate-500">{l}</div>
@@ -343,7 +343,7 @@ function LeadVideo() {
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.9, ease, delay: 0.5 }}
-      className="lead-card relative scroll-mt-24 overflow-hidden rounded-2xl border border-white/10 p-5 md:p-7 lg:col-span-8"
+      className="lead-card relative scroll-mt-24 overflow-hidden rounded-2xl border border-white/10 p-4 md:p-5 lg:col-span-8"
     >
       <div className="flex flex-wrap items-center gap-3">
         <span className="flex items-center gap-2 rounded-full bg-cyan-300/15 px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-widest text-cyan-200">
@@ -351,13 +351,13 @@ function LeadVideo() {
         </span>
         <Kicker color="text-slate-500">Intro video · 90 seconds · captions on</Kicker>
       </div>
-      <h2 className="mt-4 max-w-3xl font-serif text-4xl leading-[1.02] text-white md:text-6xl">
+      <h2 className="mt-3 max-w-3xl font-serif text-3xl leading-[1.02] text-white md:text-4xl">
         From Crete to Karolinska: <em className="text-cyan-200">my story</em> in 90 seconds
       </h2>
-      <p className="mt-3 max-w-2xl text-slate-300 md:text-lg">
+      <p className="mt-2 max-w-2xl text-sm text-slate-300 md:text-base">
         Materials science, lasers and a PhD in biotechnology, then machine learning, a hackathon win and a placement at Karolinska University Hospital.
       </p>
-      <div className="relative mt-5 overflow-hidden rounded-xl border border-white/10 bg-black">
+      <div className="relative mt-4 overflow-hidden rounded-xl border border-white/10 bg-black">
         <video
           ref={ref}
           controls={started}
@@ -391,10 +391,10 @@ function LeadVideo() {
 
 export default function FrontPage() {
   return (
-    <section className="mx-auto mt-8 max-w-7xl px-4 md:px-8">
-      <div className="grid gap-5 lg:grid-cols-12">
+    <section className="mx-auto mt-6 max-w-7xl px-4 md:px-8">
+      <div className="grid gap-4 lg:grid-cols-12">
         <LeadVideo />
-        <div className="flex flex-col gap-5 lg:col-span-4">
+        <div className="flex flex-col gap-4 lg:col-span-4">
           <Upcoming />
           <Editor />
         </div>

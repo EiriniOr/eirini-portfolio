@@ -128,14 +128,14 @@ const NAME = "Eirini Ornithopoulou";
 export function Wordmark({ ready }) {
   const liveCount = STORIES.filter((s) => s.media.includes("live")).length;
   return (
-    <section id="top" className="mx-auto max-w-7xl px-4 pt-8 md:px-8 md:pt-12">
+    <section id="top" className="mx-auto max-w-7xl px-4 pt-6 md:px-8 md:pt-8">
       <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-500">
         <span className="rounded-full border border-cyan-300/40 bg-cyan-300/10 px-3 py-1 text-[12px] font-semibold tracking-[0.22em] text-cyan-200">Portfolio · Data Science &amp; AI</span>
         <span>
           {STORIES.length} projects · {liveCount} live demos
         </span>
       </div>
-      <h1 aria-label={NAME} className="mt-2 font-serif text-[13.5vw] leading-[0.9] tracking-[-0.02em] text-white md:text-[9.2vw] xl:text-[132px]">
+      <h1 aria-label={NAME} className="mt-2 font-serif text-[12vw] leading-[0.9] tracking-[-0.02em] text-white md:text-[6.6vw] xl:text-[92px]">
         {NAME.split("").map((ch, i) => (
           <motion.span
             key={i}
@@ -161,7 +161,7 @@ export function Wordmark({ ready }) {
         initial={{ scaleX: 0 }}
         animate={ready ? { scaleX: 1 } : {}}
         transition={{ duration: 1.1, ease, delay: 0.4 }}
-        className="mt-4 h-[3px] origin-left bg-white"
+        className="mt-3 h-[2px] origin-left bg-white"
       />
       <motion.div
         initial={{ opacity: 0, y: 6 }}

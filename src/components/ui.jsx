@@ -43,7 +43,7 @@ export function Kicker({ children, color = "text-cyan-300", className = "" }) {
 
 export function SectionHead({ id, eyebrow, title, right }) {
   return (
-    <div id={id} className="scroll-mt-24 flex items-end justify-between gap-4 border-t-2 border-white/80 pt-3 mb-6">
+    <div id={id} className="scroll-mt-24 flex items-end justify-between gap-4 border-t-2 border-white/80 pt-2.5 mb-4">
       <div>
         {eyebrow && <Kicker color="text-slate-400">{eyebrow}</Kicker>}
         <motion.h2
@@ -51,7 +51,7 @@ export function SectionHead({ id, eyebrow, title, right }) {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6, ease }}
-          className="font-display text-3xl md:text-5xl font-bold tracking-tight text-white mt-1"
+          className="font-display text-2xl md:text-3xl font-bold tracking-tight text-white mt-1"
         >
           {title}
         </motion.h2>
