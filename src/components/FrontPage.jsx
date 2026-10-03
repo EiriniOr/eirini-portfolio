@@ -169,7 +169,7 @@ const pad = (n) => String(n).padStart(2, "0");
 function Digit({ value, label }) {
   return (
     <div className="flex flex-col items-center">
-      <div className="relative h-11 w-12 overflow-hidden rounded-lg border border-white/10 bg-black/50 md:h-12 md:w-14">
+      <div className="relative h-9 w-11 overflow-hidden rounded-md border border-white/10 bg-black/50">
         <AnimatePresence initial={false}>
           <motion.span
             key={value}
@@ -177,13 +177,13 @@ function Digit({ value, label }) {
             animate={{ y: 0 }}
             exit={{ y: "100%" }}
             transition={{ duration: 0.45, ease }}
-            className="absolute inset-0 grid place-items-center font-mono text-xl font-bold tabular-nums text-white md:text-2xl"
+            className="absolute inset-0 grid place-items-center font-mono text-lg font-bold tabular-nums text-white"
           >
             {value}
           </motion.span>
         </AnimatePresence>
       </div>
-      <span className="mt-1 font-mono text-[9px] uppercase tracking-widest text-slate-500">{label}</span>
+      <span className="mt-0.5 font-mono text-[9px] uppercase tracking-widest text-slate-500">{label}</span>
     </div>
   );
 }
@@ -204,7 +204,7 @@ function Upcoming() {
       initial={{ opacity: 0, x: 24 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.9, ease, delay: 0.7 }}
-      className="relative scroll-mt-24 overflow-hidden rounded-2xl border border-lime-300/20 bg-gradient-to-br from-lime-300/[0.07] via-transparent to-transparent p-5"
+      className="relative scroll-mt-24 overflow-hidden rounded-2xl border border-lime-300/20 bg-gradient-to-br from-lime-300/[0.07] via-transparent to-transparent p-4"
     >
       <div className="flex flex-wrap items-center gap-2">
         <Kicker color="text-lime-300">
@@ -214,16 +214,15 @@ function Upcoming() {
           Praktik via {UPCOMING.via}
         </span>
       </div>
-      <h3 className="mt-3 font-display text-2xl font-bold leading-tight text-white">
+      <h3 className="mt-2 font-display text-lg font-bold leading-snug text-white">
         {UPCOMING.role} praktik at {UPCOMING.org}
       </h3>
-      <p className="mt-1 text-sm text-slate-300">{UPCOMING.unit}</p>
-      <p className="mt-1 font-mono text-[11px] uppercase tracking-wider text-slate-500">
-        {fmt(start)} – {fmt(end)}
+      <p className="mt-0.5 text-xs text-slate-400">
+        {UPCOMING.unit} · <span className="font-mono">{fmt(start)} – {fmt(end)}</span>
       </p>
 
       {phase === "before" && (
-        <div className="mt-4 flex gap-2">
+        <div className="mt-3 flex gap-1.5">
           <Digit value={pad(Math.floor(left / 86400))} label="days" />
           <Digit value={pad(Math.floor((left % 86400) / 3600))} label="hrs" />
           <Digit value={pad(Math.floor((left % 3600) / 60))} label="min" />
@@ -231,7 +230,7 @@ function Upcoming() {
         </div>
       )}
       {phase === "during" && (
-        <div className="mt-5">
+        <div className="mt-3">
           <div className="flex justify-between font-mono text-xs text-slate-300">
             <span>Day {day}</span>
             <span className="text-slate-500">of {total}</span>
@@ -242,9 +241,8 @@ function Upcoming() {
         </div>
       )}
 
-      <p className="mt-4 text-sm leading-relaxed text-slate-300">{UPCOMING.summary}</p>
-      <p className="mt-2 text-xs text-slate-500">{UPCOMING.context}</p>
-      <p className="mt-3 border-t border-white/10 pt-3 text-xs leading-relaxed text-slate-400">{UPCOMING.viaNote}</p>
+      <p className="mt-3 text-[13px] leading-relaxed text-slate-300">{UPCOMING.summary}</p>
+      <p className="mt-2 text-[11px] leading-snug text-slate-500">{UPCOMING.viaNote}</p>
     </motion.article>
   );
 }
@@ -256,31 +254,29 @@ function Editor() {
       initial={{ opacity: 0, x: 24 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.9, ease, delay: 0.85 }}
-      className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur"
+      className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 backdrop-blur"
     >
       <Kicker color="text-slate-500">About Eirini</Kicker>
-      <div className="mt-4 flex items-center gap-4">
+      <div className="mt-3 flex items-center gap-3">
         <img
           src="/photo/rena.jpg"
           alt="Eirini Ornithopoulou"
-          className="h-16 w-16 rounded-full object-cover ring-2 ring-white/15 transition duration-500 hover:ring-cyan-300/60"
+          className="h-12 w-12 rounded-full object-cover ring-2 ring-white/15 transition duration-500 hover:ring-cyan-300/60"
         />
         <div className="min-w-0">
-          <div className="font-display text-lg font-bold text-white">{PROFILE.name}</div>
-          <div className="text-xs text-slate-400">{PROFILE.location}</div>
-          <div className="mt-1 font-mono text-[10px] uppercase tracking-wider text-slate-500">{PROFILE.languages.join(" · ")}</div>
+          <div className="font-display text-base font-bold text-white">{PROFILE.name}</div>
+          <div className="text-[11px] text-slate-400">{PROFILE.location} · {PROFILE.languages.join(" · ")}</div>
         </div>
       </div>
-      <p className="mt-4 text-sm leading-relaxed text-slate-400">
-        PhD in biotechnology turned data scientist. I build ML and agentic AI systems, and I bring a product mindset:
-        aligning stakeholders, prioritising, and making sure what ships is both usable and valuable.
+      <p className="mt-3 text-[13px] leading-relaxed text-slate-400">
+        PhD in biotechnology turned data scientist. I build ML and agentic AI systems with a product mindset, so what ships is usable and valuable.
       </p>
-      <div className="mt-5 flex flex-wrap gap-2">
+      <div className="mt-3 flex flex-wrap gap-1.5">
         {[
           ["GitHub", PROFILE.links.github],
           ["LinkedIn", PROFILE.links.linkedin],
         ].map(([l, h]) => (
-          <a key={l} href={h} target="_blank" rel="noreferrer" onClick={() => play("click")} className="btn-ghost">
+          <a key={l} href={h} target="_blank" rel="noreferrer" onClick={() => play("click")} className="btn-ghost !px-3 !py-1.5 !text-xs">
             {l} ↗
           </a>
         ))}
@@ -291,7 +287,7 @@ function Editor() {
             play("toggle");
             setTimeout(() => setCopied(false), 1600);
           }}
-          className="btn-ghost"
+          className="btn-ghost !px-3 !py-1.5 !text-xs"
         >
           {copied ? "Copied ✓" : "Copy email"}
         </button>
