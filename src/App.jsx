@@ -1,1087 +1,132 @@
-import { useState } from "react";
-import { motion, AnimatePresence, useScroll } from "framer-motion";
+import { useCallback, useEffect, useState } from "react";
+import { AnimatePresence, MotionConfig } from "framer-motion";
 import EmbedModal from "./EmbedModal";
-import NetworkGraph from "./NetworkGraph";
+import NeuralField from "./components/NeuralField";
+import { TopBar, Wordmark } from "./components/Masthead";
+import FrontPage from "./components/FrontPage";
+import Stories from "./components/Stories";
+import Article from "./components/Article";
+import CommandPalette from "./components/CommandPalette";
+import Intro from "./components/Intro";
+import { Briefs, Contact, Education, Footer, Stack } from "./components/Sections";
+import { STORIES } from "./data";
+import { play } from "./sound";
 
-// ── Profile ────────────────────────────────────────────────────────────────
-const PROFILE = {
-  name: "Eirini Ornithopoulou, Ph.D.",
-  title: "Data Scientist · ML/Agentic AI Enthusiast · Product Owner/IT Project Manager in the making",
-  location: "Stockholm, Sweden",
-  email: "renaorn@gmail.com",
-  phone: "+46730802820",
-  links: {
-    dashboards_pdf: "/reports/Churn practice.pdf",
-    github: "https://github.com/EiriniOr/",
-    linkedin: "https://www.linkedin.com/in/eiriniornithopoulou/",
-    thesis: "https://hh.diva-portal.org/smash/record.jsf?pid=diva2%3A1987943&dswid=5697",
-    dashboards1:
-      "https://www.dropbox.com/scl/fo/qu55944hq5mzbkltqsh9b/AK77rpDuKRHoeyOj4iDZ9qA?rlkey=4gp5ag7gp5uz9dfd6deehcj28&st=b3mxryey&dl=0",
-    dashboards2:
-      "https://app.powerbi.com/reportEmbed?reportId=c7d74911-13be-44aa-b11e-76a0312d3702&autoAuth=true&ctid=1ccb8299-3a8e-4aa1-b044-87491366f150",
-    publications: "https://www.researchgate.net/profile/Eirini-Ornithopoulou/research",
-    heart_api_demo: "https://heart-risk-api-602311160874.europe-north1.run.app/",
-    heart_api_repo: "https://github.com/EiriniOr/heart-risk-api",
-  },
-  languages: ["English (C2)", "Swedish (SVA 2)", "Greek (Native)"],
-};
-
-// ── Projects ───────────────────────────────────────────────────────────────
-const PROJECTS = [
-  {
-    kind: "AI Research Project",
-    category: "Data Science & ML",
-    title: "Fairness‑Aware, Domain‑Adaptive GAT for ICU Mortality Prediction",
-    year: "2025",
-    badge: "pinned",
-    impact:
-      "Developed end-to-end ML pipeline: SQL querying on GCP, designed computational graph construction, hyperparameter search and experiment tracking (using MLOps tools), implemented dynamic fairness constraints to reduce bias, domain adaptation before embedding creation, explainable graph visualizations and risk prediction, and post-processing tests.",
-    stack: [
-      "PyTorch Geometric", "Graph Attention Networks",
-      "Dynamic fairness constraints", "MLOps - Experiment Tracking",
-      "SQL on GCP", "Domain Adaptation",
-    ],
-    links: [{ label: "Thesis (DiVA)", href: PROFILE.links.thesis }],
-    highlights: [
-      "End‑to‑end pipeline: data extraction → graph construction → training → explainability",
-      "Attention‑based explanations and risk visualization",
-      "Domain adaptation before embedding creation",
-    ],
-  },
-  {
-    kind: "Winner of the AI Health Hackathon",
-    category: "Full-Stack Web Apps",
-    title: "NutrioFast",
-    year: "2025",
-    badge: "pinned",
-    impact:
-      "My team won the 2025 AI Health Hackathon, organized by STING, Square One and KI Innovations, by developing an app that targets the problem of tracking patient food intake, and makes it easier to organize and visualize data, as well as relieves nurses' and assistant nurses' administrative burden by producing a summary text that they can then copy into the patient's health record. The tracking itself uses voice notes and image recognition through an OpenAI API.",
-    stack: ["Service Design", "LLM", "OpenAI API", "Streamlit", "Typescript", "Prototyping"],
-    links: [{ label: "Live Demo", href: "https://nutri-patient-watch.lovable.app" }],
-    highlights: [],
-  },
-  {
-    kind: "AI Research Assistant / Full-Stack Web App",
-    category: "Agentic AI & LLM Tools",
-    title: "Cassandra",
-    year: "2026",
-    badge: "new",
-    impact:
-      "An open-domain research assistant that grounds every answer in real scientific literature. Ask a question and it searches OpenAlex + arXiv live, then renders the answer as an interactive hub-and-spoke canvas: the synthesized answer sits at the center, and its actual grounding sources fan out on demand — connected by animated, measured lines rather than a flat list — with each source itself expandable from a one-sentence fact to a full paragraph to the real open-access PDF, embedded inline only when genuinely verified. Password-gated and deployed on Vercel, built directly on the Anthropic API (no agent framework in the loop).",
-    stack: [
-      "Next.js (App Router)", "TypeScript", "Anthropic Claude API (Sonnet 5)",
-      "OpenAlex + arXiv APIs", "Upstash Redis", "Framer Motion", "Vercel Cron",
-    ],
-    links: [
-      { label: "GitHub", href: "https://github.com/EiriniOr/Cassandra" },
-    ],
-    highlights: [
-      "Hub-and-spoke answer canvas: sources fan out around the answer on expand, connected by SVG lines measured live off the DOM — not hardcoded positions — and wrap above and below the hub once there are too many for one row",
-      "Progressive disclosure per source: sentence → grounded paragraph → real embedded PDF — the PDF step is skipped entirely rather than shown fake; it verifies actual file bytes and rejects access-gated interstitials some publishers serve in place of the article",
-      "LLM relevance filter drops keyword-matched but off-topic search results before they ever reach the UI",
-      "Branch a follow-up question off any answer into a connected child node, with breadcrumb navigation back up the thread",
-      "Track a topic and a Vercel Cron job re-searches it every 2 days, surfacing new results into a saved library backed by Upstash Redis",
-      "Full conversation history stays out of the way behind the input bar — collapsed by default, reveals as a scrollable panel on hover",
-    ],
-  },
-  {
-    kind: "Agentic AI · Geospatial",
-    category: "Agentic AI & LLM Tools",
-    title: "Agentic Assistant for Climate & Urban Planning",
-    year: "2026",
-    badge: "new",
-    impact:
-      "An applied R&D project: an end-to-end agentic assistant for climate and urban-planning decision support, pairing a chat agent with an interactive map. You ask in natural language and a guarded, tool-using agent reasons over public geospatial and statistical data, answers with inline citations, and renders the result on the map — small-area demographics, land cover (green space, water, built-up), a modelled air-quality layer, a planning-document knowledge store, and live scientific literature, all behind one conversation. Project specifics are confidential, so this is a capability summary — no live demo, source, or screenshots.",
-    stack: [
-      "Next.js", "React", "MapLibre GL", "CopilotKit",
-      "Python", "LangGraph", "FastAPI", "Claude API",
-      "Azure AI", "RAG · ChromaDB", "MCP",
-    ],
-    links: [],
-    highlights: [
-      "Guarded agent: input/output guardrails + deterministic citation & quote verification — it may only present sources the tools actually returned (no hallucinated references)",
-      "Model-agnostic: runs on a small fast model or a large reasoning model, with auto-routing by question complexity and a live cost estimate",
-      "Map intelligence: metric-appropriate choropleths, weighted multi-criteria (MCDA) priority colouring, and side-by-side / spyglass comparison of two indicators",
-      "Click or draw an area → instant current-state analysis (demographics, air quality vs limit values, land cover, heat) from public data",
-      "Portable by design: framework-free tools exposed as an MCP server + per-answer evaluation logging, so the analysis drops into a production agent without a rewrite",
-    ],
-  },
-  {
-    kind: "AI Data Science Suite / ML Pipeline",
-    category: "Data Science & ML",
-    title: "Miss Datrix",
-    year: "2026",
-    badge: "inprogress",
-    impact:
-      "End-to-end AI-guided data science platform built on Streamlit. Upload any tabular dataset and an AI analyst (Claude) proposes a workflow, then walks through cleaning, EDA, feature engineering, model benchmarking, hyperparameter optimisation, SHAP explainability, and a downloadable HTML report. Also supports A/B testing and causal inference (propensity score matching, IPW). Access is invite-only as it runs on personal API infrastructure.",
-    stack: [
-      "Python", "Streamlit", "Claude API", "scikit-learn", "XGBoost", "LightGBM",
-      "Optuna", "SHAP", "Plotly", "statsmodels", "A/B Testing", "Causal Inference",
-    ],
-    links: [
-      { label: "Live Demo", href: "https://msdatrix.streamlit.app/" },
-      { label: "GitHub", href: "https://github.com/EiriniOr/data-suite" },
-    ],
-    highlights: [
-      "AI analyst proposes a minimal workflow based on uploaded data and stated goal — not a fixed template",
-      "Trains real models (RF, XGBoost, LightGBM, SVM, Logistic/Ridge) with cross-validated leaderboard",
-      "Optuna Bayesian hyperparameter search with trial progress and before/after comparison",
-      "SHAP feature importance + confusion matrix / ROC / residual plots + downloadable HTML report",
-      "A/B testing: auto-detects continuous vs binary outcome, Welch/Mann-Whitney/chi-square, Cohen's d, power analysis",
-      "Causal inference: propensity score matching or IPW, ATE with bootstrap SE, covariate balance (SMD)",
-    ],
-  },
-  {
-    kind: "EdTech Web App / AI Medical Tutor · School Project",
-    category: "Full-Stack Web Apps",
-    title: "Guru, MD",
-    year: "2026",
-    badge: "new",
-    video: "/videos/guru-md-demo.mp4",
-    impact:
-      "An AI medical-education platform for medical students, built as a school project and tuned for Swedish and EU clinical practice. At its core is \"Guru, MD\" — a Claude-powered tutor that answers questions with live, citation-backed evidence, runs structured learning paths with auto-generated quizzes, recommends what to study next, and even produces a spoken news podcast. Note: the hosted demo is retired (the Supabase database backend is no longer maintained), so the project is shared as source plus the video walkthrough below.",
-    stack: [
-      "Next.js (App Router)", "TypeScript", "Anthropic Claude (Sonnet 4.6)",
-      "Tavily Search (RAG)", "Supabase (Auth + PostgreSQL + RLS)",
-      "Web Speech API", "Tailwind CSS", "shadcn/ui", "Vercel",
-    ],
-    links: [
-      { label: "GitHub", href: "https://github.com/EiriniOr/guru-md" },
-    ],
-    highlights: [
-      "RAG-grounded tutor: streams Claude answers fused with live Tavily web search over EU/Swedish medical sources (ESC, ESICM, EULAR, FASS, Janusinfo, SBU), with inline numbered citations [1][2] back to each source",
-      "Prompt-engineered guardrails: a domain system prompt enforces SI units, European nomenclature, Socratic follow-ups, and an \"educational only — consult a clinician\" disclaimer when a question drifts toward personal medical advice",
-      "Auto-generated assessments: Claude turns any module's markdown into a strict-JSON 5-question MCQ quiz (2 easy / 2 medium / 1 hard) with per-answer explanations, then parses and scores it",
-      "AI study advisor: reads the student's activity log + module progress and returns JSON recommendations for the next path or module to tackle",
-      "Zero-cost audio: Claude writes a 2–3 minute spoken-word podcast script from fresh medical news, narrated in-browser via the Web Speech API — no paid TTS",
-      "Multi-tenant security by design: Supabase Postgres with Row-Level Security policies isolating every user's sessions, messages, quiz attempts, and progress, while learning paths stay publicly readable",
-    ],
-  },
-  {
-    kind: "Multi-agent App / Automation / Audio Narration",
-    category: "Full-Stack Web Apps",
-    title: "Automated Weekly Digest Systems",
-    year: "2025",
-    badge: "updated",
-    impact:
-      "Two fully automated content creation systems that curate weekly news and publish them as curated webpages with AI-narrated audio summaries. (1) AI Weekly Digest: curates agentic AI news from arXiv, Hacker News, Reddit every Sunday at 6 PM with a galaxy-themed UI. (2) International Politics Digest: collects news via RSS feeds from BBC, Deutsche Welle, NYT, Financial Times, Foreign Policy, and South China Morning Post every Monday at 6 AM with a newsroom-aurora UI. Both use Claude AI for curation, OpenAI TTS for narration, and deploy automatically to GitHub Pages via GitHub Actions.",
-    stack: [
-      "Python", "Claude API (Sonnet 4.5)", "OpenAI TTS (audio narration)",
-      "RSS feeds (feedparser)", "HTML/CSS", "GitHub Pages", "GitHub Actions",
-    ],
-    links: [
-      { label: "AI Digest", href: "https://EiriniOr.github.io/ai-weekly-digest/" },
-      { label: "Politics Digest", href: "https://EiriniOr.github.io/news-aggregation/" },
-      { label: "AI Digest GitHub", href: "https://github.com/EiriniOr/ai-weekly-digest" },
-      { label: "Politics Digest GitHub", href: "https://github.com/EiriniOr/news-aggregation" },
-    ],
-    highlights: [
-      "Claude generates scripts, OpenAI TTS creates 2-3 minute voice narration for each digest",
-      "Claude filters 50+ items to ~15 top stories with insights and categorization",
-      "Distinct interactive UIs: galaxy palette for AI digest, newsroom-aurora for politics",
-      "Both run in GitHub Actions cloud with email notifications on completion",
-    ],
-  },
-  {
-    kind: "Full-Stack AI App / Job Search",
-    category: "Full-Stack Web Apps",
-    title: "JobbaJobba",
-    year: "2026",
-    impact:
-      "End-to-end job search and application platform built to make the job hunt faster and smarter. Searches Arbetsförmedlingen and LinkedIn/Indeed, generates tailored cover letters and ATS-optimised CVs with Claude AI, and tracks every application in a Kanban board. Designed specifically for the Swedish job market with bilingual (EN/SV) support throughout. Access is invite-only as it runs on personal API infrastructure.",
-    stack: [
-      "Next.js 14", "Supabase (Auth + PostgreSQL + Storage)",
-      "Claude API", "JSearch API", "Tailwind CSS", "TypeScript", "Vercel",
-    ],
-    links: [
-      { label: "GitHub", href: "https://github.com/EiriniOr/job-application-assistant" },
-      { label: "Live Demo", href: "https://job-application-assistant-five.vercel.app" },
-    ],
-    highlights: [
-      "ATS match scoring with bilingual keyword detection (EN/SV) — flags missing keywords and soft skills",
-      "One-click AI CV rewrite: tailors resume to a specific job in EN or SV, downloads as styled Word or PDF",
-      "Gmail OAuth integration — auto-syncs inbox and moves kanban cards on rejections, interview invites, or offers",
-      "AI cover letter generation with custom tone/style and ATS-aware mode",
-      "Kanban board (Saved → Applied → Assessment → Interview → Offer → Rejected) with drag-and-drop",
-      "Manual job add via URL — Claude extracts title, company, and description automatically",
-      "Profile photo preserved with correct aspect ratio; all hyperlinks clickable in generated CV",
-    ],
-  },
-  {
-    kind: "macOS App / Electron / Developer Tool",
-    category: "Full-Stack Web Apps",
-    title: "Petal",
-    year: "2026",
-    impact:
-      "A local markdown notes app for macOS, built with Electron, React, and TypeScript. Notes are stored as plain .md files on disk and can be easily shared with others. Features a CodeMirror 6 editor with split/preview/edit modes, ⌘K full-text search, folders and #hashtag support, and desktop sticky notes that float on the desktop and render markdown.",
-    stack: [
-      "Electron", "React 18", "TypeScript", "Tailwind CSS",
-      "Framer Motion", "CodeMirror 6", "Zustand", "react-markdown",
-    ],
-    links: [
-      { label: "GitHub", href: "https://github.com/EiriniOr/petal" },
-      { label: "Download v1.0", href: "https://github.com/EiriniOr/petal/releases/tag/v1.0.0" },
-    ],
-    highlights: [
-      "Markdown editor with split / edit / preview modes, syntax highlighting, and live preview",
-      "Desktop sticky notes — pin any note as a floating widget, click to edit, renders markdown with themed colors",
-      "⌘K command for full-text search across all notes",
-      "Import .md files from anywhere via the sidebar file picker (supports multi-select)",
-      "Install: download the DMG from the release page, drag Petal to Applications, right-click → Open on first launch to bypass the unsigned-app warning",
-    ],
-  },
-  {
-    kind: "ML / Recommender Systems",
-    category: "Data Science & ML",
-    title: "Sequence-Based Movie Recommender",
-    year: "2026",
-    impact:
-      "Transformer-based sequential recommendation system trained on MovieLens 25M (25 million ratings). Models the order of a user's watch history to predict the next movie — capturing dynamic taste shifts that static collaborative filtering misses. Benchmarked against a Matrix Factorization baseline using Hit@10 and NDCG@10. Includes a live Streamlit demo where anyone can pick movies from a curated list and get personalised top-10 recommendations.",
-    stack: [
-      "PyTorch", "Transformer Encoder", "Matrix Factorization",
-      "MovieLens 25M", "Streamlit", "Plotly", "Python",
-    ],
-    links: [
-      { label: "Live Demo", href: "https://movie-rec-transformer.streamlit.app/" },
-      { label: "GitHub", href: "https://github.com/EiriniOr/movie-rec-transformer" },
-    ],
-    highlights: [
-      "Causal self-attention over ordered watch history — position t attends only to movies watched before it",
-      "Sliding-window next-item prediction trained with cross-entropy loss on 4.5M sequence windows",
-      "Hit@10 and NDCG@10 evaluation on held-out last-3-movies per user across ~162k users",
-      "Live demo: pick from 20 curated movie pills, get top-10 predictions instantly",
-      "\"How It Works\" explainer page covering embeddings, attention, and why order matters — aimed at non-technical viewers",
-    ],
-  },
-  {
-    kind: "Interactive Learning Tool / Web App",
-    category: "Full-Stack Web Apps",
-    title: "MrGraph — The Graph-Based Tutor",
-    year: "2026",
-    impact:
-      "Interactive force-directed knowledge graph for navigating 105 AI/ML engineering concepts across 10 learning paths. Click any node to open a rich detail panel with definitions, multi-paragraph explanations, and code examples. Built as a fully static frontend — no build step, no server dependency. Includes fuzzy search with match highlighting, learning path filters with colour-coded node dimming, Prev/Next navigation within each path, and clickable prerequisite/related concept chips.",
-    stack: [
-      "D3.js v7", "Vanilla JS (ES Modules)", "Python", "FastAPI (dev server)",
-      "Force-directed graph", "Vercel",
-    ],
-    links: [
-      { label: "Live Demo", href: "https://ai-learning-graph-ruddy.vercel.app/" },
-      { label: "GitHub", href: "https://github.com/EiriniOr/ai-learning-graph" },
-    ],
-    highlights: [
-      "105 fully-written concepts with 3+ paragraph explanations and working code examples — no stubs",
-      "10 colour-coded learning paths: ML Foundations, Deep Learning, LLMs & Generative AI, RL, MLOps, and more",
-      "Fuzzy search ranks by id/title/tag/path/short match and highlights matched text in results",
-      "Force simulation: forceLink + forceManyBody + forceCollide — drag nodes, zoom, and fit-to-screen",
-      "Smooth pan/zoom transition when selecting a concept via search or chip navigation",
-    ],
-  },
-  {
-    kind: "Curated Resource Platform / Web",
-    category: "Full-Stack Web Apps",
-    title: "ForgeMee",
-    year: "2026",
-    impact:
-      "Curated roadmap of free resources for aspiring AI Engineers, Data Scientists, and ML Engineers. Resources span 6 phases from Python foundations to production AI, with track filtering, per-track progress bars, Firebase Auth accounts, jsPDF certificates on path completion, a community suggestion form (EmailJS, server-free), and a Wall of Fame for accepted contributors.",
-    stack: [
-      "HTML", "Tailwind CSS CDN", "Vanilla JS",
-      "Firebase Auth", "Firestore", "jsPDF", "EmailJS", "Vercel",
-    ],
-    links: [
-      { label: "Live", href: "https://forgemee.vercel.app" },
-      { label: "GitHub", href: "https://github.com/EiriniOr/forgemee" },
-    ],
-    highlights: [
-      "Curated free resources across 6 learning phases — foundations to production AI",
-      "Track filter (DS / ML / AI) with per-track progress bars and Firestore persistence",
-      "Confetti celebration + downloadable dark-themed PDF certificate on completing a full track",
-      "Overlapping resources grouped as alternative paths — pick your learning style",
-      "Community suggestion form with profanity filter, spam heuristics, rate limiting, and honeypot",
-      "Wall of Fame section — accepted contributors credited by name and resource",
-    ],
-  },
-  {
-    kind: "Agentic AI / LLM / Web Scraping",
-    category: "Agentic AI & LLM Tools",
-    title: "Research Assistant",
-    year: "2025",
-    impact:
-      "Autonomous research agent that takes a question and produces a structured report with citations. Uses Claude AI to decompose questions into sub-queries, searches the web via Google search, extracts facts from sources, and synthesizes findings into reports. Identifies facts that are shared among sources and lists knowledge gaps, which is something we often look for in academia. Built to demonstrate agentic workflow design.",
-    stack: [
-      "Python", "Claude API (Sonnet 4.5)", "Agentic AI",
-      "Web Scraping", "Google Search", "Trafilatura", "Streamlit", "Poetry",
-    ],
-    links: [
-      { label: "GitHub", href: "https://github.com/EiriniOr/research-assistant" },
-      { label: "Screenshot 1", href: "/screenshots/research-assistant/screenshot1.png" },
-      { label: "Screenshot 2", href: "/screenshots/research-assistant/screenshot2.png" },
-      { label: "Screenshot 3", href: "/screenshots/research-assistant/screenshot3.png" },
-    ],
-    highlights: [
-      "Breaks complex questions into 3-5 sub-queries automatically",
-      "Compares sources, identifies agreements, contradictions, and knowledge gaps",
-      "Smart fact extraction with confidence scoring and citation tracking",
-      "Note: Live demo not provided as it consumes API tokens; demo link available upon request",
-    ],
-  },
-  {
-    kind: "MCP Server / AI Tooling",
-    category: "Agentic AI & LLM Tools",
-    title: "PowerPoint MCP Server",
-    year: "2025",
-    impact:
-      "A comprehensive Model Context Protocol server that enables AI assistants (Claude, ChatGPT) to programmatically create PowerPoint presentations. Features 36 tools for creating charts, shapes, flowcharts, tables, QR codes, and analyzing data from CSV/Excel/JSON files. Designed to work seamlessly with Claude and other AI assistants.",
-    stack: [
-      "Python", "Model Context Protocol (MCP)", "python-pptx",
-      "Data visualization", "Chart generation", "Shape manipulation",
-    ],
-    links: [
-      { label: "Example Presentation", href: "/life_in_sweden_demo.pdf" },
-      { label: "GitHub", href: "https://github.com/EiriniOr/mcp-powerpoint-server" },
-    ],
-    highlights: [
-      "36 PowerPoint automation tools for comprehensive presentation creation",
-      "Charts: bar, column, line, pie, scatter, bubble with customization",
-      "Shapes and connectors: rectangles, circles, arrows, flowcharts",
-      "Data analysis: automatic chart generation from CSV/Excel/JSON files",
-      "Advanced features: QR codes, image grids, timelines, comparison slides",
-    ],
-  },
-  {
-    kind: "NLP/LLM",
-    category: "Agentic AI & LLM Tools",
-    title: "ATS-style Job Match Scorer",
-    year: "2025",
-    impact:
-      "Tired of sending applications into a black hole? This tool estimates how well your CV would score on a specific job ad, shows you suggestions, and can even generate an ATS-friendly rewritten CV with an LLM (completely free) — so you can maximize your chances with each application.",
-    stack: [
-      "Python", "NLP", "TF-IDF", "LLM", "Groq API",
-      "OpenAI-style chat completions", "scikit-learn", "Streamlit", "Prompt engineering",
-    ],
-    links: [
-      { label: "Live Demo", href: "https://resume-analyzer-vzenm7bxsehqjeqecla8hy.streamlit.app/" },
-      { label: "GitHub", href: "https://github.com/EiriniOr/resume-analyzer" },
-    ],
-    highlights: [
-      "Implements an ATS-inspired scoring model combining TF-IDF similarity, keyword coverage, soft-skill detection, and impact signals",
-      "Supports English and Swedish CVs/job ads with custom stopword lists and section-aware weighting",
-      "LLM-assisted rewrite flow using Groq API (Llama 3.1 8B) — preserves truthfulness and ATS-friendly structure",
-    ],
-  },
-  {
-    kind: "Cloud Deployment · Smart Healthcare",
-    category: "Data Science & ML",
-    title: "Heart Disease Risk Prediction API",
-    year: "2025",
-    impact:
-      "End-to-end ML service that estimates heart disease risk from basic clinical features, with an interactive browser demo and documented REST API.",
-    stack: ["Python", "scikit-learn", "FastAPI", "Docker", "Google Cloud Run"],
-    links: [
-      { label: "Live Demo", href: PROFILE.links.heart_api_demo },
-      { label: "GitHub", href: PROFILE.links.heart_api_repo },
-    ],
-    highlights: [
-      "Trained a RandomForest classifier on the UCI Heart Disease dataset",
-      "Deployed a containerized FastAPI service to Google Cloud Run (serverless)",
-      "Simple web UI for non-technical users",
-    ],
-  },
-  {
-    kind: "Data Analysis/Data Engineering",
-    category: "Data Science & ML",
-    title: "Customer Churn Dashboard",
-    year: "2024",
-    impact:
-      "Improved stakeholder visibility into churn drivers and sales KPIs with interactive reports.",
-    stack: ["Power BI", "DAX", "Star schema"],
-    links: [
-      { label: "Dashboards (login required)", href: PROFILE.links.dashboards2 },
-      { label: "View PDF online", href: PROFILE.links.dashboards_pdf },
-    ],
-    highlights: [
-      "Dimensional modeling & DAX measures",
-      "Scenario filtering & drill‑through",
-    ],
-  },
-  {
-    kind: "LLM / RAG",
-    category: "Agentic AI & LLM Tools",
-    title: "Document Q&A (RAG Bot)",
-    year: "2025",
-    impact: "Answers grounded in uploaded PDFs using retrieval + generation.",
-    stack: ["FAISS", "Sentence-Transformers", "Flan-T5", "Streamlit"],
-    links: [
-      { label: "Live Demo", href: "https://rag-bot-jf9dca7h9sntosgie8waw4.streamlit.app/" },
-      { label: "GitHub", href: "https://github.com/EiriniOr/rag-bot" },
-    ],
-    highlights: [
-      "Local, free models — no paid APIs",
-      "Top-k passage citations for transparency",
-    ],
-  },
-  {
-    kind: "Data Visualization",
-    category: "Data Science & ML",
-    title: "Carbon Emissions Explorer",
-    year: "2025",
-    impact: "Interactive map and trends for CO₂ metrics (public data).",
-    stack: ["Pandas", "Plotly", "Streamlit"],
-    links: [
-      { label: "Live Demo", href: "https://co2explorer.streamlit.app/" },
-      { label: "GitHub", href: "https://github.com/EiriniOr/co2-explorer" },
-    ],
-    highlights: [
-      "Choropleth + multi-country time series",
-      "Compare per-capita vs absolute emissions",
-    ],
-  },
-  {
-    kind: "Causal Inference / A/B Testing",
-    category: "Data Science & ML",
-    title: "Cookie Cats A/B Test Analysis",
-    year: "2025",
-    impact:
-      "Comprehensive analysis of the Cookie Cats mobile game A/B test using causal inference methods. Goes beyond simple t-tests to implement propensity score weighting, CUPED variance reduction, doubly robust estimation, and heterogeneous treatment effect analysis with causal forests.",
-    stack: [
-      "Python", "Causal Inference", "A/B Testing", "Propensity Scores",
-      "CUPED", "EconML", "Streamlit", "Statistical Modeling",
-    ],
-    links: [
-      { label: "Live Demo", href: "https://cookie-cats-causal-inference.streamlit.app/" },
-      { label: "GitHub", href: "https://github.com/EiriniOr/cookie-cats-causal-inference" },
-    ],
-    highlights: [
-      "Classical A/B: difference-in-means, z-tests, power analysis, SRM detection",
-      "Causal methods: regression adjustment, IPW, CUPED, doubly robust estimation",
-      "HTE analysis: subgroup effects by engagement, causal forests, meta-learners",
-      "Sensitivity: peeking simulation, multiple testing correction, robustness bounds",
-    ],
-  },
-  {
-    kind: "University Projects",
-    category: "Data Science & ML",
-    title: "AI Implementation & Strategy",
-    year: "2025",
-    impact:
-      "Investigated practical adoption of AI across UX, innovation, ethics, and data management dimensions.",
-    stack: ["Innovation", "Implementation", "UX Design", "Data Management", "AI Ethics"],
-    links: [{ label: "Showcase (New page)", href: "/ai-projects" }],
-    highlights: [
-      "Explored adoption of AI from organizational and UX perspectives",
-      "Evaluated data management and governance requirements for AI projects",
-      "Studied ethical implications and alignment with EU AI Act",
-      "Developed recommendations for AI innovation strategies",
-    ],
-  },
-];
-
-// Featured (pinned/new) projects get full-size cards up top; everything else
-// groups into a compact, categorized list so 20+ projects don't read as one
-// undifferentiated wall — a skim-friendly hierarchy instead.
-const FEATURED_BADGES = new Set(["pinned"]);
-const CATEGORY_ORDER = ["Agentic AI & LLM Tools", "Data Science & ML", "Full-Stack Web Apps"];
-
-const ORDERED_PROJECTS = [
-  ...PROJECTS.filter((p) => FEATURED_BADGES.has(p.badge)),
-  ...PROJECTS.filter((p) => !FEATURED_BADGES.has(p.badge) && p.badge !== "inprogress"),
-  ...PROJECTS.filter((p) => p.badge === "inprogress"),
-];
-const FEATURED_COUNT = PROJECTS.filter((p) => FEATURED_BADGES.has(p.badge)).length;
-
-const EDUCATION = [
-  {
-    degree: "MSc, IT Project Management",
-    org: "Stockholm University, Sweden",
-    years: "2026–2028 (Ongoing, part-time)",
-    logo: "/edu/stockholm.png",
-  },
-  {
-    degree: "MSc, Computer Science — Data Science & ML",
-    org: "Halmstad University, Sweden",
-    years: "2024–2026 (Completed!)",
-    logo: "/edu/halmstad.png",
-  },
-  {
-    degree: "PhD, Bionanotechnology",
-    org: "KTH Royal Institute of Technology, Sweden",
-    years: "2017–2023",
-    logo: "/edu/kth.png",
-  },
-  {
-    degree: "BSc/MSc, Materials Science & Technology",
-    org: "University of Crete, Greece",
-    years: "2009–2016",
-    logo: "/edu/uoc.png",
-  },
-];
-
-const SKILL_GROUPS = [
-  {
-    label: "Languages & Core",
-    items: ["Python (PyTorch, scikit-learn, pandas, matplotlib, etc.)", "SQL", "R", "Git", "React", "HTML/CSS", "LaTeX"],
-  },
-  {
-    label: "Machine Learning & AI",
-    items: [
-      "Machine Learning",
-      "Deep Learning (Vision, LLMs, GAT/GCN, Transformers)",
-      "Fairness & Explainability (Fairlearn, SHAP)",
-      "NLP / RAG",
-      "Predictive Modeling (Churn, Fraud Detection, Healthcare)",
-      "Smart Healthcare AI",
-      "Causal Inference / Causal Discovery",
-      "Prompt Engineering",
-    ],
-  },
-  {
-    label: "MLOps, Agentic & Cloud",
-    items: [
-      "FastAPI", "Docker & Containerization",
-      "MLOps (Experiment Tracking, Reproducibility)",
-      "ML Model Training & Fine-tuning",
-      "Agentic Engineering", "AgentOps", "Weights & Biases",
-      "Azure", "Google Cloud Platform (Cloud Run, Vertex AI)", "Microsoft Fabric",
-    ],
-  },
-  {
-    label: "Data, Product & Research",
-    items: [
-      "Documentation", "Data Analytics", "Visualization (Power BI · Looker)",
-      "UX/UI", "Service Design", "Customer-Facing Product Design & Conception",
-      "Academic Research",
-    ],
-  },
-];
-
-const CERTS = [
-  "Product Owner Certifications (IBM/Skillsbild, 2025)",
-  "Power BI Track (Datacamp, 2024)",
-  "Data Engineering Associate in SQL (Datacamp, 2024)",
-  "MS Fabric — The Complete Guide (Udemy, 2024)",
-  "Data Scientist in Python (Datacamp, 2024)",
-  "Azure Fundamentals (Udemy, 2024)",
-  "Agile Project Management (Agilcoachen, 2024)",
-];
-
-// ── Design tokens ──────────────────────────────────────────────────────────
-const card =
-  "glow-card rounded-xl border border-cyan-900/40 bg-slate-900/80 backdrop-blur-sm shadow-lg transition-all duration-300";
-
-const tag =
-  "inline-block text-xs px-2.5 py-1 rounded-full border border-cyan-800/50 mr-2 mt-2 text-cyan-300/85 bg-cyan-950/50 font-mono";
-
-const btnSm =
-  "px-3 py-1.5 rounded-lg bg-gradient-to-r from-cyan-600 to-violet-600 hover:from-cyan-500 hover:to-violet-500 text-white text-sm shadow-sm transition-all duration-150";
-
-const gradientText =
-  "bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent";
-
-// ── Chevron icon ───────────────────────────────────────────────────────────
-function ChevronDown() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="6 9 12 15 18 9" />
-    </svg>
-  );
+function storyFromHash() {
+  const m = window.location.hash.match(/^#story\/(.+)$/);
+  return m && STORIES.some((s) => s.slug === m[1]) ? { slug: m[1], origin: "link" } : null;
 }
 
-// ── Section wrapper ────────────────────────────────────────────────────────
-function Section({ id, title, children }) {
-  return (
-    <section id={id} className="max-w-5xl mx-auto px-5 md:px-8 py-10">
-      <motion.h2
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-        className={`text-2xl md:text-3xl font-bold tracking-tight mb-6 ${gradientText}`}
-      >
-        {title}
-      </motion.h2>
-      {children}
-    </section>
-  );
+function introSeen() {
+  try {
+    return !!sessionStorage.getItem("eo-intro");
+  } catch {
+    return false;
+  }
 }
 
-// ── Project card (accordion) ───────────────────────────────────────────────
-function ProjectCard({ p, isOpen, onToggle, openEmbed, compact = false }) {
-  return (
-    <motion.article
-      initial={{ opacity: 0, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className={card}
-    >
-      {/* Header — always visible */}
-      <button
-        onClick={onToggle}
-        className={`w-full text-left flex items-start gap-3 group ${compact ? "px-4 py-3" : "px-5 pt-5 pb-4"}`}
-      >
-        <div className="flex-1 min-w-0">
-          {!compact && (
-            <div className="text-xs uppercase tracking-widest text-cyan-500/80 font-mono">
-              {p.kind} · {p.year}
-            </div>
-          )}
-          <div className={`flex items-center gap-2 flex-wrap ${compact ? "" : "mt-1.5"}`}>
-            <h3
-              style={compact ? undefined : { fontFamily: "'Space Grotesk', sans-serif" }}
-              className={compact ? "text-sm font-medium text-slate-200 leading-snug" : "text-base md:text-lg font-bold text-white leading-snug"}
-            >
-              {p.title}
-            </h3>
-            {compact && <span className="text-xs text-slate-500 font-mono">{p.year}</span>}
-            {p.badge === "pinned" && (
-              <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-amber-950/80 text-amber-400 border border-amber-700/50">
-                📌 Pinned
-              </span>
-            )}
-            {p.badge === "new" && (
-              <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-700/50">
-                ✦ New
-              </span>
-            )}
-            {p.badge === "updated" && (
-              <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-700/50">
-                🔔 Updated
-              </span>
-            )}
-            {p.badge === "inprogress" && (
-              <span className="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-[#292304] text-[#ab9007] border border-[#d6b924]">
-                 🛠️ In Progress
-              </span>
-            )}
-          </div>
-          {!isOpen && !compact && (
-            <p className="mt-1.5 text-sm text-slate-500 line-clamp-2">
-              {p.impact.slice(0, 120)}{p.impact.length > 120 ? "…" : ""}
-            </p>
-          )}
-        </div>
-        <motion.div
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.2 }}
-          className="mt-1 text-cyan-500 flex-shrink-0"
-        >
-          <ChevronDown />
-        </motion.div>
-      </button>
-
-      {/* Expandable body */}
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            key="body"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.28, ease: "easeInOut" }}
-            className="overflow-hidden"
-          >
-            <div className="px-5 pb-5 border-t border-cyan-900/30 pt-4">
-              <p className="text-sm text-slate-300 leading-relaxed">{p.impact}</p>
-
-              {/* Stack tags */}
-              <div className="mt-3">
-                {p.stack.map((s, j) => (
-                  <span key={j} className={tag}>{s}</span>
-                ))}
-              </div>
-
-              {/* Video demo */}
-              {p.video && (
-                <video
-                  controls
-                  preload="metadata"
-                  playsInline
-                  className="mt-4 w-full rounded-lg border border-cyan-900/40 bg-black"
-                >
-                  <source src={p.video} type="video/mp4" />
-                </video>
-              )}
-
-              {/* Screenshots */}
-              {p.images?.length > 0 && (
-                <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {p.images.map((src, n) => (
-                    <a key={n} href={src} target="_blank" rel="noreferrer">
-                      <img
-                        src={src}
-                        alt={`${p.title} screenshot ${n + 1}`}
-                        loading="lazy"
-                        className="w-full rounded-lg border border-cyan-900/40 bg-black object-cover hover:opacity-90 transition-opacity"
-                      />
-                    </a>
-                  ))}
-                </div>
-              )}
-
-              {/* Highlights */}
-              {p.highlights.length > 0 && (
-                <ul className="mt-4 space-y-1.5">
-                  {p.highlights.map((h, k) => (
-                    <li key={k} className="flex gap-2 text-sm text-slate-400">
-                      <span className="text-cyan-500 flex-shrink-0 mt-0.5">▸</span>
-                      <span>{h}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-
-              {/* Links */}
-              <div className="mt-4 flex flex-wrap gap-2">
-                {p.links.map((l, m) => {
-                  const isEmbed = l.href === PROFILE.links.dashboards2;
-                  const isInternal = l.href?.startsWith("/");
-                  if (isEmbed) {
-                    return (
-                      <button key={m} className={btnSm} onClick={() => openEmbed(l.href)}>
-                        {l.label}
-                      </button>
-                    );
-                  }
-                  return (
-                    <a
-                      key={m}
-                      className={btnSm}
-                      href={l.href}
-                      target={isInternal ? "_self" : "_blank"}
-                      rel={isInternal ? undefined : "noreferrer"}
-                    >
-                      {l.label}
-                    </a>
-                  );
-                })}
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.article>
-  );
-}
-
-// ── Main component ─────────────────────────────────────────────────────────
 export default function Portfolio() {
-  const [openProject, setOpenProject] = useState(null);
-  const [embedOpen, setEmbedOpen] = useState(false);
-  const [embedSrc, setEmbedSrc] = useState("");
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const navLinks = ["projects", "skills", "education", "publications", "contact"];
-  const { scrollYProgress } = useScroll();
+  const [story, setStory] = useState(storyFromHash);
+  const [intro, setIntro] = useState(() => !introSeen() && !storyFromHash());
+  const [palette, setPalette] = useState(false);
+  const [filter, setFilter] = useState({ media: "all", category: "All" });
+  const [embed, setEmbed] = useState(null);
 
-  function openEmbed(url) {
-    setEmbedSrc(url);
-    setEmbedOpen(true);
-  }
+  const finishIntro = useCallback(() => {
+    setIntro(false);
+    try {
+      sessionStorage.setItem("eo-intro", "1");
+    } catch {}
+  }, []);
 
-  function toggleProject(i) {
-    setOpenProject((prev) => (prev === i ? null : i));
-  }
+  const openStory = useCallback((slug, origin) => {
+    play("open");
+    const url = `#story/${slug}`;
+    if (window.history.state?.story) window.history.replaceState({ story: slug }, "", url);
+    else window.history.pushState({ story: slug }, "", url);
+    setStory({ slug, origin });
+  }, []);
+
+  const closeStory = useCallback(() => {
+    play("close");
+    setStory(null);
+    if (window.history.state?.story) window.history.back();
+    else window.history.replaceState(null, "", window.location.pathname);
+  }, []);
+
+  useEffect(() => {
+    const onPop = () => setStory(storyFromHash());
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
+
+  useEffect(() => {
+    const onKey = (e) => {
+      const typing = /input|textarea/i.test(e.target.tagName);
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setPalette((p) => !p);
+      } else if (e.key === "/" && !typing && !palette) {
+        e.preventDefault();
+        setPalette(true);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [palette]);
+
+  useEffect(() => {
+    document.documentElement.style.overflow = story || palette || intro ? "hidden" : "";
+  }, [story, palette, intro]);
+
+  const replayIntro = useCallback(() => {
+    window.scrollTo({ top: 0 });
+    setIntro(true);
+  }, []);
 
   return (
-    <div className="data-bg min-h-screen text-slate-100 relative overflow-hidden">
-      {/* Blobs */}
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <div className="blob blob-a" />
-        <div className="blob blob-b" />
-        <div className="blob blob-c" />
-      </div>
+    <MotionConfig reducedMotion="user">
+      <div className="relative min-h-screen overflow-x-clip bg-[#07070c] text-slate-100">
+        <NeuralField />
+        <div className="grain pointer-events-none fixed inset-0 z-[1]" aria-hidden />
 
-      {/* SCROLL PROGRESS */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-cyan-400 to-violet-400 origin-left z-30"
-        style={{ scaleX: scrollYProgress }}
-      />
+        <div className="relative z-10">
+          <TopBar onSearch={() => setPalette(true)} />
+          <Wordmark ready={!intro} />
+          <FrontPage />
+          <Stories onOpen={openStory} filter={filter} setFilter={setFilter} />
+          <Stack />
+          <Education />
+          <Briefs />
+          <Contact />
+          <Footer />
+        </div>
 
-      {/* NAV */}
-      <header className="sticky top-0 z-20 bg-slate-950/80 backdrop-blur border-b border-cyan-900/30">
-        <nav className="max-w-5xl mx-auto px-5 md:px-8 py-3 flex items-center justify-between">
-          <a href="#top" style={{ fontFamily: "'Dancing Script', cursive" }} className={`text-base font-semibold ${gradientText}`}>
-            Eirini's Portfolio
-          </a>
-          <div className="hidden md:flex gap-6 text-sm">
-            {navLinks.map((s) => (
-              <a key={s} href={`#${s}`} className={`${gradientText} capitalize opacity-80 hover:opacity-100 transition-opacity`}>
-                {s}
-              </a>
-            ))}
-          </div>
-          <button
-            className="md:hidden text-cyan-300 p-1.5 -mr-1.5"
-            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={mobileMenuOpen}
-            onClick={() => setMobileMenuOpen((v) => !v)}
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              {mobileMenuOpen ? (
-                <path d="M6 6l12 12M18 6L6 18" />
-              ) : (
-                <path d="M4 7h16M4 12h16M4 17h16" />
-              )}
-            </svg>
-          </button>
-        </nav>
-        <AnimatePresence initial={false}>
-          {mobileMenuOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.2, ease: "easeInOut" }}
-              className="md:hidden overflow-hidden border-t border-cyan-900/30"
-            >
-              <div className="px-5 py-3 flex flex-col gap-3 text-sm">
-                {navLinks.map((s) => (
-                  <a
-                    key={s}
-                    href={`#${s}`}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`${gradientText} capitalize opacity-80 hover:opacity-100 transition-opacity`}
-                  >
-                    {s}
-                  </a>
-                ))}
-              </div>
-            </motion.div>
+        <AnimatePresence>
+          {story && (
+            <Article
+              key="article"
+              slug={story.slug}
+              origin={story.origin}
+              onClose={closeStory}
+              onOpen={openStory}
+              openEmbed={setEmbed}
+            />
           )}
         </AnimatePresence>
-      </header>
-
-      {/* HERO */}
-      <section id="top" className="max-w-5xl mx-auto px-5 md:px-8 pt-12 pb-6 relative">
-        <NetworkGraph className="pointer-events-none absolute -inset-x-10 -top-16 -bottom-16 w-[calc(100%+5rem)] h-[calc(100%+8rem)]" />
-        <div className={`${card} grid md:grid-cols-3 gap-6 items-center p-6 relative`}>
-          <div className="md:col-span-2 flex flex-col gap-4">
-            <motion.h1
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              style={{ fontFamily: "'Dancing Script', cursive" }}
-              className={`text-3xl md:text-5xl font-semibold tracking-normal ${gradientText}`}
-            >
-              {PROFILE.name}
-            </motion.h1>
-            <p className="text-base md:text-lg text-slate-300 font-mono">{PROFILE.title}</p>
-            <p className="leading-relaxed text-slate-400 text-sm">
-              Driven by curiosity and a desire to make meaningful change through technology.
-              I love understanding how systems work, uncovering insights in data, and building
-              solutions that help people and organizations. I naturally take on a product mindset:
-              aligning stakeholders, prioritising and translating ideas so that solutions are
-              both usable and valuable in the real world.
-            </p>
-            <div className="mt-2 flex flex-wrap gap-3">
-              {[
-                { label: "GitHub", href: PROFILE.links.github },
-                { label: "LinkedIn", href: PROFILE.links.linkedin },
-              ].map((l) => (
-                <motion.a
-                  key={l.label}
-                  whileHover={{ y: -1, scale: 1.015 }}
-                  whileTap={{ scale: 0.985 }}
-                  className="px-4 py-2 rounded-lg bg-gradient-to-r from-cyan-600 to-violet-600 hover:from-cyan-500 hover:to-violet-500 text-white text-sm shadow-sm transition-all"
-                  href={l.href}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {l.label}
-                </motion.a>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex flex-col items-center gap-4">
-            <img
-              src="/photo/rena.jpg"
-              alt="Eirini Ornithopoulou portrait"
-              className="w-36 h-36 rounded-full object-cover border-2 border-cyan-700/60 shadow-lg shadow-cyan-900/30"
-              loading="lazy"
+        <AnimatePresence>
+          {palette && (
+            <CommandPalette
+              onClose={() => setPalette(false)}
+              onOpen={openStory}
+              setFilter={setFilter}
+              replayIntro={replayIntro}
             />
-            <div className="rounded-xl bg-slate-950/80 border border-cyan-900/30 text-sm p-4 w-full">
-              <div className="text-slate-500 text-xs font-mono uppercase tracking-wider">Based in</div>
-              <div className="font-medium text-slate-200 mt-0.5">{PROFILE.location}</div>
-              <div className="text-slate-500 text-xs font-mono uppercase tracking-wider mt-3">Contact</div>
-              <a className="text-cyan-400 hover:text-cyan-300 underline mt-0.5 block text-xs" href={`mailto:${PROFILE.email}`}>
-                {PROFILE.email}
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* PROJECTS */}
-      <Section id="projects" title="Selected Projects">
-        {/* Featured — pinned + newest flagship work, full-size cards */}
-        <div className="grid md:grid-cols-2 gap-3 items-start">
-          {ORDERED_PROJECTS.slice(0, FEATURED_COUNT).map((p, i) => (
-            <ProjectCard
-              key={i}
-              p={p}
-              isOpen={openProject === i}
-              onToggle={() => toggleProject(i)}
-              openEmbed={openEmbed}
-            />
-          ))}
-        </div>
-
-        {/* Everything else — grouped by category, compact rows */}
-        {CATEGORY_ORDER.map((cat) => {
-          const items = ORDERED_PROJECTS
-            .map((p, i) => ({ p, i }))
-            .filter(({ p, i }) => i >= FEATURED_COUNT && p.badge !== "inprogress" && p.category === cat);
-          if (items.length === 0) return null;
-          return (
-            <div key={cat} className="mt-8">
-              <h3 className="text-xs font-semibold uppercase tracking-widest text-cyan-500/70 mb-3">
-                {cat}
-              </h3>
-              <div className="grid md:grid-cols-2 gap-2 items-start">
-                {items.map(({ p, i }) => (
-                  <ProjectCard
-                    key={i}
-                    p={p}
-                    isOpen={openProject === i}
-                    onToggle={() => toggleProject(i)}
-                    openEmbed={openEmbed}
-                    compact
-                  />
-                ))}
-              </div>
-            </div>
-          );
-        })}
-
-        {/* Still in progress */}
-        {ORDERED_PROJECTS.some((p) => p.badge === "inprogress") && (
-          <div className="mt-8">
-            <h3 className="text-xs font-semibold uppercase tracking-widest text-cyan-500/70 mb-3">
-              In Progress
-            </h3>
-            <div className="grid md:grid-cols-2 gap-2 items-start">
-              {ORDERED_PROJECTS.map((p, i) =>
-                p.badge === "inprogress" ? (
-                  <ProjectCard
-                    key={i}
-                    p={p}
-                    isOpen={openProject === i}
-                    onToggle={() => toggleProject(i)}
-                    openEmbed={openEmbed}
-                    compact
-                  />
-                ) : null
-              )}
-            </div>
-          </div>
-        )}
-      </Section>
-
-      {/* SKILLS */}
-      <Section id="skills" title="Skills">
-        <div className={`${card} p-6 flex flex-col gap-5`}>
-          {SKILL_GROUPS.map((group) => (
-            <div key={group.label}>
-              <h3 className="text-xs font-semibold uppercase tracking-widest text-cyan-500/70 mb-2">
-                {group.label}
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {group.items.map((s, i) => (
-                  <span key={i} className={tag}>{s}</span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* EDUCATION */}
-      <Section id="education" title="Education">
-        <div className="grid md:grid-cols-3 gap-4">
-          {EDUCATION.map((e, i) => (
-            <div key={i} className={`${card} p-5`}>
-              <div className="flex items-center gap-4">
-                {e.logo ? (
-                  <img
-                    src={e.logo}
-                    alt={`${e.org} emblem`}
-                    className="h-12 w-12 rounded-lg object-contain bg-slate-800 p-1"
-                    loading="lazy"
-                  />
-                ) : (
-                  <div className="h-12 w-12 rounded-lg bg-cyan-950 flex items-center justify-center text-cyan-400 font-bold text-sm">
-                    {e.org.split(" ").slice(0, 2).map((w) => w[0]).join("").toUpperCase()}
-                  </div>
-                )}
-                <div>
-                  <div className="font-semibold text-slate-200 text-sm leading-snug">{e.degree}</div>
-                  <div className="text-slate-400 text-xs mt-0.5">{e.org}</div>
-                  <div className="text-slate-500 text-xs mt-0.5 font-mono">{e.years}</div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* CERTIFICATIONS */}
-      <Section id="certs" title="Certifications">
-        <div className="grid md:grid-cols-2 gap-3">
-          {CERTS.map((c, i) => (
-            <div key={i} className={`${card} px-5 py-3`}>
-              <div className="flex items-center gap-2 text-sm text-slate-300">
-                <span className="text-cyan-500 text-xs">◆</span>
-                {c}
-              </div>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* PUBLICATIONS */}
-      <Section id="publications" title="Publications & Writing">
-        <div className={`${card} p-6`}>
-          <p className="text-slate-400 text-sm">
-            See peer‑reviewed publications and research activity on{" "}
-            <a
-              className="text-cyan-400 hover:text-cyan-300 underline"
-              href={PROFILE.links.publications}
-              target="_blank"
-              rel="noreferrer"
-            >
-              ResearchGate
-            </a>.
-          </p>
-        </div>
-      </Section>
-
-      {/* CONTACT */}
-      <Section id="contact" title="Contact">
-        <div className={`${card} p-6`}>
-          <p className="text-slate-400 text-sm">
-            Open to roles in Data Science / Product Ownership.
-          </p>
-          <div className="mt-4 flex flex-wrap gap-3">
-            <a
-              className="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 border border-cyan-900/40 text-white text-sm transition-colors"
-              href={PROFILE.links.linkedin}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Connect on LinkedIn
-            </a>
-            <a
-              className="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 border border-cyan-900/40 text-white text-sm transition-colors"
-              href={`mailto:${PROFILE.email}`}
-            >
-              Email
-            </a>
-          </div>
-        </div>
-      </Section>
-
-      <EmbedModal open={embedOpen} onClose={() => setEmbedOpen(false)} src={embedSrc} />
-
-      <footer className="py-10 text-center text-slate-600 text-xs font-mono">
-        © {new Date().getFullYear()} {PROFILE.name} · Built with React & Tailwind
-      </footer>
-    </div>
+          )}
+        </AnimatePresence>
+        <AnimatePresence>{intro && <Intro onDone={finishIntro} />}</AnimatePresence>
+        <EmbedModal open={!!embed} onClose={() => setEmbed(null)} src={embed} />
+      </div>
+    </MotionConfig>
   );
 }
