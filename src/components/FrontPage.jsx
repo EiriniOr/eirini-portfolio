@@ -351,9 +351,6 @@ function LeadVideo() {
       <h2 className="mt-3 max-w-3xl font-serif text-3xl leading-[1.02] text-white md:text-4xl">
         From Crete to Karolinska: <em className="text-cyan-200">my story</em> in 90 seconds
       </h2>
-      <p className="mt-2 max-w-2xl text-sm text-slate-300 md:text-base">
-        Materials science, lasers and a PhD in biotechnology, then machine learning, a hackathon win and a placement at Karolinska University Hospital.
-      </p>
       <div className="relative mt-4 overflow-hidden rounded-xl border border-white/10 bg-black">
         <video
           ref={ref}

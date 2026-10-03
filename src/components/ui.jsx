@@ -149,10 +149,20 @@ export function Cover({ p, className = "", hoverPlay = true }) {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      {p.poster || p.images?.length ? (
+      {p.confidential && !p.thumb ? (
+        <div className="cover-media absolute inset-0 grid place-items-center bg-gradient-to-br from-slate-800/80 via-[#0d1018] to-cyan-950/60">
+          <div className="flex flex-col items-center gap-1 text-slate-400">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+              <rect x="5" y="11" width="14" height="9" rx="2" />
+              <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+            </svg>
+            <span className="font-mono text-[9px] uppercase tracking-[0.2em]">Confidential project</span>
+          </div>
+        </div>
+      ) : p.thumb || p.poster || p.images?.length ? (
         <>
           <img
-            src={p.poster || p.images[0]}
+            src={p.thumb || p.poster || p.images[0]}
             alt=""
             loading="lazy"
             className="cover-media absolute inset-0 h-full w-full object-cover object-top"
@@ -184,7 +194,7 @@ export function Cover({ p, className = "", hoverPlay = true }) {
           </text>
         </svg>
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
     </div>
   );
 }

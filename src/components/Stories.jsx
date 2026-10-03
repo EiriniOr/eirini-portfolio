@@ -34,7 +34,7 @@ function Latest({ onOpen }) {
       <SectionHead eyebrow="Recently shipped" title="Latest projects" />
       <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
         {items.map((s, i) => (
-          <motion.button key={s.slug} {...reveal(i)} onClick={() => onOpen(s.slug, "latest")} className="story group text-left">
+          <motion.button key={s.slug} {...reveal(i)} onClick={() => onOpen(s.slug, "latest")} className="story group flex flex-col justify-start text-left">
             <motion.div layoutId={`cover-latest-${s.slug}`} className="overflow-hidden rounded-xl">
               <Cover p={s} className="aspect-[16/8] rounded-xl" />
             </motion.div>
@@ -62,19 +62,19 @@ function TopStories({ onOpen }) {
             key={s.slug}
             {...reveal(i)}
             onClick={() => onOpen(s.slug, "top")}
-            className="story feature group relative overflow-hidden rounded-2xl border border-white/10 text-left"
+            className="story feature group relative flex flex-col justify-start overflow-hidden rounded-2xl border border-white/10 text-left"
           >
             <motion.div layoutId={`cover-top-${s.slug}`} className="overflow-hidden">
-              <Cover p={s} className="aspect-[16/5]" />
+              <Cover p={s} className="aspect-[16/6]" />
             </motion.div>
-            <div className="relative p-5"> 
+            <div className="relative flex flex-1 flex-col p-5">
               <div className="flex flex-wrap items-center gap-2">
                 <Badge b="pinned" />
                 <Kicker color="text-cyan-300">{s.kind} · {s.year}</Kicker>
               </div>
               <h3 className="story-title mt-2 font-display text-xl font-bold leading-[1.1] tracking-tight text-white md:text-2xl">{s.title}</h3>
               <p className="mt-2 line-clamp-2 text-sm text-slate-400">{s.impact}</p>
-              <div className="mt-3 flex items-center justify-between gap-3">
+              <div className="mt-auto flex items-center justify-between gap-3 pt-3">
                 <MediaTags media={s.media} />
                 <span className="arrow-link shrink-0 text-sm font-semibold text-white">View project →</span>
               </div>

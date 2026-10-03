@@ -624,4 +624,16 @@ export function mediaOf(p) {
   return [...out].sort((a, b) => order.indexOf(a) - order.indexOf(b));
 }
 
-export const STORIES = PROJECTS.map((p, i) => ({ ...p, slug: slugify(p.title), media: mediaOf(p), index: i }));
+// Screenshots of each project's own page (live demo, thesis cover, report or repo card).
+const THUMBS = new Set([
+  "fairgatdann-fairness-aware-graph-attention-domain-adversarial-network-for-icu-mortality",
+  "nutriofast", "cassandra", "miss-datrix", "automated-weekly-digest-systems", "jobbajobba", "petal",
+  "sequence-based-movie-recommender", "mrgraph-the-graph-based-tutor", "forgemee", "powerpoint-mcp-server",
+  "ats-style-job-match-scorer", "heart-disease-risk-prediction-api", "customer-churn-dashboard",
+  "document-qa-rag-bot", "carbon-emissions-explorer", "cookie-cats-ab-test-analysis", "ai-implementation-strategy",
+]);
+
+export const STORIES = PROJECTS.map((p, i) => {
+  const slug = slugify(p.title);
+  return { ...p, slug, media: mediaOf(p), index: i, thumb: THUMBS.has(slug) ? `/thumbs/${slug}.jpg` : null };
+});

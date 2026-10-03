@@ -149,9 +149,9 @@ export function Wordmark({ ready }) {
         </motion.span>
         <motion.span
           aria-hidden
-          className="ml-4 inline-block -rotate-6 whitespace-nowrap align-middle font-script text-[0.55em] leading-none md:text-[0.5em] text-cyan-200 md:ml-6"
-          initial={{ clipPath: "inset(0 100% 0 0)", opacity: 0 }}
-          animate={ready ? { clipPath: "inset(0 0% 0 0)", opacity: 1 } : {}}
+          className="relative z-20 ml-4 inline-block -translate-y-[0.2em] -rotate-6 whitespace-nowrap px-2 py-1 align-top font-script text-[0.55em] leading-none md:text-[0.5em] text-cyan-200 md:ml-6"
+          initial={{ clipPath: "inset(-40% 100% -40% -10%)", opacity: 0 }}
+          animate={ready ? { clipPath: "inset(-40% -10% -40% -10%)", opacity: 1 } : {}}
           transition={{ duration: 1.1, ease: "easeInOut", delay: 1 }}
         >
           My portfolio
