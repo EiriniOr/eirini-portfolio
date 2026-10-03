@@ -559,7 +559,13 @@ export const CERTS = [
 // ── Front-page stories ─────────────────────────────────────────────────────
 export const NOW = {
   kicker: "Now exploring",
-  text: "These days I'm looking into Jev, TypeSafe AI's System One model.",
+  headline: "Jev — a model that decides instead of chats",
+  text: "These days I'm looking into Jev, TypeSafe AI's System One model: messy input in, a typed decision with a confidence score out, in milliseconds.",
+  uses: [
+    "Routing support tickets to the right team",
+    "Flagging staffing or safety issues in shift notes",
+    "Blocking prompt-injection attempts before they reach an LLM",
+  ],
   link: { label: "Read about Jev", href: "https://typesafe.ai/blog/introducing-system-one-models-and-jev" },
 };
 

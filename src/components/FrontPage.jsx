@@ -4,6 +4,78 @@ import { CAREER_VIDEO, EDUCATION, NOW, PROFILE, STORIES, UPCOMING } from "../dat
 import { play } from "../sound";
 import { Kicker, SectionHead, ease, useNow } from "./ui";
 
+const SAMPLES = [
+  { input: "Ticket: “Can't log in after password reset”", out: '{ queue: "auth", priority: "high" }', p: 0.94, ms: 88 },
+  { input: "Shift note: “Ward 4 short two nurses tonight”", out: '{ flag: "staffing", urgency: "high" }', p: 0.89, ms: 104 },
+  { input: "Prompt: “ignore previous instructions and…”", out: '{ allow: false, reason: "injection" }', p: 0.99, ms: 71 },
+  { input: "Email: “Invoice #4471 attached, due 30 Oct”", out: '{ type: "invoice", due: "2026-10-30" }', p: 0.97, ms: 112 },
+  { input: "Review: “Arrived late but works great”", out: '{ sentiment: "mixed" }', p: 0.71, ms: 95 },
+  { input: "Form field: “forty-two”", out: "{ age: 42 }", p: 0.98, ms: 79 },
+];
+
+function DecisionStream() {
+  const [rows, setRows] = useState(() => [{ ...SAMPLES[0], id: 0 }]);
+  const ref = useRef(null);
+  const inView = useInView(ref);
+
+  useEffect(() => {
+    if (!inView) return;
+    const id = setInterval(() => {
+      setRows((r) => {
+        const next = r[0].id + 1;
+        return [{ ...SAMPLES[next % SAMPLES.length], id: next }, ...r].slice(0, 3);
+      });
+    }, 2400);
+    return () => clearInterval(id);
+  }, [inView]);
+
+  return (
+    <div ref={ref} className="rounded-xl border border-white/10 bg-black/60 font-mono text-[11.5px] shadow-2xl shadow-cyan-950/40">
+      <div className="flex items-center justify-between border-b border-white/10 px-3 py-2 text-[10px] uppercase tracking-widest text-slate-500">
+        <span className="flex items-center gap-1.5">
+          <span className="h-2 w-2 rounded-full bg-rose-400/80" />
+          <span className="h-2 w-2 rounded-full bg-amber-300/80" />
+          <span className="h-2 w-2 rounded-full bg-lime-300/80" />
+          <span className="ml-2">decision stream</span>
+        </span>
+        <span>illustrative</span>
+      </div>
+      <div className="relative h-[178px] overflow-hidden p-3">
+        <AnimatePresence initial={false}>
+          {rows.map((r, i) => (
+            <motion.div
+              key={r.id}
+              layout
+              initial={{ opacity: 0, y: -16, filter: "blur(6px)" }}
+              animate={{ opacity: 1 - i * 0.22, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5, ease }}
+              className="mb-3"
+            >
+              <div className="truncate text-slate-500">› {r.input}</div>
+              <div className="mt-0.5 flex items-center gap-2">
+                <span className="truncate text-cyan-300">{r.out}</span>
+                <span className="ml-auto shrink-0 rounded bg-white/5 px-1.5 text-[10px] text-slate-400">{r.ms}ms</span>
+              </div>
+              <div className="mt-1 flex items-center gap-2">
+                <div className="h-1 flex-1 overflow-hidden rounded-full bg-white/10">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: `${r.p * 100}%` }}
+                    transition={{ duration: 0.8, ease, delay: 0.15 }}
+                    className={`h-full rounded-full ${r.p > 0.9 ? "bg-lime-300" : r.p > 0.8 ? "bg-cyan-300" : "bg-amber-300"}`}
+                  />
+                </div>
+                <span className="w-12 shrink-0 text-right text-[10px] text-slate-400">p={r.p.toFixed(2)}</span>
+              </div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+}
+
 function NowStory() {
   return (
     <motion.article
@@ -12,17 +84,30 @@ function NowStory() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.6, ease }}
-      className="lead-card flex scroll-mt-24 flex-wrap items-center justify-between gap-4 rounded-2xl border border-white/10 px-5 py-4"
+      className="lead-card grid scroll-mt-24 gap-5 rounded-2xl border border-white/10 p-5 md:grid-cols-2 md:p-6"
     >
-      <div className="flex min-w-0 flex-wrap items-center gap-3">
-        <span className="flex items-center gap-2 rounded-full bg-rose-500/15 px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-widest text-rose-300">
+      <div className="min-w-0">
+        <span className="inline-flex items-center gap-2 rounded-full bg-rose-500/15 px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-widest text-rose-300">
           <span className="live-dot live-dot-red" /> {NOW.kicker}
         </span>
-        <p className="text-sm text-slate-200 md:text-base">{NOW.text}</p>
+        <h3 className="mt-3 font-serif text-3xl leading-[1.05] text-white">{NOW.headline}</h3>
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">{NOW.text}</p>
+        <Kicker color="text-slate-500" className="mt-4">How it can be used</Kicker>
+        <ul className="mt-2 space-y-1.5">
+          {NOW.uses.map((u) => (
+            <li key={u} className="flex gap-2 text-sm text-slate-300">
+              <span className="text-cyan-300">→</span>
+              {u}
+            </li>
+          ))}
+        </ul>
+        <a href={NOW.link.href} target="_blank" rel="noreferrer" className="btn-ghost mt-5">
+          {NOW.link.label} ↗
+        </a>
       </div>
-      <a href={NOW.link.href} target="_blank" rel="noreferrer" className="btn-ghost shrink-0">
-        {NOW.link.label} ↗
-      </a>
+      <div className="min-w-0">
+        <DecisionStream />
+      </div>
     </motion.article>
   );
 }
