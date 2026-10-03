@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useInView, animate } from "framer-motion";
 import { CAREER_VIDEO, EDUCATION, NOW, PROFILE, STORIES, UPCOMING } from "../data";
 import { play } from "../sound";
-import { Kicker, ease, useNow } from "./ui";
+import { Kicker, SectionHead, ease, useNow } from "./ui";
 import { burst } from "./NeuralField";
 
 const SAMPLES = [
@@ -82,13 +82,14 @@ function NowStory() {
     <motion.article
       id="now"
       initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.9, ease, delay: 0.9 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.8, ease }}
       onMouseEnter={(e) => {
         const r = e.currentTarget.getBoundingClientRect();
         burst(r.left + r.width * 0.75, r.top + 80);
       }}
-      className="lead-card relative mt-4 scroll-mt-24 overflow-hidden rounded-2xl border border-white/10 p-5 md:p-6"
+      className="lead-card relative scroll-mt-24 overflow-hidden rounded-2xl border border-white/10 p-5 md:p-6"
     >
       <div className="flex flex-wrap items-center gap-3">
         <span className="flex items-center gap-2 rounded-full bg-rose-500/15 px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-widest text-rose-300">
@@ -254,21 +255,21 @@ function Editor() {
       initial={{ opacity: 0, x: 24 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.9, ease, delay: 0.85 }}
-      className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 backdrop-blur"
+      className="relative overflow-hidden rounded-2xl border border-cyan-300/30 bg-gradient-to-br from-cyan-400/[0.12] via-[#0b0c14]/80 to-violet-500/[0.14] p-5 shadow-lg shadow-cyan-950/30 backdrop-blur"
     >
-      <Kicker color="text-slate-500">About Eirini</Kicker>
-      <div className="mt-3 flex items-center gap-3">
+      <Kicker color="text-cyan-300">About Eirini</Kicker>
+      <div className="mt-3 flex items-center gap-4">
         <img
           src="/photo/rena.jpg"
           alt="Eirini Ornithopoulou"
-          className="h-12 w-12 rounded-full object-cover ring-2 ring-white/15 transition duration-500 hover:ring-cyan-300/60"
+          className="h-16 w-16 shrink-0 rounded-full object-cover ring-2 ring-cyan-300/50 ring-offset-2 ring-offset-[#0b0c14]"
         />
         <div className="min-w-0">
-          <div className="font-display text-base font-bold text-white">{PROFILE.name}</div>
+          <div className="font-display text-xl font-bold leading-tight text-white">{PROFILE.name}</div>
           <div className="text-[11px] text-slate-400">{PROFILE.location} · {PROFILE.languages.join(" · ")}</div>
         </div>
       </div>
-      <p className="mt-3 text-[13px] leading-relaxed text-slate-400">
+      <p className="mt-3 text-sm leading-relaxed text-slate-200">
         PhD in biotechnology turned data scientist. I build ML and agentic AI systems with a product mindset, so what ships is usable and valuable.
       </p>
       <div className="mt-3 flex flex-wrap gap-1.5">
@@ -385,6 +386,15 @@ function LeadVideo() {
   );
 }
 
+export function NowSection() {
+  return (
+    <section className="mx-auto mt-12 max-w-7xl px-4 md:px-8">
+      <SectionHead eyebrow="Current work" title="Now building" />
+      <NowStory />
+    </section>
+  );
+}
+
 export default function FrontPage() {
   return (
     <section className="mx-auto mt-6 max-w-7xl px-4 md:px-8">
@@ -395,7 +405,6 @@ export default function FrontPage() {
           <Editor />
         </div>
       </div>
-      <NowStory />
       <Numbers />
     </section>
   );

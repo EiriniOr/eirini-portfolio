@@ -3,7 +3,7 @@ import { AnimatePresence, MotionConfig } from "framer-motion";
 import EmbedModal from "./EmbedModal";
 import NeuralField from "./components/NeuralField";
 import { TopBar, Wordmark } from "./components/Masthead";
-import FrontPage from "./components/FrontPage";
+import FrontPage, { NowSection } from "./components/FrontPage";
 import Stories from "./components/Stories";
 import Article from "./components/Article";
 import CommandPalette from "./components/CommandPalette";
@@ -94,7 +94,9 @@ export default function Portfolio() {
           <TopBar onSearch={() => setPalette(true)} />
           <Wordmark ready={!intro} />
           <FrontPage />
-          <Stories onOpen={openStory} filter={filter} setFilter={setFilter} />
+          <Stories onOpen={openStory} filter={filter} setFilter={setFilter}>
+            <NowSection />
+          </Stories>
           <Stack />
           <Education />
           <Briefs />

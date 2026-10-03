@@ -188,10 +188,11 @@ function Archive({ onOpen, filter, setFilter }) {
   );
 }
 
-export default function Stories({ onOpen, filter, setFilter }) {
+export default function Stories({ onOpen, filter, setFilter, children }) {
   return (
     <>
       <TopStories onOpen={onOpen} />
+      {children}
       <Latest onOpen={onOpen} />
       <Archive onOpen={onOpen} filter={filter} setFilter={setFilter} />
     </>
