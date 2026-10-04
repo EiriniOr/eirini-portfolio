@@ -434,7 +434,7 @@ export const PROJECTS = [
     stack: ["Pandas", "Plotly", "Streamlit"],
     links: [
       { label: "Live Demo", href: "https://co2explorer.streamlit.app/" },
-      { label: "GitHub", href: "https://github.com/EiriniOr/co2-explorer" },
+      { label: "GitHub", href: "https://github.com/EiriniOr/co2" },
     ],
     highlights: [
       "Choropleth + multi-country time series",
