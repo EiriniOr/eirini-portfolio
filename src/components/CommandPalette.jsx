@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { PROFILE, STORIES } from "../data";
 import { play, setAmbient, setSound, useSound } from "../sound";
 import { MediaTags, ease } from "./ui";
+import { track } from "../analytics";
 
 const go = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
 
@@ -62,6 +63,7 @@ export default function CommandPalette({ onClose, onOpen, setFilter, replayIntro
 
   function run(it) {
     if (!it) return;
+    track("search_select", { item: it.label.slice(0, 60), query: q.slice(0, 40) });
     onClose();
     setTimeout(it.run, 60);
   }

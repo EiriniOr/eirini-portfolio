@@ -10,6 +10,7 @@ import Intro from "./components/Intro";
 import { Briefs, Contact, Education, Footer, Stack } from "./components/Sections";
 import { STORIES } from "./data";
 import { play } from "./sound";
+import { track } from "./analytics";
 
 function storyFromHash() {
   const m = window.location.hash.match(/^#story\/(.+)$/);
@@ -28,7 +29,11 @@ export default function Portfolio() {
   const [story, setStory] = useState(storyFromHash);
   const [intro, setIntro] = useState(() => !introSeen() && !storyFromHash());
   const [palette, setPalette] = useState(false);
-  const [filter, setFilter] = useState({ media: "all", category: "All" });
+  const [filter, setFilterState] = useState({ media: "all", category: "All" });
+  const setFilter = useCallback((f) => {
+    setFilterState(f);
+    track("filter_used", { media: f.media, category: f.category });
+  }, []);
   const [embed, setEmbed] = useState(null);
 
   const finishIntro = useCallback(() => {
@@ -40,6 +45,7 @@ export default function Portfolio() {
 
   const openStory = useCallback((slug, origin) => {
     play("open");
+    track("project_open", { project: slug, from: origin });
     const url = `#story/${slug}`;
     if (window.history.state?.story) window.history.replaceState({ story: slug }, "", url);
     else window.history.pushState({ story: slug }, "", url);
@@ -72,6 +78,10 @@ export default function Portfolio() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
+  }, [palette]);
+
+  useEffect(() => {
+    if (palette) track("search_open");
   }, [palette]);
 
   useEffect(() => {

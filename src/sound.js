@@ -1,4 +1,5 @@
 import { useSyncExternalStore } from "react";
+import { track } from "./analytics";
 
 // Per-file gains balance the ElevenLabs output loudness (measured with ffmpeg volumedetect).
 const SFX = {
@@ -141,6 +142,7 @@ function applyDuck() {
 }
 
 export async function setSound(on) {
+  track("sound_toggle", { on });
   state.enabled = on;
   persist();
   emit();

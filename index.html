@@ -17,8 +17,7 @@
       function gtag(){ dataLayer.push(arguments); }
       gtag('js', new Date());
 
-      // Enable debug so you can see hits in Realtime DebugView
-      gtag('config', 'G-TMF6SB4P1X', { debug_mode: true, send_page_view: false });
+      gtag('config', 'G-TMF6SB4P1X', { send_page_view: false });
 
       // Explicit page_view for SPAs
       window.addEventListener('load', function () {

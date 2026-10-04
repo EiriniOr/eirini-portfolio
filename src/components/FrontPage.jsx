@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useInView, animate } from "framer-motion";
 import { CAREER_VIDEO, EDUCATION, NOW, PROFILE, STORIES, UPCOMING } from "../data";
 import { play } from "../sound";
+import { track } from "../analytics";
 import { Kicker, SectionHead, ease, useNow } from "./ui";
 
 const SAMPLES = [
@@ -231,6 +232,7 @@ function Editor() {
         <button
           onClick={() => {
             navigator.clipboard?.writeText(PROFILE.email);
+            track("copy_email", { from: "about_card" });
             setCopied(true);
             play("toggle");
             setTimeout(() => setCopied(false), 1600);
@@ -280,6 +282,7 @@ function Numbers() {
 
 function LeadVideo() {
   const ref = useRef(null);
+  const quartiles = useRef(new Set());
   const [started, setStarted] = useState(false);
   return (
     <motion.article
@@ -305,7 +308,19 @@ function LeadVideo() {
           playsInline
           preload="none"
           poster={CAREER_VIDEO.poster}
-          onPlay={() => setStarted(true)}
+          onPlay={() => {
+            if (!started) track("video_play", { video: "career_story" });
+            setStarted(true);
+          }}
+          onTimeUpdate={(e) => {
+            const v = e.currentTarget;
+            const pct = Math.floor((v.currentTime / v.duration) * 4) * 25;
+            if (pct >= 25 && pct < 100 && !quartiles.current.has(pct)) {
+              quartiles.current.add(pct);
+              track("video_progress", { video: "career_story", percent: pct });
+            }
+          }}
+          onEnded={() => track("video_complete", { video: "career_story" })}
           className="block aspect-video w-full"
         >
           <source src={CAREER_VIDEO.src} type="video/mp4" />

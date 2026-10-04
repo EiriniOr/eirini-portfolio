@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { CERTS, EDUCATION, PROFILE, SKILL_GROUPS } from "../data";
 import { play } from "../sound";
+import { track } from "../analytics";
 import { Kicker, SectionHead, ease } from "./ui";
 
 export function Stack() {
@@ -154,6 +155,7 @@ export function Contact() {
           <button
             onClick={() => {
               navigator.clipboard?.writeText(PROFILE.email);
+              track("copy_email", { from: "contact" });
               setCopied(true);
               play("toggle");
               setTimeout(() => setCopied(false), 1600);

@@ -65,6 +65,7 @@ export default function Article({ slug, origin, onClose, onOpen, openEmbed }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 30 }}
             transition={{ duration: 0.5, ease }}
+            data-project={s.slug}
             className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#0b0c14] shadow-2xl"
           >
             <motion.div layoutId={shared ? `cover-${origin}-${s.slug}` : undefined} className="overflow-hidden">
