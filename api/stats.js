@@ -2,6 +2,7 @@
 // Env (Vercel project settings): GA_PROPERTY_ID, GA_CREDENTIALS_B64 (service-account JSON, base64), STATS_PASSWORD.
 import { timingSafeEqual } from "node:crypto";
 import { BetaAnalyticsDataClient } from "@google-analytics/data";
+import { PROJECTS, slugify } from "../src/data.js";
 
 const EVENTS = [
   "video_play", "video_complete", "project_open", "outbound_click",
@@ -17,6 +18,103 @@ function authorized(req) {
 const eventIs = (name) => ({ filter: { fieldName: "eventName", stringFilter: { value: name } } });
 const rows = (r, toValue = Number) =>
   (r?.rows || []).map((row) => ({ name: row.dimensionValues[0].value, value: toValue(row.metricValues[0].value) }));
+
+// Jev (TypeSafe AI) turns the summary into typed, confidence-scored judgements; the page
+// renders them as sentences. Skipped when TYPESAFE_API_KEY is not set.
+const PROJECT_INFO = Object.fromEntries(PROJECTS.map((p) => [slugify(p.title), `${p.title} (${p.category}; ${p.kind})`]));
+
+const QUESTIONS = {
+  enough_data: {
+    type: "noul",
+    instructions: "There is enough visitor activity in this period to draw conclusions",
+    criteria: { true: "At least roughly 20 visitors and some project activity", false: "Too few visitors or events to say anything meaningful" },
+  },
+  main_interest: {
+    type: "choice",
+    instructions: "Which theme do visitors engage with most, judging by projects opened and links clicked",
+    criteria: {
+      healthcare_ai: "Healthcare / clinical AI projects",
+      agentic_ai: "Agentic AI and LLM tools",
+      data_science: "Data science, ML models and analysis",
+      web_apps: "Full-stack web apps and tools",
+      mixed: "No clear favourite",
+    },
+  },
+  audience: {
+    type: "choice",
+    instructions: "Where most visitors come from",
+    criteria: {
+      linkedin: "LinkedIn or other professional networks",
+      technical: "GitHub or other developer sites",
+      search: "Search engines",
+      direct: "Direct visits, bookmarks or shared links",
+      unclear: "No dominant source",
+    },
+  },
+  video_engagement: {
+    type: "score",
+    instructions: "How engaged people are with the intro video once they press play",
+    criteria: ["Most stop early", "About half keep watching", "Most watch to the end"],
+  },
+  hands_on: {
+    type: "score",
+    instructions: "How much visitors try live demos and read code, relative to how many visit",
+    criteria: ["Rarely open demos or code", "Some open demos or code", "Many open demos or code"],
+  },
+  trend: {
+    type: "choice",
+    instructions: "How visitor numbers change between the first and second half of the period",
+    criteria: { growing: "Clearly more visitors recently", steady: "Roughly the same", declining: "Clearly fewer visitors recently" },
+  },
+  suggestion: {
+    type: "choice",
+    instructions: "The single most useful next step for the portfolio owner, given this behaviour",
+    criteria: {
+      feature_top: "Feature the most-opened project more prominently",
+      promote_video: "Make the intro video more visible, few people play it",
+      shorten_video: "Shorten the intro video, viewers drop off",
+      more_demos: "Add live demos, visitors click demos but few exist in their favourite theme",
+      share_more: "Share the portfolio more widely, traffic is low",
+      keep: "Keep things as they are, engagement looks healthy",
+    },
+  },
+};
+
+async function jevInsight(summary) {
+  if (!process.env.TYPESAFE_API_KEY) return null;
+  const half = Math.floor(summary.daily.length / 2);
+  const sum = (a) => a.reduce((t, d) => t + d.visitors, 0);
+  const state = {
+    period_days: summary.days,
+    visitors: summary.totals.visitors,
+    visits: summary.totals.sessions,
+    average_visit_seconds: summary.totals.avgSessionSec,
+    visitors_first_half: sum(summary.daily.slice(0, half)),
+    visitors_second_half: sum(summary.daily.slice(half)),
+    traffic_sources: summary.sources,
+    projects_opened: summary.projects.map((p) => ({ project: PROJECT_INFO[p.name] || p.name, opens: p.value })),
+    demo_and_code_clicks_by_project: summary.projectClicks.map((p) => ({ project: PROJECT_INFO[p.name] || p.name, clicks: p.value })),
+    link_clicks_by_kind: summary.linkKinds,
+    intro_video: summary.video,
+  };
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 8000);
+  try {
+    const r = await fetch("https://api.typesafe.ai/v1/systemone", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${process.env.TYPESAFE_API_KEY}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ model: "jev-latest", state, questions: QUESTIONS }),
+      signal: ctrl.signal,
+    });
+    if (!r.ok) return { error: `Jev ${r.status}` };
+    const j = await r.json();
+    return { model: j.model, answers: j.answers };
+  } catch (e) {
+    return { error: `Jev unavailable (${e.name === "AbortError" ? "timeout" : e.message})` };
+  } finally {
+    clearTimeout(timer);
+  }
+}
 
 export default async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");
@@ -71,7 +169,7 @@ export default async function handler(req, res) {
   const ev = Object.fromEntries(rows(events).map((r) => [r.name, r.value]));
   const pct = Object.fromEntries(rows(progress).map((r) => [r.name, r.value]));
 
-  res.status(200).json({
+  const summary = {
     days,
     totals: { visitors: t[0], sessions: t[1], avgSessionSec: Math.round(t[2]), engagementRate: t[3] },
     daily: rows(daily).map((r) => ({ date: r.name, visitors: r.value })),
@@ -89,5 +187,8 @@ export default async function handler(req, res) {
       complete: ev.video_complete || 0,
     },
     warnings,
-  });
+  };
+  summary.insight = await jevInsight(summary);
+  if (summary.insight?.error) warnings.push(summary.insight.error);
+  res.status(200).json(summary);
 }

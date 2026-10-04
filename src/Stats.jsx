@@ -26,7 +26,70 @@ function sample(days) {
     projectClicks: [["nutriofast", 19], ["jobbajobba", 11], ["mrgraph-the-graph-based-tutor", 8], ["miss-datrix", 6]].map(([name, value]) => ({ name, value })),
     video: { play: 74, p25: 61, p50: 47, p75: 39, complete: 31 },
     warnings: [],
+    insight: {
+      model: "jev (sample)",
+      answers: {
+        enough_data: { type: "noul", noul: 0.97 },
+        main_interest: { type: "choice", choice: "healthcare_ai", confidence: 0.84 },
+        audience: { type: "choice", choice: "linkedin", confidence: 0.91 },
+        video_engagement: { type: "score", score: 0.5, confidence: 0.77 },
+        hands_on: { type: "score", score: 1, confidence: 0.69 },
+        trend: { type: "choice", choice: "growing", confidence: 0.73 },
+        suggestion: { type: "choice", choice: "feature_top", confidence: 0.58 },
+      },
+    },
   };
+}
+
+const INTEREST = { healthcare_ai: "healthcare AI", agentic_ai: "agentic AI and LLM tools", data_science: "data science and ML", web_apps: "full-stack web apps", mixed: "a mix of themes, with no clear favourite" };
+const AUDIENCE = { linkedin: "from LinkedIn", technical: "from GitHub and developer sites", search: "from search engines", direct: "directly or through shared links", unclear: "from many places, with no dominant source" };
+const VIDEO = ["most viewers stop the intro video early", "about half of viewers keep watching the intro video", "most viewers watch the intro video to the end"];
+const HANDS_ON = ["visitors rarely open demos or code", "some visitors open demos or code", "visitors actively try demos and read code"];
+const TREND = { growing: "Visitor numbers are growing.", steady: "Visitor numbers are steady.", declining: "Visitor numbers are declining." };
+const SUGGEST = {
+  feature_top: "feature your most-opened project more prominently",
+  promote_video: "make the intro video more visible",
+  shorten_video: "shorten the intro video",
+  more_demos: "add live demos in the theme visitors like most",
+  share_more: "share the portfolio more widely",
+  keep: "keep things as they are",
+};
+const level = (a, n) => Math.max(0, Math.min(n - 1, Math.round((a?.score ?? 0) * (n - 1))));
+
+function Conf({ value }) {
+  if (value == null) return null;
+  return <span className="ml-1.5 rounded bg-white/10 px-1.5 py-0.5 font-mono text-[10px] text-slate-300">{Math.round(value * 100)}% sure</span>;
+}
+
+function Insight({ insight }) {
+  if (!insight) {
+    return <p className="text-sm text-slate-400">Add a <code>TYPESAFE_API_KEY</code> in Vercel to get Jev's read on your visitors.</p>;
+  }
+  if (insight.error) return <p className="text-sm text-slate-400">Jev couldn't be reached this time ({insight.error}).</p>;
+  const a = insight.answers || {};
+  if ((a.enough_data?.noul ?? 1) < 0.5) {
+    return <p className="text-sm text-slate-300">Not enough visitors in this period for Jev to draw conclusions yet.</p>;
+  }
+  const lines = [
+    a.main_interest && <>Visitors seem most interested in <b className="text-white">{INTEREST[a.main_interest.choice]}</b>.<Conf value={a.main_interest.confidence} /></>,
+    a.audience && <>Most arrive <b className="text-white">{AUDIENCE[a.audience.choice]}</b>.<Conf value={a.audience.confidence} /></>,
+    a.video_engagement && <>{VIDEO[level(a.video_engagement, 3)].replace(/^./, (c) => c.toUpperCase())}.<Conf value={a.video_engagement.confidence} /></>,
+    a.hands_on && <>{HANDS_ON[level(a.hands_on, 3)].replace(/^./, (c) => c.toUpperCase())}.<Conf value={a.hands_on.confidence} /></>,
+    a.trend && <>{TREND[a.trend.choice]}<Conf value={a.trend.confidence} /></>,
+  ].filter(Boolean);
+  return (
+    <div>
+      <ul className="space-y-1.5 text-sm leading-relaxed text-slate-300">
+        {lines.map((l, i) => <li key={i}>{l}</li>)}
+      </ul>
+      {a.suggestion && (
+        <p className="mt-3 rounded-lg border border-cyan-300/20 bg-cyan-300/[0.06] px-3 py-2 text-sm text-slate-200">
+          Suggested next step: <b className="text-white">{SUGGEST[a.suggestion.choice]}</b>.<Conf value={a.suggestion.confidence} />
+        </p>
+      )}
+      <p className="mt-2 text-[11px] text-slate-500">Typed judgements by {insight.model} (TypeSafe AI), from this period's numbers.</p>
+    </div>
+  );
 }
 
 function Tile({ label, value, sub }) {
@@ -237,6 +300,12 @@ export default function Stats() {
               <Tile label="Avg. visit" value={mmss(data.totals.avgSessionSec)} sub={`${Math.round(data.totals.engagementRate * 100)}% engaged`} />
               <Tile label="Video plays" value={fmt(v.play)} sub={`${pct(v.complete, v.play)} watched to the end`} />
               <Tile label="Links opened" value={fmt(data.events.outbound_click)} sub={`${fmt(data.events.copy_email)} emails copied`} />
+            </div>
+
+            <div className="mt-4">
+              <Panel title="Insight by Jev" note="What the numbers suggest, with Jev's confidence for each judgement">
+                <Insight insight={data.insight} />
+              </Panel>
             </div>
 
             <div className="mt-4">
