@@ -21,6 +21,7 @@
 
       // Explicit page_view for SPAs
       window.addEventListener('load', function () {
+        if (location.pathname.indexOf('/stats') === 0) return;
         gtag('event', 'page_view', {
           page_title: document.title,
           page_location: location.href,
