@@ -56,6 +56,29 @@ export const PROJECTS = [
     highlights: [],
   },
   {
+    kind: "Adaptive Interface · Decision Model",
+    category: "Agentic AI & LLM Tools",
+    title: "Jev Command Center",
+    year: "2026",
+    badge: "new",
+    impact:
+      "One text box, and the page decides what it is. Every pause in typing sends the text to Jev, TypeSafe AI's System One decision model, with three typed questions: which tool fits (a Choice over seven labels), how urgent it is (a Score on a four-level rubric) and whether the thought is finished (a Noul, a single yes/no probability). The page then becomes a timer, checklist, calculator, note, calendar event or question hand-off. A confidence threshold gates every switch: above it the layout changes on its own; below it the page shows the likeliest tools as cards and asks. An always-on panel shows each question, its probabilities, confidence, latency and token usage, so the model's reasoning is never hidden.",
+    stack: [
+      "Next.js 16 (App Router)", "TypeScript", "TypeSafe Jev · @typesafe-ai/sdk",
+      "Calibrated probabilities", "Confidence gating", "Vercel",
+    ],
+    links: [
+      { label: "GitHub", href: "https://github.com/EiriniOr/jev-playground" },
+    ],
+    highlights: [
+      "Jev decides, code acts: the model only picks the tool; plain, testable regular expressions pull out the duration, list items, arithmetic (no eval) and dates",
+      "Calibration is the feature: a slider sets the confidence the UI needs before it may switch layout, and the panel explains every verdict (\"74% < 95%, showing candidates instead\")",
+      "Explicit abstain option: the intent question includes an \"unclear\" label, because decision models without a way to abstain guess confidently on fragments",
+      "All three Jev primitives in one request: Choice for intent, Score for urgency, Noul for completeness",
+      "Server-side SDK call keeps the API key off the client; a clearly labelled mock mode keeps the UI explorable without a key",
+    ],
+  },
+  {
     kind: "AI Research Assistant / Full-Stack Web App",
     category: "Agentic AI & LLM Tools",
     title: "Cassandra",
@@ -558,15 +581,15 @@ export const CERTS = [
 
 // ── Front-page stories ─────────────────────────────────────────────────────
 export const NOW = {
-  kicker: "Now exploring",
-  headline: "Jev — a model that decides instead of chats",
-  text: "These days I'm looking into Jev, TypeSafe AI's System One model: messy input in, a typed decision with a confidence score out, in milliseconds.",
+  kicker: "Now building",
+  headline: "Jev Command Center — an interface that decides what it is",
+  text: "I'm building with Jev, TypeSafe AI's System One decision model. One text box: the page becomes a timer, checklist, calculator or calendar depending on what Jev judges you're typing, with the probabilities behind every switch on screen.",
   uses: [
-    "Routing support tickets to the right team",
-    "Flagging staffing or safety issues in shift notes",
-    "Blocking prompt-injection attempts before they reach an LLM",
+    "Confidence-gated UI: the layout switches only when Jev is sure, otherwise it asks",
+    "All three Jev primitives in one call: Choice for intent, Score for urgency, Noul for completeness",
+    "An explicit \"unclear\" label so the model can abstain instead of guessing",
   ],
-  link: { label: "Read about Jev", href: "https://typesafe.ai/blog/introducing-system-one-models-and-jev" },
+  link: { label: "See the project", href: "https://github.com/EiriniOr/jev-playground" },
 };
 
 export const UPCOMING = {
@@ -621,7 +644,7 @@ export function mediaOf(p) {
 // Screenshots of each project's own page (live demo, thesis cover, report or repo card).
 const THUMBS = new Set([
   "fairgatdann-fairness-aware-graph-attention-domain-adversarial-network-for-icu-mortality",
-  "nutriofast", "cassandra", "miss-datrix", "automated-weekly-digest-systems", "jobbajobba", "petal",
+  "nutriofast", "jev-command-center", "cassandra", "miss-datrix", "automated-weekly-digest-systems", "jobbajobba", "petal",
   "sequence-based-movie-recommender", "mrgraph-the-graph-based-tutor", "forgemee", "powerpoint-mcp-server",
   "ats-style-job-match-scorer", "heart-disease-risk-prediction-api", "customer-churn-dashboard",
   "document-qa-rag-bot", "carbon-emissions-explorer", "cookie-cats-ab-test-analysis", "ai-implementation-strategy",

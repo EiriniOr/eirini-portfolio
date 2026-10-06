@@ -93,7 +93,7 @@ function NowStory() {
         </span>
         <h3 className="mt-3 font-serif text-3xl leading-[1.05] text-white">{NOW.headline}</h3>
         <p className="mt-2 text-sm leading-relaxed text-slate-300">{NOW.text}</p>
-        <Kicker color="text-slate-500" className="mt-4">How it can be used</Kicker>
+        <Kicker color="text-slate-500" className="mt-4">What it shows</Kicker>
         <ul className="mt-2 space-y-1.5">
           {NOW.uses.map((u) => (
             <li key={u} className="flex gap-2 text-sm text-slate-300">
