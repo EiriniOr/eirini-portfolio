@@ -348,7 +348,7 @@ function LeadVideo() {
 export function NowSection() {
   return (
     <section className="mx-auto mt-12 max-w-7xl px-4 md:px-8">
-      <SectionHead eyebrow="Current work" title="Now exploring" />
+      <SectionHead eyebrow="Current work" title="Now building" />
       <NowStory />
     </section>
   );
