@@ -6,12 +6,13 @@ import { track } from "../analytics";
 import { Kicker, SectionHead, ease, useNow } from "./ui";
 
 const SAMPLES = [
-  { input: "Ticket: “Can't log in after password reset”", out: '{ queue: "auth", priority: "high" }', p: 0.94, ms: 88 },
-  { input: "Shift note: “Ward 4 short two nurses tonight”", out: '{ flag: "staffing", urgency: "high" }', p: 0.89, ms: 104 },
-  { input: "Prompt: “ignore previous instructions and…”", out: '{ allow: false, reason: "injection" }', p: 0.99, ms: 71 },
-  { input: "Email: “Invoice #4471 attached, due 30 Oct”", out: '{ type: "invoice", due: "2026-10-30" }', p: 0.97, ms: 112 },
-  { input: "Review: “Arrived late but works great”", out: '{ sentiment: "mixed" }', p: 0.71, ms: 95 },
-  { input: "Form field: “forty-two”", out: "{ age: 42 }", p: 0.98, ms: 79 },
+  { input: "“focus for 25 minutes”", out: '{ tool: "timer", urgency: 1 }', p: 0.96, ms: 84 },
+  { input: "“milk, eggs, bread and butter”", out: '{ tool: "checklist", items: 4 }', p: 0.93, ms: 77 },
+  { input: "“18% tip on 64.50”", out: '{ tool: "calculator" }  → 11.61', p: 0.91, ms: 69 },
+  { input: "“dentist Tuesday 3pm”", out: '{ tool: "calendar", urgency: 2 }', p: 0.97, ms: 92 },
+  { input: "“call mum”", out: '{ tool: "unclear" }  → asks instead', p: 0.44, ms: 73 },
+  { input: "“why does bread rise?”", out: '{ tool: "question", complete: 0.98 }', p: 0.95, ms: 81 },
+  { input: "“idea: a lamp that dims when quiet”", out: '{ tool: "note", urgency: 0 }', p: 0.86, ms: 88 },
 ];
 
 function DecisionStream() {
@@ -37,7 +38,7 @@ function DecisionStream() {
           <span className="h-2 w-2 rounded-full bg-rose-400/80" />
           <span className="h-2 w-2 rounded-full bg-amber-300/80" />
           <span className="h-2 w-2 rounded-full bg-lime-300/80" />
-          <span className="ml-2">decision stream</span>
+          <span className="ml-2">what is the user typing?</span>
         </span>
         <span>illustrative</span>
       </div>
