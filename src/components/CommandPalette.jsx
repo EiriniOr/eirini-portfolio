@@ -16,7 +16,7 @@ export default function CommandPalette({ onClose, onOpen, setFilter, replayIntro
 
   const items = useMemo(() => {
     const actions = [
-      { group: "Jump to", label: "Now — building with Jev", run: () => go("now") },
+      { group: "Jump to", label: "Now — Jev vs a simple NLP model", run: () => go("now") },
       { group: "Jump to", label: "Coming up — Karolinska", run: () => go("coming-up") },
       { group: "Jump to", label: "▶ Watch my story (90 s)", run: () => go("watch") },
       { group: "Jump to", label: "Featured projects", run: () => go("featured") },

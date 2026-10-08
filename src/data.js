@@ -56,26 +56,27 @@ export const PROJECTS = [
     highlights: [],
   },
   {
-    kind: "Adaptive Interface · Decision Model",
+    kind: "Model Comparison · Adaptive Interface",
     category: "Agentic AI & LLM Tools",
     title: "Jev Command Center",
     year: "2026",
     badge: "new",
     impact:
-      "One text box, and the page decides what it is. Every pause in typing sends the text to Jev, TypeSafe AI's System One decision model, with three typed questions: which tool fits (a Choice over seven labels), how urgent it is (a Score on a four-level rubric) and whether the thought is finished (a Noul, a single yes/no probability). The page then becomes a timer, checklist, calculator, note, calendar event or question hand-off. A confidence threshold gates every switch: above it the layout changes on its own; below it the page shows the likeliest tools as cards and asks. An always-on panel shows each question, its probabilities, confidence, latency and token usage, so the model's reasoning is never hidden.",
+      "Is a decision model worth it, or would a tiny classifier do? One sentence goes in, and two judges say which tool the page should become (timer, checklist, calculator, note, calendar, question): Jev, TypeSafe AI's System One decision model, on the left, and a simple NLP model I trained on 154 example sentences on the right. Either one can drive the page through the same confidence gate. Then I tested both on 112 unseen sentences, 28 of them deliberately ambiguous. Jev scored 96%, the simple NLP model 93%; on the ambiguous ones they tied (82% vs 79%). The simple model needs no API, costs nothing and improves every time I add a phrasing it missed. Jev's real edge is unseen phrasing and trustworthy high-confidence answers; its weakness is over-reading context, turning \"when is the dentist\" into a calendar entry at 93% confidence.",
     stack: [
       "Next.js 16 (App Router)", "TypeScript", "TypeSafe Jev · @typesafe-ai/sdk",
-      "Calibrated probabilities", "Confidence gating", "Vercel",
+      "Logistic regression · n-gram features", "Held-out evaluation", "Calibration analysis", "Vercel",
     ],
     links: [
       { label: "GitHub", href: "https://github.com/EiriniOr/jev-playground" },
     ],
     highlights: [
-      "Jev decides, code acts: the model only picks the tool; plain, testable regular expressions pull out the duration, list items, arithmetic (no eval) and dates",
-      "Calibration is the feature: a slider sets the confidence the UI needs before it may switch layout, and the panel explains every verdict (\"74% < 95%, showing candidates instead\")",
-      "Explicit abstain option: the intent question includes an \"unclear\" label, because decision models without a way to abstain guess confidently on fragments",
-      "All three Jev primitives in one request: Choice for intent, Score for urgency, Noul for completeness",
-      "Server-side SDK call keeps the API key off the client; a clearly labelled mock mode keeps the UI explorable without a key",
+      "Head-to-head on a held-out set, scored through the app's own code path: Jev 96% vs simple NLP 93% overall, 100% vs 98% on clear sentences, 82% vs 79% on ambiguous ones (a tie at n=28)",
+      "Latency 180 ms over a paid API vs 0.1 ms in-process and free; the simple model is retrainable in seconds whenever it misses a phrasing",
+      "Calibration checked, not assumed: Jev's 95 answers above 95% confidence were 99% correct; the simple model abstains more and guesses less",
+      "Failure modes documented: Jev over-reads (schedule words become calendar entries), the NLP model under-reads (unseen phrasing becomes \"unclear\")",
+      "Honest method: test set written after training, Jev's answers cached and never re-queried, one feature bug found by error analysis and both versions reported",
+      "Earlier experiment in the same repo: keyword rules vs Jev on emergency-department notes (70% vs 93%), where free text genuinely needed a model",
     ],
   },
   {
@@ -581,15 +582,15 @@ export const CERTS = [
 
 // ── Front-page stories ─────────────────────────────────────────────────────
 export const NOW = {
-  kicker: "Now building",
-  headline: "Jev Command Center — an interface that decides what it is",
-  text: "I'm building with Jev, TypeSafe AI's System One decision model. One text box: the page becomes a timer, checklist, calculator or calendar depending on what Jev judges you're typing, with the probabilities behind every switch on screen.",
+  kicker: "Now testing",
+  headline: "Jev vs a model I trained in an afternoon",
+  text: "I built an interface where TypeSafe's Jev and a 154-example logistic regression each decide what the page should become, then scored both on 112 unseen sentences. Jev 96%, simple NLP 93%, a tie on the ambiguous ones. Three points of accuracy, for an API call and a bill.",
   uses: [
-    "Confidence-gated UI: the layout switches only when Jev is sure, otherwise it asks",
-    "All three Jev primitives in one call: Choice for intent, Score for urgency, Noul for completeness",
-    "An explicit \"unclear\" label so the model can abstain instead of guessing",
+    "Clear sentences: Jev 100%, simple NLP 98%",
+    "Ambiguous sentences: 82% vs 79%, a tie at this size",
+    "Latency: 180 ms paid vs 0.1 ms free, and the small model is retrainable in seconds",
   ],
-  link: { label: "See the project", href: "https://github.com/EiriniOr/jev-playground" },
+  link: { label: "Code, test set and report", href: "https://github.com/EiriniOr/jev-playground" },
 };
 
 export const UPCOMING = {

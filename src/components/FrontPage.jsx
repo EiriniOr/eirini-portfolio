@@ -6,13 +6,13 @@ import { track } from "../analytics";
 import { Kicker, SectionHead, ease, useNow } from "./ui";
 
 const SAMPLES = [
-  { input: "“focus for 25 minutes”", out: '{ tool: "timer", urgency: 1 }', p: 0.96, ms: 84 },
-  { input: "“milk, eggs, bread and butter”", out: '{ tool: "checklist", items: 4 }', p: 0.93, ms: 77 },
-  { input: "“18% tip on 64.50”", out: '{ tool: "calculator" }  → 11.61', p: 0.91, ms: 69 },
-  { input: "“dentist Tuesday 3pm”", out: '{ tool: "calendar", urgency: 2 }', p: 0.97, ms: 92 },
-  { input: "“call mum”", out: '{ tool: "unclear" }  → asks instead', p: 0.44, ms: 73 },
-  { input: "“why does bread rise?”", out: '{ tool: "question", complete: 0.98 }', p: 0.95, ms: 81 },
-  { input: "“idea: a lamp that dims when quiet”", out: '{ tool: "note", urgency: 0 }', p: 0.86, ms: 88 },
+  { input: "“focus for 25 minutes.”", out: "jev → timer 0.96 · nlp → timer 0.99", p: 0.96, ms: 180 },
+  { input: "“milk, eggs, bread and butter.”", out: "jev → checklist 0.99 · nlp → checklist 0.97", p: 0.99, ms: 171 },
+  { input: "“when is the dentist”", out: "jev → calendar 0.93 ✗ · nlp → question 0.95 ✓", p: 0.55, ms: 160 },
+  { input: "“add to calendar: call mom”", out: "jev → calendar 1.00 ✓ · nlp → unclear 0.19", p: 0.78, ms: 183 },
+  { input: "“eggs”", out: "jev → checklist 0.63 ✗ · nlp → unclear 0.99 ✓", p: 0.5, ms: 165 },
+  { input: "“18% tip on 64.50”", out: "jev → calculator 0.98 · nlp → calculator 0.99", p: 0.98, ms: 176 },
+  { input: "“dentist tomorrow”", out: "jev → calendar 1.00 · nlp → calendar 0.93", p: 1.0, ms: 182 },
 ];
 
 function DecisionStream() {
@@ -38,9 +38,9 @@ function DecisionStream() {
           <span className="h-2 w-2 rounded-full bg-rose-400/80" />
           <span className="h-2 w-2 rounded-full bg-amber-300/80" />
           <span className="h-2 w-2 rounded-full bg-lime-300/80" />
-          <span className="ml-2">what is the user typing?</span>
+          <span className="ml-2">jev vs simple nlp</span>
         </span>
-        <span>illustrative</span>
+        <span>from the test set</span>
       </div>
       <div className="relative h-[178px] overflow-hidden p-3">
         <AnimatePresence initial={false}>
@@ -349,7 +349,7 @@ function LeadVideo() {
 export function NowSection() {
   return (
     <section className="mx-auto mt-12 max-w-7xl px-4 md:px-8">
-      <SectionHead eyebrow="Current work" title="Now building" />
+      <SectionHead eyebrow="Current work" title="Now testing" />
       <NowStory />
     </section>
   );
